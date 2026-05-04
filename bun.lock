@@ -3,7 +3,7 @@
   "configVersion": 0,
   "workspaces": {
     "": {
-      "name": "soojal-3d-portfolio",
+      "name": "soojal-kumar-portfolio",
       "dependencies": {
         "@next/swc-wasm-nodejs": "14.2.33",
         "framer-motion": "^12.38.0",
