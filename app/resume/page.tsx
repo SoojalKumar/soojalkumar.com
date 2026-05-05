@@ -14,14 +14,18 @@ export default function ResumePage() {
         description="View or download my resume for a concise overview of my education, experience, projects, and technical skills."
       />
       <div className="flex flex-wrap justify-center gap-3">
-        <a href="/resume.pdf" className="rounded-lg bg-accent px-5 py-3 font-semibold text-white transition hover:bg-sky-500">
+        <a
+          href="/resume.pdf"
+          className="rounded-lg bg-accent px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-sky-500"
+          download
+        >
           Download Resume
         </a>
-        <Link href="/" className="rounded-lg bg-navy px-5 py-3 font-semibold text-white transition hover:bg-slate-800">
+        <Link href="/" className="rounded-lg bg-navy px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-slate-800">
           Back to Portfolio
         </Link>
       </div>
-      <div className="mt-10 overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-slate-200">
+      <div className="mt-10 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
         {hasResume ? (
           <iframe src="/resume.pdf" title="Soojal Kumar Resume" className="h-[75vh] w-full" />
         ) : (

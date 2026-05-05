@@ -1,0 +1,143 @@
+%-------------------------
+% Resume - Soojal Kumar
+% One Page Software Engineering Resume
+%-------------------------
+
+\documentclass[letterpaper,10.5pt]{article}
+
+\usepackage[english]{babel}
+\usepackage{times}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{array}
+
+\addtolength{\oddsidemargin}{-0.62in}
+\addtolength{\textwidth}{1.24in}
+\addtolength{\topmargin}{-0.78in}
+\addtolength{\textheight}{1.5in}
+
+\linespread{0.98}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{0pt}
+\raggedright
+
+\titleformat{\section}
+  {\vspace{-7pt}\bfseries\large}
+  {}{0em}{}[\titlerule \vspace{-5pt}]
+
+\setlist[itemize]{noitemsep, topsep=1pt, leftmargin=0.16in}
+
+\newcommand{\resumeItem}[1]{\item #1}
+
+\newcommand{\resumeSubheading}[4]{
+  \item
+  \begin{tabular*}{0.97\textwidth}{@{\extracolsep{\fill}} l r}
+    \textbf{#1} & #2 \\
+    \textit{#3} & \textit{#4}
+  \end{tabular*}
+}
+
+\newcommand{\projectHeading}[3]{
+  \item
+  \begin{tabular*}{0.97\textwidth}{@{\extracolsep{\fill}} l r}
+    \textbf{#1} & #2 \\
+    \textit{#3} &
+  \end{tabular*}
+}
+
+\begin{document}
+
+%----------HEADER----------
+\begin{center}
+  {\LARGE \textbf{Soojal Kumar}} \\[-1pt]
+  California, United States $|$
+  \href{mailto:s_kumar18@u.pacific.edu}{s\_kumar18@u.pacific.edu} $|$
+  \href{https://github.com/SoojalKumar}{github.com/SoojalKumar} $|$
+  \href{https://linkedin.com/in/soojal-kumar-sk}{linkedin.com/in/soojal-kumar-sk}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+\textbf{University of the Pacific}, Stockton, CA \hfill 2021 -- Dec 2025 \\
+\textit{Bachelor of Science in Computer Science} \\
+Relevant Coursework: Artificial Intelligence, Data Structures, Computer Systems \& Networks, Digital Design, Discrete Math, Programming for Data Science, Application Development
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+\textbf{Languages:} Python, TypeScript, JavaScript, Java, C++, PHP, HTML, CSS, SQL \\
+\textbf{Frontend/Backend:} React, Next.js, Tailwind CSS, FastAPI, REST APIs, SQLite, API Authentication, Request Validation, Pagination \\
+\textbf{AI/Data/Systems:} Machine Learning, NLP, Genetic Algorithms, NumPy, Matplotlib, Linux, Unix, Docker, Git, GitHub Actions, CLI Tools, Speech Recognition
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+\begin{itemize}
+
+\resumeSubheading
+  {Operations Manager Intern}{May 2025 -- Sep 2025}
+  {Alaska Car \& RV Rentals}{Anchorage, AK}
+\begin{itemize}
+  \resumeItem{Managed daily rental operations across reservations, check-ins, agreements, payments, insurance coordination, and customer support workflows.}
+  \resumeItem{Streamlined fleet tracking for availability, mileage, damages, service history, cleaning, inspections, and maintenance coordination.}
+  \resumeItem{Coordinated between customers, staff, insurers, workshops, and management to reduce operational delays and support high-demand seasonal activity.}
+\end{itemize}
+
+\resumeSubheading
+  {Deputy Director of Diversity, Equity, and Inclusion}{Nov 2024 -- May 2025}
+  {ASUOP, University of the Pacific}{Stockton, CA}
+\begin{itemize}
+  \resumeItem{Coordinated student government operations with campus organizations, university stakeholders, and student leadership teams.}
+  \resumeItem{Improved communication workflows by identifying operational gaps, supporting documentation, and contributing practical recommendations.}
+\end{itemize}
+
+\resumeSubheading
+  {Teaching Observation Partner}{Dec 2023 -- May 2024}
+  {University of the Pacific}{Stockton, CA}
+\begin{itemize}
+  \resumeItem{Observed classroom dynamics and delivered structured feedback to help faculty improve engagement, learning outcomes, and equity-focused teaching practices.}
+\end{itemize}
+
+\end{itemize}
+
+%-----------PROJECTS-----------
+\section{Projects}
+\begin{itemize}
+
+\projectHeading
+  {Cloud-Based API Service}{Jan 2026 -- Apr 2026}
+  {FastAPI, Python, React, TypeScript, SQLite, Docker, GitHub Actions}
+\begin{itemize}
+  \resumeItem{Developed a production-style task management API with CRUD operations, API-key authentication, validation, pagination, filtering, health checks, and structured error handling.}
+  \resumeItem{Built a React/TypeScript dashboard and Dockerized full-stack workflow to streamline task creation, updates, filtering, deletion, and deployment readiness.}
+  \resumeItem{Automated validation through GitHub Actions CI/CD, improving reliability and reducing manual build-check effort before deployment.}
+\end{itemize}
+
+\projectHeading
+  {EchoWear}{Aug 2025 -- Dec 2025}
+  {Mobile Application, Speech Recognition, Haptic Feedback, Accessibility}
+\begin{itemize}
+  \resumeItem{Designed an accessibility-focused mobile and wearable interaction system using wake-word detection, customizable keywords, and haptic feedback.}
+  \resumeItem{Implemented real-time voice-triggered workflows that improved hands-free interaction and reduced reliance on touch-based navigation.}
+  \resumeItem{Enhanced user responsiveness through immediate vibration feedback, visual confirmation, and structured keyword management across mobile and smartwatch-style interfaces.}
+\end{itemize}
+
+\projectHeading
+  {GenAI Project -- Genetic Algorithm Optimization Engine}{Aug 2024 -- Dec 2024}
+  {Python, Genetic Algorithms, Optimization, NumPy, Matplotlib}
+\begin{itemize}
+  \resumeItem{Implemented a genetic algorithm framework using selection, crossover, mutation, and elitism to optimize candidate strategies from historical data.}
+  \resumeItem{Designed configurable CLI experiments with training/testing workflows, JSON summaries, and fitness progression plots to improve experiment tracking.}
+  \resumeItem{Streamlined performance analysis by generating structured outputs and visualizations for comparing optimization behavior across generations.}
+\end{itemize}
+
+\end{itemize}
+
+%-----------CERTIFICATIONS & AWARDS-----------
+\section{Certifications \& Awards}
+\begin{itemize}
+  \resumeItem{\textbf{Best Paper Award}, IJAIBDCMS -- Explainable AI for Intrusion Detection Systems, Apr 2026}
+  \resumeItem{\textbf{Docker Essentials: A Developer Introduction}, IBM, Apr 2026}
+\end{itemize}
+
+\end{document}
