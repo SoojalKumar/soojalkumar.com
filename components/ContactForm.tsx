@@ -47,12 +47,6 @@ const ContactForm = () => {
             Have an opportunity, collaboration idea, or technical project in mind? Send me a message and I&apos;ll get
             back to you.
           </p>
-          <div className="mt-6 rounded-2xl border-l-4 border-accent bg-sky-50 p-5">
-            <p className="font-semibold text-ink">Client-side mailto form</p>
-            <p className="mt-2 text-sm leading-6 text-slate-600">
-              This opens your email client with the message prepared. No fake backend or hidden email service is used.
-            </p>
-          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="grid gap-5">
