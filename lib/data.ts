@@ -45,14 +45,48 @@ export type Project = {
   features: string[];
   implementation: string[];
   impact: string[];
+  heroVisual: {
+    title: string;
+    items: string[];
+  };
+  workflow: string[];
+  architecture: string[];
+  technicalGroups: {
+    title: string;
+    items: string[];
+  }[];
+  visuals: {
+    title: string;
+    description: string;
+    variant: "dashboard" | "pipeline" | "terminal" | "diagram";
+  }[];
+  challenges: {
+    challenge: string;
+    solution: string;
+  }[];
+  preview?: {
+    title: string;
+    language: "json" | "terminal" | "text";
+    content: string;
+  };
 };
+
+type ProjectBase = Omit<
+  Project,
+  "heroVisual" | "workflow" | "architecture" | "technicalGroups" | "visuals" | "challenges" | "preview"
+>;
+
+type ProjectCaseStudy = Pick<
+  Project,
+  "heroVisual" | "workflow" | "architecture" | "technicalGroups" | "visuals" | "challenges" | "preview"
+>;
 
 const commonImpact = [
   "Demonstrates practical software engineering through modular structure, readable workflows, and clear technical documentation.",
   "Shows ability to convert course and research concepts into working systems with real implementation constraints.",
 ];
 
-export const projects: Project[] = [
+const baseProjects: ProjectBase[] = [
   {
     slug: "campusstudy-ai",
     title: "CampusStudy AI",
@@ -237,6 +271,330 @@ export const projects: Project[] = [
     impact: commonImpact,
   },
 ];
+
+const commonTechnicalGroups = {
+  pythonSystems: [
+    { title: "Language", items: ["Python", "Modular source structure", "Command-line workflows"] },
+    { title: "Core Logic", items: ["Separated processing steps", "Traceable execution", "Reusable helper modules"] },
+    { title: "Outputs", items: ["Readable console output", "Structured project artifacts", "Documentation-ready behavior"] },
+  ],
+};
+
+const caseStudyDetails: Record<string, ProjectCaseStudy> = {
+  "campusstudy-ai": {
+    heroVisual: {
+      title: "AI Study Platform Concept",
+      items: ["Study Planner", "AI Assistant", "RAG Search", "Mobile App", "Background Workers"],
+    },
+    workflow: ["Student Uploads / Study Input", "RAG Retrieval", "AI Study Assistant", "Generated Study Output", "Saved Workflow"],
+    architecture: ["Web App / Mobile App", "FastAPI Backend", "RAG Layer", "Worker Queue", "Study Data / Documents"],
+    technicalGroups: [
+      { title: "Frontend", items: ["TypeScript interface planning", "Web and mobile study flows", "Minimal academic dashboard patterns"] },
+      { title: "Backend", items: ["FastAPI service layer", "Study workflow endpoints", "Structured backend responsibilities"] },
+      { title: "AI Layer", items: ["RAG-style retrieval", "Context-aware study assistance", "Academic content grounding"] },
+      { title: "Workers", items: ["Background processing", "Async study tasks", "Pipeline-ready architecture"] },
+    ],
+    visuals: [
+      { title: "AI Study Dashboard Preview", description: "Conceptual dashboard for planner, assistant, and study workflow entry points.", variant: "dashboard" },
+      { title: "RAG Retrieval Flow", description: "Visualizes how course material context can support AI study responses.", variant: "pipeline" },
+      { title: "Mobile Study Workflow", description: "Compact layout concept for quick study actions on a mobile surface.", variant: "dashboard" },
+      { title: "Background Worker Pipeline", description: "Conceptual queue for longer-running processing tasks.", variant: "diagram" },
+    ],
+    challenges: [
+      {
+        challenge: "Students often use disconnected tools for study planning, notes, and AI help.",
+        solution: "Designed a unified academic platform concept with AI workflows and retrieval-based assistance.",
+      },
+      {
+        challenge: "AI output needs context from course material to be useful in an academic workflow.",
+        solution: "Structured the system around a RAG-style retrieval layer that connects responses with study content.",
+      },
+    ],
+  },
+  "cloud-api-service": {
+    heroVisual: {
+      title: "Production API Dashboard",
+      items: ["GET /tasks", "POST /tasks", "Authenticated API", "Health Check: OK", "Dockerized Deployment"],
+    },
+    workflow: ["Client Request", "API Key Validation", "FastAPI Route", "Service Layer", "SQLite Database", "JSON Response"],
+    architecture: ["React Dashboard", "FastAPI API", "Services / Repositories", "SQLite DB", "Docker Container", "GitHub Actions CI/CD"],
+    technicalGroups: [
+      { title: "Frontend", items: ["React dashboard", "TypeScript state handling", "Task create/update/delete flows"] },
+      { title: "Backend", items: ["FastAPI routes", "Request validation", "Structured errors and health checks"] },
+      { title: "Data", items: ["SQLite persistence", "Repository-style data access", "Filtering and pagination"] },
+      { title: "DevOps", items: ["Docker containerization", "GitHub Actions CI/CD", "Public deployment workflow"] },
+      { title: "Testing", items: ["pytest coverage", "API behavior checks", "Deployment readiness validation"] },
+    ],
+    visuals: [
+      { title: "API Endpoint Panel", description: "Conceptual endpoint map for task CRUD, auth, filtering, and health checks.", variant: "terminal" },
+      { title: "React Dashboard Preview", description: "Intentional placeholder for the dashboard used to interact with task APIs.", variant: "dashboard" },
+      { title: "Docker Build Flow", description: "Shows application packaging into a repeatable deployment container.", variant: "pipeline" },
+      { title: "CI/CD Pipeline", description: "Build, test, and deploy stages represented as a release workflow.", variant: "diagram" },
+    ],
+    challenges: [
+      {
+        challenge: "Basic CRUD APIs can look unfinished without validation, auth, persistence, and deployment practices.",
+        solution: "Built a fuller API surface with API-key auth, validation, structured errors, pagination, Docker, and CI/CD.",
+      },
+      {
+        challenge: "Frontend and backend need to stay aligned for task operations.",
+        solution: "Paired the FastAPI service with a typed React dashboard for direct API interaction.",
+      },
+    ],
+    preview: {
+      title: "API Response Preview",
+      language: "json",
+      content: `GET /api/tasks?status=open&page=1\n\n{\n  "items": ["task objects"],\n  "page": 1,\n  "total": 24\n}`,
+    },
+  },
+  "mips-cpu-simulator": {
+    heroVisual: {
+      title: "CPU Pipeline Trace",
+      items: ["Instruction Input", "Fetch", "Decode", "Execute", "Memory", "Writeback"],
+    },
+    workflow: ["Assembly Instruction", "Parser", "Control Unit", "ALU / Memory", "Register Update", "Execution Trace"],
+    architecture: ["CLI Input", "CPU Engine", "Control Unit", "Register File", "Memory System", "Trace Output"],
+    technicalGroups: [
+      { title: "CPU Engine", items: ["Fetch/decode/execute flow", "Branch handling", "Cycle-by-cycle trace generation"] },
+      { title: "Control Unit", items: ["Instruction interpretation", "Control signal structure", "Execution path selection"] },
+      { title: "State Systems", items: ["Register file", "Memory model", "Write-back updates"] },
+      { title: "Tools", items: ["Python", "CLI execution", "Trace-oriented debugging"] },
+    ],
+    visuals: [
+      { title: "CPU Pipeline Diagram", description: "Conceptual instruction path across fetch, decode, execute, memory, and writeback.", variant: "pipeline" },
+      { title: "Register File Preview", description: "Intentional table-style panel for register state changes.", variant: "dashboard" },
+      { title: "Memory Table Preview", description: "Conceptual memory-state panel for load and store operations.", variant: "dashboard" },
+      { title: "Cycle Trace Terminal", description: "Terminal-style preview of instruction execution across cycles.", variant: "terminal" },
+    ],
+    challenges: [
+      {
+        challenge: "CPU execution is hard to understand when register and memory changes are hidden.",
+        solution: "Generated cycle-by-cycle traces that expose instruction flow and state updates.",
+      },
+      {
+        challenge: "Assignment implementations can become fragmented across CPU responsibilities.",
+        solution: "Refactored into a modular CPU engine, control unit, register file, and memory system.",
+      },
+    ],
+    preview: {
+      title: "Cycle Trace Preview",
+      language: "terminal",
+      content: `cycle 01: fetch addi $t0, $zero, 5\ncycle 02: decode opcode=addi\ncycle 03: execute ALU result=5\ncycle 04: writeback $t0=5`,
+    },
+  },
+  "genai-optimization": {
+    heroVisual: {
+      title: "Evolution Loop",
+      items: ["Initial Population", "Fitness Evaluation", "Selection", "Crossover", "Mutation", "Best Strategy"],
+    },
+    workflow: ["Historical Data", "Candidate Strategies", "Fitness Scoring", "Genetic Operators", "Best Strategy", "Test Evaluation"],
+    architecture: ["CLI Config", "GA Engine", "Fitness Function", "Experiment Runner", "JSON Summary + Plots"],
+    technicalGroups: [
+      { title: "Algorithm", items: ["Selection", "Crossover", "Mutation", "Elitism"] },
+      { title: "Experimentation", items: ["Configurable CLI", "Training/testing workflows", "Repeatable parameter tuning"] },
+      { title: "Data + Output", items: ["Historical financial data", "JSON summaries", "Fitness progression plots"] },
+      { title: "Tools", items: ["Python", "NumPy", "Matplotlib"] },
+    ],
+    visuals: [
+      { title: "Fitness Curve Placeholder", description: "Conceptual visualization panel for optimization progress over generations.", variant: "dashboard" },
+      { title: "Strategy Evolution Flow", description: "Shows candidate strategy evolution from population to selected result.", variant: "pipeline" },
+      { title: "Experiment Config Panel", description: "Configuration surface for population size, mutation rate, and generation count.", variant: "terminal" },
+      { title: "JSON Output Preview", description: "Structured experiment summary concept for result comparison.", variant: "terminal" },
+    ],
+    challenges: [
+      {
+        challenge: "Large strategy spaces are difficult to search manually.",
+        solution: "Used a genetic algorithm loop to evolve candidate strategies through repeated scoring and variation.",
+      },
+      {
+        challenge: "Optimization experiments need visibility into parameter choices and outcomes.",
+        solution: "Added CLI configuration, JSON summaries, and fitness progression visualizations.",
+      },
+    ],
+    preview: {
+      title: "Experiment Config Preview",
+      language: "json",
+      content: `{\n  "population_size": 100,\n  "mutation_rate": 0.05,\n  "generations": 50,\n  "best_fitness": "..."\n}`,
+    },
+  },
+  "orbit-simulator": {
+    heroVisual: {
+      title: "Orbit Visualization",
+      items: ["Central Star", "Elliptical Path", "Planet Config", "Kepler Solver", "Static / GIF Output"],
+    },
+    workflow: ["Planet Config", "Kepler Equation Solver", "Position Calculation", "Orbit Rendering", "Static / GIF Output"],
+    architecture: ["JSON / Input", "Simulation Engine", "Numerical Solver", "Matplotlib Renderer", "Image / GIF Export"],
+    technicalGroups: [
+      { title: "Simulation", items: ["Kepler-based motion", "Elliptical orbit modeling", "Position calculation over time"] },
+      { title: "Configuration", items: ["Demo mode", "Interactive input", "JSON planetary systems"] },
+      { title: "Visualization", items: ["Static snapshots", "Animated GIF output", "Matplotlib rendering"] },
+      { title: "Tools", items: ["Python", "NumPy", "Matplotlib"] },
+    ],
+    visuals: [
+      { title: "Elliptical Orbit Preview", description: "Conceptual panel with a central star and elliptical orbital path.", variant: "diagram" },
+      { title: "Planet Configuration Panel", description: "Clean placeholder for JSON-based planetary system configuration.", variant: "terminal" },
+      { title: "Position Calculation Flow", description: "Numerical path from orbital parameters to plotted coordinates.", variant: "pipeline" },
+      { title: "Animation Output Placeholder", description: "Intentional preview panel for static and GIF visualization output.", variant: "dashboard" },
+    ],
+    challenges: [
+      {
+        challenge: "Orbital equations are abstract without visual feedback.",
+        solution: "Converted Kepler-based calculations into static and animated visual outputs.",
+      },
+      {
+        challenge: "A useful simulator should support more than one hardcoded demo.",
+        solution: "Added interactive and JSON configuration modes for custom systems.",
+      },
+    ],
+  },
+  "sentiment-analysis": {
+    heroVisual: {
+      title: "NLP Classification Pipeline",
+      items: ["Raw Review", "Preprocessing", "Tokenization", "Naive Bayes", "Positive / Negative"],
+    },
+    workflow: ["Dataset", "Cleaning", "Tokenization", "Word Frequency Training", "Log Probability Scoring", "Sentiment Prediction"],
+    architecture: ["Text Input", "Preprocessor", "Feature Extractor", "Naive Bayes Classifier", "Prediction Output"],
+    technicalGroups: [
+      { title: "Preprocessing", items: ["Lowercasing", "Punctuation removal", "Tokenization"] },
+      { title: "Model", items: ["Word frequency distributions", "Laplace smoothing", "Log-probability scoring"] },
+      { title: "Workflow", items: ["Configurable datasets", "CLI execution", "Positive/negative classification"] },
+      { title: "Tools", items: ["Python", "NLP fundamentals", "Probabilistic modeling"] },
+    ],
+    visuals: [
+      { title: "NLP Pipeline Diagram", description: "Conceptual flow from raw text to sentiment prediction.", variant: "pipeline" },
+      { title: "Tokenization Preview", description: "Placeholder panel showing cleaned tokens prepared for modeling.", variant: "terminal" },
+      { title: "Probability Score Panel", description: "Visual concept for comparing class-level log scores.", variant: "dashboard" },
+      { title: "Classification Output Card", description: "Clean result card for positive or negative prediction output.", variant: "diagram" },
+    ],
+    challenges: [
+      {
+        challenge: "Raw text is noisy and cannot be modeled directly.",
+        solution: "Built a preprocessing pipeline for lowercasing, punctuation removal, and tokenization.",
+      },
+      {
+        challenge: "Unseen words can break simple probability estimates.",
+        solution: "Used Laplace smoothing and log-probability scoring for more stable classification.",
+      },
+    ],
+    preview: {
+      title: "Classification Preview",
+      language: "text",
+      content: `Input:\n"The movie was surprisingly emotional and well acted."\n\nPrediction:\nPositive Review`,
+    },
+  },
+  "cache-simulator": {
+    heroVisual: {
+      title: "Memory Hierarchy",
+      items: ["CPU", "Cache", "Main Memory", "Tag / Index / Offset", "Hit / Miss"],
+    },
+    workflow: ["Memory Address", "Tag / Index / Offset Parsing", "Cache Lookup", "Hit / Miss Decision", "LRU Update"],
+    architecture: ["CLI Args", "Cache Config", "Address Parser", "Cache Engine", "Statistics Output"],
+    technicalGroups: [
+      { title: "Cache Models", items: ["Direct-mapped cache", "Set-associative cache", "Configurable cache parameters"] },
+      { title: "Address Logic", items: ["Tag extraction", "Index calculation", "Offset parsing"] },
+      { title: "Replacement", items: ["LRU behavior", "Hit/miss tracking", "State updates"] },
+      { title: "Tools", items: ["Python", "Ubuntu Linux", "CLI configuration"] },
+    ],
+    visuals: [
+      { title: "Cache Table Preview", description: "Conceptual cache-state table with sets, tags, and valid entries.", variant: "dashboard" },
+      { title: "Hit/Miss Flow", description: "Visual path from address parsing to cache decision.", variant: "pipeline" },
+      { title: "Address Breakdown Panel", description: "Tag/index/offset split presented as a systems diagram.", variant: "diagram" },
+      { title: "CLI Output Preview", description: "Terminal-style memory access trace.", variant: "terminal" },
+    ],
+    challenges: [
+      {
+        challenge: "Cache mapping behavior can be difficult to inspect from theory alone.",
+        solution: "Created traceable hit/miss decisions from configurable memory accesses.",
+      },
+      {
+        challenge: "Set-associative caches need replacement policy behavior.",
+        solution: "Implemented LRU tracking to update cache state across accesses.",
+      },
+    ],
+    preview: {
+      title: "Access Trace Preview",
+      language: "terminal",
+      content: `access 0x1A3F -> set=3 tag=0x68 -> HIT\naccess 0x2B41 -> set=1 tag=0xAD -> MISS`,
+    },
+  },
+  "banking-system": {
+    heroVisual: {
+      title: "OOP Class Design",
+      items: ["Bank", "BankAccount", "CheckingAccount", "SavingsAccount", "Transactions"],
+    },
+    workflow: ["User Input", "Bank Controller", "Account Object", "Transaction Logic", "Updated Balance"],
+    architecture: ["Console UI", "Bank Class", "Account Classes", "Transaction Methods", "Output"],
+    technicalGroups: [
+      { title: "Classes", items: ["Bank", "BankAccount", "CheckingAccount", "SavingsAccount"] },
+      { title: "OOP Concepts", items: ["Inheritance", "Polymorphism", "Encapsulation"] },
+      { title: "Operations", items: ["Account creation", "Deposits and withdrawals", "Balance updates"] },
+      { title: "Interface", items: ["Console menu", "User input handling", "Readable output"] },
+    ],
+    visuals: [
+      { title: "Class Design Diagram", description: "Conceptual inheritance layout for account types and bank operations.", variant: "diagram" },
+      { title: "Account Flow Preview", description: "Shows user action moving through the bank and account object model.", variant: "pipeline" },
+      { title: "Transaction Console Preview", description: "Terminal-style placeholder for account actions and updated balance.", variant: "terminal" },
+      { title: "OOP Concept Cards", description: "Feature cards for inheritance, polymorphism, and encapsulation.", variant: "dashboard" },
+    ],
+    challenges: [
+      {
+        challenge: "Early software projects can become procedural without clear domain modeling.",
+        solution: "Modeled banking behavior with dedicated classes and account-type inheritance.",
+      },
+      {
+        challenge: "Account workflows need user-friendly state changes.",
+        solution: "Built console interactions for account creation, transactions, and updated balances.",
+      },
+    ],
+    preview: {
+      title: "Transaction Preview",
+      language: "terminal",
+      content: `create CheckingAccount #1024\ndeposit 250.00\nwithdraw 40.00\nbalance -> 210.00`,
+    },
+  },
+  "zerog-survival": {
+    heroVisual: {
+      title: "Game Loop",
+      items: ["Player Input", "Movement", "Oxygen Update", "Asteroid Collision", "Win / Lose State"],
+    },
+    workflow: ["Player Action", "Game State Update", "Oxygen / Hazard Check", "Progress Calculation", "Outcome"],
+    architecture: ["Game Loop", "Player System", "Hazard System", "Resource System", "UI / Output"],
+    technicalGroups: [
+      { title: "Game Systems", items: ["Game loop", "Player movement", "Win/lose state checks"] },
+      { title: "Resource Mechanics", items: ["Oxygen tracking", "Survival pressure", "Progress toward objective"] },
+      { title: "Hazards", items: ["Asteroid navigation", "Collision challenges", "Risk/reward movement"] },
+      { title: "Tools", items: ["Java", "Eclipse", "Interactive game project"] },
+    ],
+    visuals: [
+      { title: "Game Loop Diagram", description: "Conceptual update loop from input to state resolution.", variant: "pipeline" },
+      { title: "Oxygen Management Panel", description: "Placeholder UI showing oxygen as a survival resource.", variant: "dashboard" },
+      { title: "Asteroid Hazard Preview", description: "Conceptual hazard field for navigation challenge.", variant: "diagram" },
+      { title: "Win/Lose State Flow", description: "Outcome logic for reaching the station or running out of oxygen.", variant: "pipeline" },
+    ],
+    challenges: [
+      {
+        challenge: "A small game needs a clear tension loop to feel engaging.",
+        solution: "Used oxygen depletion and asteroid hazards to create resource-management pressure.",
+      },
+      {
+        challenge: "Players need a simple objective that makes the mechanics meaningful.",
+        solution: "Centered the experience on reaching a space station while surviving limited oxygen.",
+      },
+    ],
+  },
+};
+
+export const projects: Project[] = baseProjects.map((project) => ({
+  ...project,
+  ...(caseStudyDetails[project.slug] ?? {
+    heroVisual: { title: "Project Overview", items: project.metrics },
+    workflow: project.objectives,
+    architecture: project.methodology,
+    technicalGroups: commonTechnicalGroups.pythonSystems,
+    visuals: [],
+    challenges: [],
+  }),
+}));
 
 export const featuredProjectSlugs = ["campusstudy-ai", "cloud-api-service", "mips-cpu-simulator"];
 
