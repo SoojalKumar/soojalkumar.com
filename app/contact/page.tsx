@@ -1,4 +1,5 @@
 import { BookOpen, ExternalLink, Mail, MapPin } from "lucide-react";
+import ContactForm from "@/components/ContactForm";
 import MotionSection from "@/components/MotionSection";
 import ProfileAvatar from "@/components/ProfileAvatar";
 import SectionTitle from "@/components/SectionTitle";
@@ -14,7 +15,7 @@ const contacts = [
 
 export default function ContactPage() {
   return (
-    <main className="mx-auto max-w-4xl px-5 py-28 text-center">
+    <main className="mx-auto max-w-5xl px-5 py-28 text-center">
       <ProfileAvatar size="small" />
       <SectionTitle title="Let's Connect" description="I'm open to software engineering, backend, full-stack, cybersecurity, AI, and systems-focused opportunities." />
       <MotionSection className="grid gap-4 text-left md:grid-cols-2">
@@ -37,6 +38,7 @@ export default function ContactPage() {
           );
         })}
       </MotionSection>
+      <ContactForm />
     </main>
   );
 }
