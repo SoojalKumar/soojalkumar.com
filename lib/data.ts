@@ -139,6 +139,53 @@ const baseProjects: ProjectBase[] = [
     impact: ["Built a realistic full-stack API portfolio project that goes beyond CRUD.", "Practiced production-style validation, testing, containerization, and deployment workflows."],
   },
   {
+    slug: "echowear",
+    title: "EchoWear",
+    date: "Aug 2025 - Dec 2025",
+    subtitle: "Swift-based iOS/watchOS prototype for voice-driven wearable interaction.",
+    description:
+      "SwiftUI iOS/watchOS prototype combining speech recognition, microphone-driven listening, authentication, and a clean wearable-focused interface for experimenting with voice-driven interactions.",
+    tags: ["Swift", "SwiftUI", "iOS", "watchOS", "Speech Recognition", "AVFoundation", "Keychain"],
+    github: "https://github.com/SoojalKumar/EchoWear",
+    summary:
+      "EchoWear is a Swift-based iOS/watchOS prototype that explores wearable-first voice monitoring experiences. The project includes a modern SwiftUI sign-in flow, a voice monitor surface, configurable speech recognition behavior, microphone-driven listening through AVFoundation, and supporting structure for Apple Watch-related work.",
+    metrics: ["SwiftUI App", "Speech Recognition", "Wearable-Focused UI", "iOS Simulator Ready"],
+    problem:
+      "Voice-driven mobile and wearable interactions need a simple interface, permission-aware microphone access, and clear feedback so users can experiment with hands-free workflows without complex touch navigation.",
+    objectives: [
+      "Build a clean SwiftUI iOS prototype.",
+      "Explore speech recognition through Apple's Speech framework.",
+      "Use AVFoundation for microphone-driven listening flows.",
+      "Create a wearable-focused interface and watchOS-ready project structure.",
+      "Support portfolio demos and continued prototyping in Xcode.",
+    ],
+    methodology: [
+      "Designed a SwiftUI interface around sign-in and voice monitoring flows.",
+      "Connected speech recognition behavior with microphone permissions and audio input.",
+      "Organized the project with iOS, watchOS-related structure, assets, and future test folders.",
+    ],
+    features: [
+      "SwiftUI sign-in interface",
+      "Voice monitor surface",
+      "Speech recognition support",
+      "Microphone listening flow",
+      "Keychain-based credential storage",
+      "iOS simulator support",
+    ],
+    implementation: [
+      "Language: Swift",
+      "UI: SwiftUI",
+      "Audio: AVFoundation",
+      "Speech: Apple's Speech framework",
+      "Security: Keychain services and CryptoKit",
+      "Platform: iOS simulator with watchOS-related project structure",
+    ],
+    impact: [
+      "Demonstrates mobile and wearable prototyping with native Apple frameworks.",
+      "Shows ability to combine UI, authentication, permissions, speech recognition, and audio workflows in a practical app structure.",
+    ],
+  },
+  {
     slug: "mips-cpu-simulator",
     title: "MIPS CPU Simulator",
     date: "Jan 2025 - Mar 2025",
@@ -345,6 +392,41 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
       title: "API Response Preview",
       language: "json",
       content: `GET /api/tasks?status=open&page=1\n\n{\n  "items": ["task objects"],\n  "page": 1,\n  "total": 24\n}`,
+    },
+  },
+  echowear: {
+    heroVisual: {
+      title: "Voice-Driven Wearable Prototype",
+      items: ["SwiftUI Sign In", "Voice Monitor", "Speech Recognition", "Microphone Flow", "watchOS Structure"],
+    },
+    workflow: ["User Opens App", "Authentication Flow", "Microphone Permission", "Speech Recognition", "Voice Monitor Feedback", "Future Wearable Actions"],
+    architecture: ["SwiftUI App", "Authentication Manager", "Speech Recognizer", "AVFoundation Audio Input", "Keychain Storage", "watchOS Project Structure"],
+    technicalGroups: [
+      { title: "Mobile UI", items: ["SwiftUI screens", "Modern sign-in flow", "Wearable-focused visual style"] },
+      { title: "Speech + Audio", items: ["Apple Speech framework", "Microphone listening flow", "AVFoundation audio input"] },
+      { title: "Authentication", items: ["Demo Apple/email/password options", "Keychain credential storage", "CryptoKit password hashing"] },
+      { title: "Platform", items: ["Xcode project", "iOS simulator support", "watchOS-related structure"] },
+    ],
+    visuals: [
+      { title: "Sign-In Flow Preview", description: "Conceptual panel for the SwiftUI authentication experience.", variant: "dashboard" },
+      { title: "Voice Monitor Surface", description: "Wearable-focused screen for listening state and speech interaction feedback.", variant: "dashboard" },
+      { title: "Speech Recognition Flow", description: "Shows audio input moving through recognition and UI updates.", variant: "pipeline" },
+      { title: "Apple Platform Structure", description: "Project architecture across iOS app code, assets, tests, and watchOS-related folders.", variant: "diagram" },
+    ],
+    challenges: [
+      {
+        challenge: "Hands-free interactions require microphone access, speech permissions, and a clean UI state model.",
+        solution: "Structured the prototype around permission-aware audio input, speech recognition, and a clear voice monitor surface.",
+      },
+      {
+        challenge: "A wearable concept needs to stay simple while leaving room for deeper watchOS behavior.",
+        solution: "Built the iOS prototype with watchOS-related project structure and modular Swift files for continued expansion.",
+      },
+    ],
+    preview: {
+      title: "Voice Flow Preview",
+      language: "text",
+      content: `Open EchoWear\nAuthorize microphone + speech recognition\nStart listening\nRecognized speech updates the voice monitor interface`,
     },
   },
   "mips-cpu-simulator": {
@@ -596,7 +678,7 @@ export const projects: Project[] = baseProjects.map((project) => ({
   }),
 }));
 
-export const featuredProjectSlugs = ["campusstudy-ai", "cloud-api-service", "mips-cpu-simulator"];
+export const featuredProjectSlugs = ["campusstudy-ai", "cloud-api-service", "echowear"];
 
 export const skillGroups = [
   { title: "Programming Languages", skills: ["Python", "TypeScript", "JavaScript", "Java", "C++", "PHP", "HTML", "CSS", "SQL"] },
