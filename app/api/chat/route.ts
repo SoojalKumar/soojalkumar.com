@@ -7,6 +7,35 @@ const PROVIDER = "groq";
 const MODEL = "llama-3.1-8b-instant";
 const ENDPOINT = "https://api.groq.com/openai/v1/chat/completions";
 
+const allowedLinks = [
+  "Projects page: /projects",
+  "EchoWear: /projects/echowear",
+  "Cloud-Based API Service: /projects/cloud-api-service",
+  "CampusStudy AI: /projects/campusstudy-ai",
+  "GenAI Optimization: /projects/genai-optimization",
+  "Orbit Simulator: /projects/orbit-simulator",
+  "Sentiment Analysis: /projects/sentiment-analysis",
+  "Cache Simulator: /projects/cache-simulator",
+  "Banking System: /projects/banking-system",
+  "Zero-G Survival: /projects/zerog-survival",
+  "Resume: /resume",
+  "Contact: /contact",
+  "Research: /research",
+  "Experience: /experience",
+];
+
+const projectLinkBySlug: Record<string, string> = {
+  "campusstudy-ai": "/projects/campusstudy-ai",
+  "cloud-api-service": "/projects/cloud-api-service",
+  echowear: "/projects/echowear",
+  "genai-optimization": "/projects/genai-optimization",
+  "orbit-simulator": "/projects/orbit-simulator",
+  "sentiment-analysis": "/projects/sentiment-analysis",
+  "cache-simulator": "/projects/cache-simulator",
+  "banking-system": "/projects/banking-system",
+  "zerog-survival": "/projects/zerog-survival",
+};
+
 const portfolioContext = [
   `Name: ${profile.name}`,
   `Pronouns: ${profile.pronouns}`,
@@ -16,11 +45,19 @@ const portfolioContext = [
   `Education: ${profile.education}; graduation/issued: ${profile.graduation}`,
   `Email: ${profile.email}`,
   `Summary: ${profile.summary}`,
-  `Social links: ${socialLinks.map((link) => `${link.label}: ${link.href}`).join("; ")}`,
+  `Social profiles available on the Contact page: ${socialLinks.map((link) => link.label).join(", ")}`,
+  `Allowed internal links:\n${allowedLinks.map((link) => `- ${link}`).join("\n")}`,
   `Projects:\n${projects
     .map(
-      (project) =>
-        `- ${project.title} (${project.date}): ${project.description} Tech: ${project.tags.join(", ")}. Summary: ${project.summary}`
+      (project) => {
+        const projectDescription =
+          project.slug === "mips-cpu-simulator"
+            ? "MIPS CPU Simulator is a Python-based simulator that models fetch, decode, execute, register updates, memory access, branch handling, and cycle-by-cycle execution tracing for MIPS-like instructions."
+            : project.description;
+        const projectLink = projectLinkBySlug[project.slug] ?? "/projects";
+
+        return `- ${project.title} (${project.date}): ${projectDescription} Tech: ${project.tags.join(", ")}. Summary: ${project.summary} Internal link: ${projectLink}`;
+      }
     )
     .join("\n")}`,
   `Experience:\n${experience
@@ -33,11 +70,17 @@ const portfolioContext = [
 
 const systemPrompt = `You are Soojal Kumar's portfolio assistant.
 
-Answer only about Soojal Kumar's portfolio information: education, skills, projects, experience, resume, research, certifications, organizations, GitHub, LinkedIn, ORCID, location, and contact information.
+Answer only about Soojal Kumar's portfolio information: education, skills, projects, experience, resume, research, certifications, organizations, location, and contact information.
 
-Use only the provided portfolio context. Do not invent private information, salary, visa status, fake metrics, phone number, GPA, confidential details, or unrelated facts. Do not mention a phone number. If asked unrelated questions, politely redirect to Soojal's portfolio information.
+Use only the provided portfolio context. Do not invent facts, metrics, URLs, awards, job titles, private information, salary, visa status, phone number, GPA, confidential details, or features not listed in the context. Do not mention a phone number.
 
-Keep answers concise, professional, and helpful. If relevant, suggest the user visit the Projects, Resume, Research, Experience, or Contact page.
+Never use placeholder links such as your-portfolio.com. When including a link, use only these relative internal links from the allowed internal links list: /projects, /projects/campusstudy-ai, /projects/cloud-api-service, /projects/echowear, /projects/genai-optimization, /projects/orbit-simulator, /projects/sentiment-analysis, /projects/cache-simulator, /projects/banking-system, /projects/zerog-survival, /resume, /contact, /research, /experience. If a project does not have an allowed detail link, point to /projects.
+
+If asked about a specific project, answer with: what it is, what Soojal built, technologies used, what it demonstrates, and the correct internal link if available. For MIPS CPU Simulator, say branch handling only; do not say branch prediction.
+
+If you are unsure or the detail is not in the portfolio context, say: "I don't have that detail in the portfolio data, but you can check the Projects page for more."
+
+Keep answers concise, polished, recruiter-friendly, and helpful. If asked unrelated questions, politely redirect to Soojal's portfolio information.
 
 Portfolio context:
 ${portfolioContext}`;

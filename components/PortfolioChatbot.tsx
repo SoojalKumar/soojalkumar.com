@@ -2,7 +2,7 @@
 
 import { FormEvent, KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
 import { MessageCircle, Send, Sparkles, Trash2, X } from "lucide-react";
-import { awards, certifications, experience, profile, projects, socialLinks } from "@/lib/data";
+import { awards, certifications, experience, profile, projects } from "@/lib/data";
 
 type ChatMessage = {
   id: number;
@@ -14,18 +14,31 @@ const welcomeMessage =
   "Hi, I'm Soojal's portfolio assistant. Ask me about his projects, skills, experience, resume, or contact information.";
 
 const fallbackAnswer =
-  "I can help with Soojal's projects, skills, experience, resume, research, and contact information. Try asking: 'What projects has Soojal built?' or 'What are Soojal's technical skills?'";
+  "I can help with Soojal's projects, skills, experience, resume, research, and contact information. Try asking: 'What projects has Soojal built?' or visit /projects.";
 
 const projectAliases: Record<string, string[]> = {
   "campusstudy-ai": ["campusstudy", "campus study", "rag", "study platform"],
   "cloud-api-service": ["cloud", "api", "task", "fastapi", "docker"],
   echowear: ["echowear", "echo wear", "speech", "wake", "wearable", "haptic"],
+  "mips-cpu-simulator": ["mips", "cpu", "instruction", "architecture", "branch"],
   "genai-optimization": ["genai", "genetic", "optimization", "fitness", "trading"],
   "orbit-simulator": ["orbit", "kepler", "planet", "simulation"],
   "sentiment-analysis": ["sentiment", "naive bayes", "nlp", "movie review"],
   "cache-simulator": ["cache", "lru", "memory", "hit", "miss"],
   "banking-system": ["bank", "banking", "oop", "c++"],
   "zerog-survival": ["zero-g", "zerog", "survival", "game", "oxygen", "asteroid"],
+};
+
+const projectLinkBySlug: Record<string, string> = {
+  "campusstudy-ai": "/projects/campusstudy-ai",
+  "cloud-api-service": "/projects/cloud-api-service",
+  echowear: "/projects/echowear",
+  "genai-optimization": "/projects/genai-optimization",
+  "orbit-simulator": "/projects/orbit-simulator",
+  "sentiment-analysis": "/projects/sentiment-analysis",
+  "cache-simulator": "/projects/cache-simulator",
+  "banking-system": "/projects/banking-system",
+  "zerog-survival": "/projects/zerog-survival",
 };
 
 const technicalSkills =
@@ -50,17 +63,23 @@ const projectListAnswer = () => {
         "zerog-survival",
       ].includes(project.slug)
     )
-    .map((project) => `- ${project.title}: ${project.description}`)
+    .map((project) => `- ${project.title}: ${project.description} (${projectLinkBySlug[project.slug] ?? "/projects"})`)
     .join("\n");
 
-  return `Soojal has built projects across AI, backend APIs, mobile/wearable interaction, optimization, simulation, NLP, and systems programming.\n\n${highlighted}\n\nYou can explore them in detail on the Projects page.`;
+  return `Soojal has built projects across AI, backend APIs, mobile/wearable interaction, optimization, simulation, NLP, and systems programming.\n\n${highlighted}\n\nYou can explore them in detail on the Projects page: /projects`;
 };
 
 const getProjectAnswer = (question: string) => {
   const match = projects.find((project) => includesAny(question, [project.title.toLowerCase(), project.slug, ...(projectAliases[project.slug] ?? [])]));
   if (!match) return null;
 
-  return `${match.title} is ${match.description}\n\nTech: ${match.tags.join(", ")}.\n\nWhy it matters: ${match.impact.join(" ")}`;
+  const description =
+    match.slug === "mips-cpu-simulator"
+      ? "MIPS CPU Simulator is a Python-based simulator that models fetch, decode, execute, register updates, memory access, branch handling, and cycle-by-cycle execution tracing for MIPS-like instructions."
+      : match.description;
+  const link = projectLinkBySlug[match.slug] ?? "/projects";
+
+  return `What it is: ${description}\n\nWhat Soojal built: ${match.features.slice(0, 5).join(", ")}.\n\nTechnologies used: ${match.tags.join(", ")}.\n\nWhat it demonstrates: ${match.impact.join(" ")}\n\nView it here: ${link}`;
 };
 
 const getAssistantAnswer = (rawQuestion: string) => {
@@ -100,17 +119,15 @@ const getAssistantAnswer = (rawQuestion: string) => {
   }
 
   if (includesAny(question, ["certification", "certificate", "license", "docker", "linux", "unix"])) {
-    return `Selected certifications include ${certifications.slice(0, 6).join("; ")}. You can see the full list on the Research / Awards page.`;
+    return `Selected certifications include ${certifications.slice(0, 6).join("; ")}. You can see the full list here: /research`;
   }
 
   if (includesAny(question, ["resume", "cv", "download"])) {
-    return "Soojal's resume is available on the Resume page and can be downloaded as a PDF from /resume.pdf.";
+    return "Soojal's resume is available on the Resume page and can be downloaded there. View it here: /resume";
   }
 
   if (includesAny(question, ["contact", "email", "linkedin", "connect", "hire", "reach"])) {
-    const github = socialLinks.find((link) => link.label === "GitHub")?.href;
-    const linkedin = socialLinks.find((link) => link.label === "LinkedIn")?.href;
-    return `You can contact Soojal at ${profile.email}.\n\nGitHub: ${github}\nLinkedIn: ${linkedin}\n\nThe Contact page also includes a message form. No phone number is listed on the public portfolio.`;
+    return `You can contact Soojal at ${profile.email}. The Contact page also includes a message form and links to his public profiles.\n\nView it here: /contact\n\nNo phone number is listed on the public portfolio.`;
   }
 
   if (includesAny(question, ["location", "based", "where"])) {
