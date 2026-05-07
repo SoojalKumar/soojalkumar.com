@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import { awards, certifications, experience, organizations, profile, projects, socialLinks } from "@/lib/data";
 
-const GEMINI_MODEL = "gemini-2.5-flash";
-const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+export const runtime = "nodejs";
+
+const MODEL = "gemini-1.5-flash";
+const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
 const portfolioContext = [
   `Name: ${profile.name}`,
@@ -28,7 +30,7 @@ const portfolioContext = [
   `Organizations: ${organizations.map((item) => `${item.title}, ${item.role}, ${item.date}: ${item.description}`).join("; ")}`,
 ].join("\n\n");
 
-const systemInstruction = `You are Soojal Kumar's portfolio assistant.
+const systemPrompt = `You are Soojal Kumar's portfolio assistant.
 
 Answer only about Soojal Kumar's portfolio information: education, skills, projects, experience, resume, research, certifications, organizations, GitHub, LinkedIn, ORCID, location, and contact information.
 
@@ -51,6 +53,18 @@ type GeminiResponse = {
     message?: string;
   };
 };
+
+export async function GET() {
+  const key = process.env.GEMINI_API_KEY;
+
+  return NextResponse.json({
+    ok: true,
+    hasGeminiKey: Boolean(key),
+    keyLength: key?.length ?? 0,
+    model: MODEL,
+    runtime,
+  });
+}
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -76,16 +90,15 @@ export async function POST(request: Request) {
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
+  console.log("Gemini key exists:", Boolean(apiKey));
+  console.log("Gemini model:", MODEL);
 
   if (!apiKey) {
-    return NextResponse.json(
-      { reply: "Gemini is not configured yet. The local portfolio assistant fallback can still answer common questions." },
-      { status: 503 }
-    );
+    return NextResponse.json({ error: "Gemini API key is not configured on the server." }, { status: 503 });
   }
 
   try {
-    const response = await fetch(GEMINI_ENDPOINT, {
+    const response = await fetch(ENDPOINT, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -93,7 +106,7 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         systemInstruction: {
-          parts: [{ text: systemInstruction }],
+          parts: [{ text: systemPrompt }],
         },
         contents: [
           {
@@ -101,36 +114,29 @@ export async function POST(request: Request) {
             parts: [{ text: message }],
           },
         ],
-        generationConfig: {
-          temperature: 0.35,
-          topP: 0.9,
-          maxOutputTokens: 420,
-        },
       }),
     });
+    console.log("Gemini response status:", response.status);
 
     if (!response.ok) {
-      return NextResponse.json(
-        { reply: "Gemini could not answer right now. I can still use the local portfolio fallback." },
-        { status: 502 }
-      );
+      const errorBody = await response.text();
+      console.error("Gemini error response body:", errorBody);
+      return NextResponse.json({ error: "Gemini request failed." }, { status: 502 });
     }
 
     const data = (await response.json()) as GeminiResponse;
-    const reply = data.candidates?.[0]?.content?.parts?.map((part) => part.text ?? "").join("").trim();
+    const reply = data?.candidates?.[0]?.content?.parts
+      ?.map((part) => part.text)
+      ?.filter(Boolean)
+      ?.join("\n")
+      ?.trim();
 
     if (!reply) {
-      return NextResponse.json(
-        { reply: "Gemini returned an empty response. I can still use the local portfolio fallback." },
-        { status: 502 }
-      );
+      return NextResponse.json({ error: "Gemini response could not be parsed." }, { status: 502 });
     }
 
     return NextResponse.json({ reply });
   } catch {
-    return NextResponse.json(
-      { reply: "Gemini is temporarily unavailable. I can still use the local portfolio fallback." },
-      { status: 502 }
-    );
+    return NextResponse.json({ error: "Gemini request failed." }, { status: 502 });
   }
 }
