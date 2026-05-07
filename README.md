@@ -11,7 +11,7 @@ The site highlights software engineering, AI, optimization, cloud API, cybersecu
 - Tailwind CSS
 - Framer Motion
 - Lucide React
-- GitHub Pages
+- Vercel
 
 ## Local Development
 
@@ -32,17 +32,32 @@ bun run dev -- -p 5173 -H 127.0.0.1
 bun run build
 ```
 
-The project exports a static site to `out/` for GitHub Pages.
+The project builds as a server-capable Next.js app for Vercel so the chatbot API route can use `GEMINI_API_KEY` securely on the server.
 
 ## Portfolio Assistant
 
-The floating chatbot is currently a static, client-side portfolio assistant. It answers from local portfolio data and works on GitHub Pages without an API key or backend.
+The floating chatbot calls the server-side `/api/chat` route on Vercel. That route uses Google Gemini with `GEMINI_API_KEY` from Vercel Environment Variables. The API key is never exposed in frontend code.
 
-For a future Gemini-powered version, deploy the site to server-capable hosting such as Vercel or Netlify, add `GEMINI_API_KEY` as an environment variable, and create a server-side API route such as `app/api/chat/route.ts`. Do not expose the Gemini key in frontend code.
+If the Gemini API route is unavailable, the chatbot falls back to the local static portfolio knowledge base so visitors can still ask about Soojal's projects, skills, experience, resume, research, and contact information.
+
+To configure Gemini on Vercel:
+
+1. Open the Vercel project.
+2. Go to Settings → Environment Variables.
+3. Add `GEMINI_API_KEY`.
+4. Redeploy the site.
+
+For local server testing, create `.env.local` with:
+
+```text
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+Do not commit `.env.local`.
 
 ## Deployment
 
-GitHub Actions deploys the static site to GitHub Pages on every push to `main`.
+Vercel deploys the site from the GitHub repository. GitHub Actions runs a build verification on every push to `main`.
 
 Custom domain:
 

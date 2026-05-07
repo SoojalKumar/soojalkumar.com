@@ -124,6 +124,7 @@ const PortfolioChatbot = () => {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([{ id: 1, role: "assistant", content: welcomeMessage }]);
+  const [loading, setLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const nextId = useRef(2);
 
@@ -136,25 +137,68 @@ const PortfolioChatbot = () => {
     if (open) scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, open]);
 
-  const addUserQuestion = (question: string) => {
+  const askGemini = async (question: string) => {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: question }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Chat API failed");
+    }
+
+    const data = (await response.json()) as { reply?: string };
+    const reply = data.reply?.trim();
+
+    if (!reply) {
+      throw new Error("Chat API returned an empty reply");
+    }
+
+    return reply;
+  };
+
+  const addUserQuestion = async (question: string) => {
     const trimmed = question.trim();
-    if (!trimmed) return;
+    if (!trimmed || loading) return;
 
     const userMessage: ChatMessage = { id: nextId.current++, role: "user", content: trimmed };
-    const assistantMessage: ChatMessage = { id: nextId.current++, role: "assistant", content: getAssistantAnswer(trimmed) };
-    setMessages((current) => [...current, userMessage, assistantMessage]);
+    const assistantMessageId = nextId.current++;
+
+    setMessages((current) => [
+      ...current,
+      userMessage,
+      { id: assistantMessageId, role: "assistant", content: "Thinking..." },
+    ]);
     setInput("");
+    setLoading(true);
+
+    try {
+      const reply = await askGemini(trimmed);
+      setMessages((current) =>
+        current.map((message) => (message.id === assistantMessageId ? { ...message, content: reply } : message))
+      );
+    } catch {
+      const fallbackReply = `${getAssistantAnswer(trimmed)}\n\n(Note: Gemini is unavailable right now, so I answered from the local portfolio knowledge base.)`;
+      setMessages((current) =>
+        current.map((message) => (message.id === assistantMessageId ? { ...message, content: fallbackReply } : message))
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    addUserQuestion(input);
+    void addUserQuestion(input);
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
-      addUserQuestion(input);
+      void addUserQuestion(input);
     }
   };
 
@@ -162,6 +206,7 @@ const PortfolioChatbot = () => {
     nextId.current = 2;
     setMessages([{ id: 1, role: "assistant", content: welcomeMessage }]);
     setInput("");
+    setLoading(false);
   };
 
   return (
@@ -213,7 +258,8 @@ const PortfolioChatbot = () => {
                 <button
                   key={prompt}
                   type="button"
-                  onClick={() => addUserQuestion(prompt)}
+                  onClick={() => void addUserQuestion(prompt)}
+                  disabled={loading}
                   className="rounded-full border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:border-accent hover:text-accent"
                 >
                   {prompt}
@@ -227,11 +273,13 @@ const PortfolioChatbot = () => {
                 onKeyDown={handleKeyDown}
                 rows={2}
                 placeholder="Ask about projects, skills, resume..."
+                disabled={loading}
                 className="min-h-12 flex-1 resize-none rounded-xl border border-slate-200 px-3 py-2 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-accent focus:ring-4 focus:ring-cyan-100"
               />
               <button
                 type="submit"
-                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-white transition hover:bg-sky-500 focus:outline-none focus:ring-4 focus:ring-cyan-100"
+                disabled={loading}
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-white transition hover:bg-sky-500 focus:outline-none focus:ring-4 focus:ring-cyan-100 disabled:cursor-not-allowed disabled:opacity-60"
                 aria-label="Send message"
               >
                 <Send size={18} />
