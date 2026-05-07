@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-label="Cache Simulator Hit / Miss Table">
+  <rect width="1400" height="900" fill="#F8FAFC"/>
+  <rect x="70" y="70" width="1260" height="760" rx="34" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="3"/>
+  <rect x="70" y="70" width="1260" height="86" rx="34" fill="#0B1120"/>
+  <circle cx="118" cy="113" r="12" fill="#F87171"/><circle cx="154" cy="113" r="12" fill="#FBBF24"/><circle cx="190" cy="113" r="12" fill="#34D399"/>
+  <text x="700" y="124" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800" fill="#FFFFFF">Cache Simulator Hit / Miss Table</text>
+  
+  <rect x="140" y="245" width="1120" height="420" rx="24" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+  <rect x="140" y="245" width="1120" height="70" rx="24" fill="#ECFEFF"/>
+  <text x="185" y="290" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#111827">Address</text>
+  <text x="440" y="290" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#111827">Set</text>
+  <text x="620" y="290" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#111827">Tag</text>
+  <text x="835" y="290" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" fill="#111827">Result</text>
+  <text x="185" y="375" font-family="SFMono-Regular, Menlo, monospace" font-size="25" fill="#334155">0x1A3F</text><text x="450" y="375" font-size="25" font-family="SFMono-Regular, Menlo, monospace" fill="#334155">3</text><text x="620" y="375" font-size="25" font-family="SFMono-Regular, Menlo, monospace" fill="#334155">0x68</text><text x="835" y="375" font-size="25" font-family="Inter, Arial, sans-serif" font-weight="900" fill="#059669">HIT</text>
+  <text x="185" y="465" font-family="SFMono-Regular, Menlo, monospace" font-size="25" fill="#334155">0x2B41</text><text x="450" y="465" font-size="25" font-family="SFMono-Regular, Menlo, monospace" fill="#334155">1</text><text x="620" y="465" font-size="25" font-family="SFMono-Regular, Menlo, monospace" fill="#334155">0xAD</text><text x="835" y="465" font-size="25" font-family="Inter, Arial, sans-serif" font-weight="900" fill="#DC2626">MISS</text>
+  <text x="185" y="555" font-family="SFMono-Regular, Menlo, monospace" font-size="25" fill="#334155">0x1A3F</text><text x="450" y="555" font-size="25" font-family="SFMono-Regular, Menlo, monospace" fill="#334155">3</text><text x="620" y="555" font-size="25" font-family="SFMono-Regular, Menlo, monospace" fill="#334155">0x68</text><text x="835" y="555" font-size="25" font-family="Inter, Arial, sans-serif" font-weight="900" fill="#059669">HIT</text>
+  <rect x="98" y="778" width="220" height="28" rx="14" fill="#06B6D4" opacity=".16"/>
+  <text x="118" y="798" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#06B6D4">Grounded project visual</text>
+</svg>

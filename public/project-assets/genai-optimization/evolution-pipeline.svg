@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-label="Genetic Algorithm Evolution Pipeline">
+  <rect width="1400" height="900" fill="#F8FAFC"/>
+  <rect x="70" y="70" width="1260" height="760" rx="34" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="3"/>
+  <rect x="70" y="70" width="1260" height="86" rx="34" fill="#0B1120"/>
+  <circle cx="118" cy="113" r="12" fill="#F87171"/><circle cx="154" cy="113" r="12" fill="#FBBF24"/><circle cx="190" cy="113" r="12" fill="#34D399"/>
+  <text x="700" y="124" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800" fill="#FFFFFF">Genetic Algorithm Evolution Pipeline</text>
+  
+  
+  <rect x="110" y="300" width="210" height="145" rx="24" fill="#ECFEFF" stroke="#A5F3FC" stroke-width="2"/>
+  <text x="138" y="345" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">Population</text>
+  <text x="138" y="388" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Candidate</text><text x="138" y="422" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">strategies</text>
+  
+  <path d="M335 372 L440 372" stroke="#06B6D4" stroke-width="5" stroke-linecap="round"/>
+  <path d="M422 359 L440 372 L422 385" fill="none" stroke="#06B6D4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <rect x="455" y="300" width="210" height="145" rx="24" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+  <text x="483" y="345" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">Fitness</text>
+  <text x="483" y="388" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Score each</text><text x="483" y="422" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">strategy</text>
+  
+  <path d="M680 372 L785 372" stroke="#06B6D4" stroke-width="5" stroke-linecap="round"/>
+  <path d="M767 359 L785 372 L767 385" fill="none" stroke="#06B6D4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <rect x="800" y="300" width="210" height="145" rx="24" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+  <text x="828" y="345" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">Selection</text>
+  <text x="828" y="388" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Keep strong</text><text x="828" y="422" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">candidates</text>
+  
+  <path d="M1025 372 L1130 372" stroke="#06B6D4" stroke-width="5" stroke-linecap="round"/>
+  <path d="M1112 359 L1130 372 L1112 385" fill="none" stroke="#06B6D4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <rect x="1145" y="300" width="150" height="145" rx="24" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+  <text x="1173" y="345" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">Mutation</text>
+  <text x="1173" y="388" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Explore</text>
+  
+  <rect x="290" y="545" width="820" height="125" rx="24" fill="#F8FAFC" stroke="#D7E1EA" stroke-width="2"/>
+  <text x="318" y="590" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">Best Strategy Output</text>
+  <text x="318" y="633" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Training/testing workflow writes JSON summaries and fitness plots for analysis.</text>
+  <rect x="98" y="778" width="220" height="28" rx="14" fill="#06B6D4" opacity=".16"/>
+  <text x="118" y="798" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#06B6D4">Grounded project visual</text>
+</svg>

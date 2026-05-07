@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-label="Banking Transaction Console Flow">
+  <rect width="1400" height="900" fill="#F8FAFC"/>
+  <rect x="70" y="70" width="1260" height="760" rx="34" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="3"/>
+  <rect x="70" y="70" width="1260" height="86" rx="34" fill="#0B1120"/>
+  <circle cx="118" cy="113" r="12" fill="#F87171"/><circle cx="154" cy="113" r="12" fill="#FBBF24"/><circle cx="190" cy="113" r="12" fill="#34D399"/>
+  <text x="700" y="124" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800" fill="#FFFFFF">Banking Transaction Console Flow</text>
+  
+  <rect x="140" y="230" width="1120" height="500" rx="24" fill="#0B1120"/>
+  <text x="185" y="295" font-family="SFMono-Regular, Menlo, monospace" font-size="25" fill="#67E8F9">create CheckingAccount #1024</text>
+  <text x="185" y="355" font-family="SFMono-Regular, Menlo, monospace" font-size="25" fill="#E0F2FE">deposit 250.00</text>
+  <text x="185" y="415" font-family="SFMono-Regular, Menlo, monospace" font-size="25" fill="#E0F2FE">withdraw 40.00</text>
+  <text x="185" y="475" font-family="SFMono-Regular, Menlo, monospace" font-size="25" fill="#A7F3D0">balance -> 210.00</text>
+  <text x="185" y="570" font-family="SFMono-Regular, Menlo, monospace" font-size="22" fill="#CBD5E1">Console interface exercises C++ classes, account state, and transaction methods.</text>
+  <rect x="98" y="778" width="220" height="28" rx="14" fill="#06B6D4" opacity=".16"/>
+  <text x="118" y="798" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#06B6D4">Grounded project visual</text>
+</svg>

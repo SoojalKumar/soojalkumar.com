@@ -58,6 +58,10 @@ export type Project = {
   visuals: {
     title: string;
     description: string;
+    label?: "Screenshot" | "Output" | "Diagram" | "Workflow" | "Architecture" | "GIF" | "Asset";
+    image?: string;
+    alt?: string;
+    source?: "Real project asset" | "Generated from project structure" | "Grounded diagram";
     variant: "dashboard" | "pipeline" | "terminal" | "diagram";
   }[];
   challenges: {
@@ -342,10 +346,33 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
       { title: "Workers", items: ["Background processing", "Async study tasks", "Pipeline-ready architecture"] },
     ],
     visuals: [
-      { title: "AI Study Dashboard Preview", description: "Conceptual dashboard for planner, assistant, and study workflow entry points.", variant: "dashboard" },
-      { title: "RAG Retrieval Flow", description: "Visualizes how course material context can support AI study responses.", variant: "pipeline" },
-      { title: "Mobile Study Workflow", description: "Compact layout concept for quick study actions on a mobile surface.", variant: "dashboard" },
-      { title: "Background Worker Pipeline", description: "Conceptual queue for longer-running processing tasks.", variant: "diagram" },
+      {
+        title: "Study Dashboard Preview",
+        description: "Grounded dashboard visual based on the real CampusStudy AI web/mobile routes for study planning, materials, AI assistance, and course context.",
+        label: "Diagram",
+        image: "/project-assets/campusstudy-ai/study-dashboard.svg",
+        alt: "CampusStudy AI study dashboard visual",
+        source: "Generated from project structure",
+        variant: "dashboard",
+      },
+      {
+        title: "RAG Retrieval Flow",
+        description: "Workflow diagram based on the implemented retrieval, chunking, citation, and generation service structure in the CampusStudy AI backend.",
+        label: "Workflow",
+        image: "/project-assets/campusstudy-ai/rag-flow.svg",
+        alt: "CampusStudy AI retrieval augmented generation workflow",
+        source: "Generated from project structure",
+        variant: "pipeline",
+      },
+      {
+        title: "Background Worker Pipeline",
+        description: "Architecture visual grounded in the FastAPI services and Celery worker tasks used for extraction, processing, and study output generation.",
+        label: "Architecture",
+        image: "/project-assets/campusstudy-ai/worker-pipeline.svg",
+        alt: "CampusStudy AI FastAPI and worker pipeline",
+        source: "Generated from project structure",
+        variant: "diagram",
+      },
     ],
     challenges: [
       {
@@ -373,10 +400,33 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
       { title: "Testing", items: ["pytest coverage", "API behavior checks", "Deployment readiness validation"] },
     ],
     visuals: [
-      { title: "API Endpoint Panel", description: "Conceptual endpoint map for task CRUD, auth, filtering, and health checks.", variant: "terminal" },
-      { title: "React Dashboard Preview", description: "Intentional placeholder for the dashboard used to interact with task APIs.", variant: "dashboard" },
-      { title: "Docker Build Flow", description: "Shows application packaging into a repeatable deployment container.", variant: "pipeline" },
-      { title: "CI/CD Pipeline", description: "Build, test, and deploy stages represented as a release workflow.", variant: "diagram" },
+      {
+        title: "React Task Dashboard",
+        description: "Actual screenshot from the Cloud-Based API Service frontend showing the task management dashboard used to create, update, filter, and delete tasks.",
+        label: "Screenshot",
+        image: "/project-assets/cloud-api-service/dashboard.png",
+        alt: "Cloud-Based API Service task dashboard screenshot",
+        source: "Real project asset",
+        variant: "dashboard",
+      },
+      {
+        title: "API Response Preview",
+        description: "Grounded request/response panel based on the task API's pagination, filtering, API-key authentication, and structured JSON response design.",
+        label: "Output",
+        image: "/project-assets/cloud-api-service/api-response.svg",
+        alt: "Cloud API request and JSON response preview",
+        source: "Generated from project structure",
+        variant: "terminal",
+      },
+      {
+        title: "Docker + CI/CD Flow",
+        description: "Deployment workflow visual showing the React dashboard, FastAPI API, SQLite persistence, Docker packaging, and GitHub Actions validation path.",
+        label: "Architecture",
+        image: "/project-assets/cloud-api-service/cicd-flow.svg",
+        alt: "Cloud API Docker and CI/CD workflow",
+        source: "Generated from project structure",
+        variant: "diagram",
+      },
     ],
     challenges: [
       {
@@ -408,10 +458,42 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
       { title: "Platform", items: ["Xcode project", "iOS simulator support", "watchOS-related structure"] },
     ],
     visuals: [
-      { title: "Sign-In Flow Preview", description: "Conceptual panel for the SwiftUI authentication experience.", variant: "dashboard" },
-      { title: "Voice Monitor Surface", description: "Wearable-focused screen for listening state and speech interaction feedback.", variant: "dashboard" },
-      { title: "Speech Recognition Flow", description: "Shows audio input moving through recognition and UI updates.", variant: "pipeline" },
-      { title: "Apple Platform Structure", description: "Project architecture across iOS app code, assets, tests, and watchOS-related folders.", variant: "diagram" },
+      {
+        title: "SwiftUI Sign-In Screen",
+        description: "Actual EchoWear iOS screenshot from the project README showing the clean authentication entry point.",
+        label: "Screenshot",
+        image: "/project-assets/echowear/sign-in.png",
+        alt: "EchoWear SwiftUI sign-in screenshot",
+        source: "Real project asset",
+        variant: "dashboard",
+      },
+      {
+        title: "EchoWear Home Surface",
+        description: "Actual app screenshot showing the main EchoWear interface for the wearable-first voice monitoring prototype.",
+        label: "Screenshot",
+        image: "/project-assets/echowear/home.png",
+        alt: "EchoWear home screen screenshot",
+        source: "Real project asset",
+        variant: "dashboard",
+      },
+      {
+        title: "Speech Recognition Screen",
+        description: "Actual app screenshot of the speech recognition surface that connects microphone input with voice-driven interaction.",
+        label: "Screenshot",
+        image: "/project-assets/echowear/speech-recognition.png",
+        alt: "EchoWear speech recognition screen screenshot",
+        source: "Real project asset",
+        variant: "dashboard",
+      },
+      {
+        title: "Voice Interaction Flow",
+        description: "Grounded workflow visual showing how voice input moves through AVFoundation, Apple's Speech framework, and UI feedback.",
+        label: "Workflow",
+        image: "/project-assets/echowear/voice-flow.svg",
+        alt: "EchoWear voice recognition interaction flow",
+        source: "Generated from project structure",
+        variant: "pipeline",
+      },
     ],
     challenges: [
       {
@@ -443,10 +525,10 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
       { title: "Tools", items: ["Python", "CLI execution", "Trace-oriented debugging"] },
     ],
     visuals: [
-      { title: "CPU Pipeline Diagram", description: "Conceptual instruction path across fetch, decode, execute, memory, and writeback.", variant: "pipeline" },
-      { title: "Register File Preview", description: "Intentional table-style panel for register state changes.", variant: "dashboard" },
-      { title: "Memory Table Preview", description: "Conceptual memory-state panel for load and store operations.", variant: "dashboard" },
-      { title: "Cycle Trace Terminal", description: "Terminal-style preview of instruction execution across cycles.", variant: "terminal" },
+      { title: "CPU Pipeline Diagram", description: "Grounded instruction path across fetch, decode, execute, memory, and writeback.", label: "Workflow", variant: "pipeline", source: "Grounded diagram" },
+      { title: "Register File Preview", description: "Table-style panel for register state changes during instruction execution.", label: "Diagram", variant: "dashboard", source: "Grounded diagram" },
+      { title: "Memory Table Preview", description: "Memory-state panel for load and store operations.", label: "Diagram", variant: "dashboard", source: "Grounded diagram" },
+      { title: "Cycle Trace Terminal", description: "Terminal-style preview of instruction execution across cycles.", label: "Output", variant: "terminal", source: "Grounded diagram" },
     ],
     challenges: [
       {
@@ -478,10 +560,33 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
       { title: "Tools", items: ["Python", "NumPy", "Matplotlib"] },
     ],
     visuals: [
-      { title: "Fitness Curve Placeholder", description: "Conceptual visualization panel for optimization progress over generations.", variant: "dashboard" },
-      { title: "Strategy Evolution Flow", description: "Shows candidate strategy evolution from population to selected result.", variant: "pipeline" },
-      { title: "Experiment Config Panel", description: "Configuration surface for population size, mutation rate, and generation count.", variant: "terminal" },
-      { title: "JSON Output Preview", description: "Structured experiment summary concept for result comparison.", variant: "terminal" },
+      {
+        title: "Fitness Progress Plot",
+        description: "Actual output plot from the GenAI project showing optimization progress across generations.",
+        label: "Output",
+        image: "/project-assets/genai-optimization/fitness-progress.png",
+        alt: "GenAI genetic algorithm fitness progress plot",
+        source: "Real project asset",
+        variant: "dashboard",
+      },
+      {
+        title: "Strategy Evolution Pipeline",
+        description: "Grounded pipeline diagram for the implemented population, fitness scoring, selection, crossover, mutation, and best-strategy workflow.",
+        label: "Workflow",
+        image: "/project-assets/genai-optimization/evolution-pipeline.svg",
+        alt: "Genetic algorithm evolution pipeline",
+        source: "Generated from project structure",
+        variant: "pipeline",
+      },
+      {
+        title: "JSON Summary Output",
+        description: "Structured experiment summary visual based on the project's generated run_summary.json output artifact.",
+        label: "Output",
+        image: "/project-assets/genai-optimization/json-summary.svg",
+        alt: "GenAI run summary JSON visual",
+        source: "Generated from project structure",
+        variant: "terminal",
+      },
     ],
     challenges: [
       {
@@ -513,10 +618,33 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
       { title: "Tools", items: ["Python", "NumPy", "Matplotlib"] },
     ],
     visuals: [
-      { title: "Elliptical Orbit Preview", description: "Conceptual panel with a central star and elliptical orbital path.", variant: "diagram" },
-      { title: "Planet Configuration Panel", description: "Clean placeholder for JSON-based planetary system configuration.", variant: "terminal" },
-      { title: "Position Calculation Flow", description: "Numerical path from orbital parameters to plotted coordinates.", variant: "pipeline" },
-      { title: "Animation Output Placeholder", description: "Intentional preview panel for static and GIF visualization output.", variant: "dashboard" },
+      {
+        title: "Orbit Snapshot",
+        description: "Actual static image generated by the Orbit Simulator project using its Matplotlib rendering workflow.",
+        label: "Output",
+        image: "/project-assets/orbit-simulator/orbits.png",
+        alt: "Orbit Simulator generated orbit snapshot",
+        source: "Real project asset",
+        variant: "diagram",
+      },
+      {
+        title: "Animated Orbit Output",
+        description: "Actual animated GIF output generated by the simulator to show orbital motion over time.",
+        label: "GIF",
+        image: "/project-assets/orbit-simulator/orbits.gif",
+        alt: "Orbit Simulator animated orbit GIF",
+        source: "Real project asset",
+        variant: "dashboard",
+      },
+      {
+        title: "Planet Configuration Panel",
+        description: "Grounded configuration visual based on the project's JSON-driven planetary system input and Kepler solver workflow.",
+        label: "Output",
+        image: "/project-assets/orbit-simulator/config-panel.svg",
+        alt: "Orbit Simulator JSON configuration panel",
+        source: "Generated from project structure",
+        variant: "terminal",
+      },
     ],
     challenges: [
       {
@@ -543,10 +671,24 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
       { title: "Tools", items: ["Python", "NLP fundamentals", "Probabilistic modeling"] },
     ],
     visuals: [
-      { title: "NLP Pipeline Diagram", description: "Conceptual flow from raw text to sentiment prediction.", variant: "pipeline" },
-      { title: "Tokenization Preview", description: "Placeholder panel showing cleaned tokens prepared for modeling.", variant: "terminal" },
-      { title: "Probability Score Panel", description: "Visual concept for comparing class-level log scores.", variant: "dashboard" },
-      { title: "Classification Output Card", description: "Clean result card for positive or negative prediction output.", variant: "diagram" },
+      {
+        title: "NLP Pipeline Diagram",
+        description: "Grounded pipeline visual showing the implemented preprocessing, tokenization, Naive Bayes scoring, smoothing, and sentiment prediction flow.",
+        label: "Workflow",
+        image: "/project-assets/sentiment-analysis/nlp-pipeline.svg",
+        alt: "Sentiment Analysis Naive Bayes NLP pipeline",
+        source: "Generated from project structure",
+        variant: "pipeline",
+      },
+      {
+        title: "Classification Output Example",
+        description: "Grounded output card based on the project's review classification workflow and probability-scoring approach.",
+        label: "Output",
+        image: "/project-assets/sentiment-analysis/classification-output.svg",
+        alt: "Sentiment Analysis classification output example",
+        source: "Generated from project structure",
+        variant: "terminal",
+      },
     ],
     challenges: [
       {
@@ -578,10 +720,24 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
       { title: "Tools", items: ["Python", "Ubuntu Linux", "CLI configuration"] },
     ],
     visuals: [
-      { title: "Cache Table Preview", description: "Conceptual cache-state table with sets, tags, and valid entries.", variant: "dashboard" },
-      { title: "Hit/Miss Flow", description: "Visual path from address parsing to cache decision.", variant: "pipeline" },
-      { title: "Address Breakdown Panel", description: "Tag/index/offset split presented as a systems diagram.", variant: "diagram" },
-      { title: "CLI Output Preview", description: "Terminal-style memory access trace.", variant: "terminal" },
+      {
+        title: "Cache Hit / Miss Table",
+        description: "Grounded systems output panel showing address parsing, set lookup, tag comparison, and hit/miss decisions.",
+        label: "Output",
+        image: "/project-assets/cache-simulator/cache-table.svg",
+        alt: "Cache Simulator hit miss table",
+        source: "Generated from project structure",
+        variant: "dashboard",
+      },
+      {
+        title: "Address Breakdown Panel",
+        description: "Tag, index, and offset visual based on the cache simulator's memory-address parsing responsibilities.",
+        label: "Diagram",
+        image: "/project-assets/cache-simulator/address-breakdown.svg",
+        alt: "Cache Simulator address breakdown diagram",
+        source: "Generated from project structure",
+        variant: "diagram",
+      },
     ],
     challenges: [
       {
@@ -613,10 +769,24 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
       { title: "Interface", items: ["Console menu", "User input handling", "Readable output"] },
     ],
     visuals: [
-      { title: "Class Design Diagram", description: "Conceptual inheritance layout for account types and bank operations.", variant: "diagram" },
-      { title: "Account Flow Preview", description: "Shows user action moving through the bank and account object model.", variant: "pipeline" },
-      { title: "Transaction Console Preview", description: "Terminal-style placeholder for account actions and updated balance.", variant: "terminal" },
-      { title: "OOP Concept Cards", description: "Feature cards for inheritance, polymorphism, and encapsulation.", variant: "dashboard" },
+      {
+        title: "OOP Class Diagram",
+        description: "Grounded class diagram showing the Bank, BankAccount, CheckingAccount, and SavingsAccount relationship used in the C++ project.",
+        label: "Diagram",
+        image: "/project-assets/banking-system/class-diagram.svg",
+        alt: "Banking System Simulation C++ class diagram",
+        source: "Generated from project structure",
+        variant: "diagram",
+      },
+      {
+        title: "Transaction Console Flow",
+        description: "Grounded console output preview based on the account creation, deposit, withdrawal, and balance update workflow.",
+        label: "Output",
+        image: "/project-assets/banking-system/transaction-flow.svg",
+        alt: "Banking System transaction console flow",
+        source: "Generated from project structure",
+        variant: "terminal",
+      },
     ],
     challenges: [
       {
@@ -648,10 +818,33 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
       { title: "Tools", items: ["Java", "Eclipse", "Interactive game project"] },
     ],
     visuals: [
-      { title: "Game Loop Diagram", description: "Conceptual update loop from input to state resolution.", variant: "pipeline" },
-      { title: "Oxygen Management Panel", description: "Placeholder UI showing oxygen as a survival resource.", variant: "dashboard" },
-      { title: "Asteroid Hazard Preview", description: "Conceptual hazard field for navigation challenge.", variant: "diagram" },
-      { title: "Win/Lose State Flow", description: "Outcome logic for reaching the station or running out of oxygen.", variant: "pipeline" },
+      {
+        title: "Gameplay Scene",
+        description: "Scene visual composed from real Zero-G Survival project assets, including the astronaut and meteor sprites.",
+        label: "Asset",
+        image: "/project-assets/zerog-survival/gameplay-scene.svg",
+        alt: "Zero-G Survival gameplay scene using real project sprites",
+        source: "Real project asset",
+        variant: "dashboard",
+      },
+      {
+        title: "Space Background Asset",
+        description: "Actual space background asset from the Java game project.",
+        label: "Asset",
+        image: "/project-assets/zerog-survival/space-background.png",
+        alt: "Zero-G Survival space background asset",
+        source: "Real project asset",
+        variant: "dashboard",
+      },
+      {
+        title: "Survival Game Loop",
+        description: "Grounded loop diagram showing how movement, oxygen depletion, hazards, progress, and win/lose state checks connect.",
+        label: "Workflow",
+        image: "/project-assets/zerog-survival/survival-loop.svg",
+        alt: "Zero-G Survival game loop diagram",
+        source: "Generated from project structure",
+        variant: "pipeline",
+      },
     ],
     challenges: [
       {

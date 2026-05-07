@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-label="Naive Bayes NLP Pipeline">
+  <rect width="1400" height="900" fill="#F8FAFC"/>
+  <rect x="70" y="70" width="1260" height="760" rx="34" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="3"/>
+  <rect x="70" y="70" width="1260" height="86" rx="34" fill="#0B1120"/>
+  <circle cx="118" cy="113" r="12" fill="#F87171"/><circle cx="154" cy="113" r="12" fill="#FBBF24"/><circle cx="190" cy="113" r="12" fill="#34D399"/>
+  <text x="700" y="124" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800" fill="#FFFFFF">Naive Bayes NLP Pipeline</text>
+  
+  
+  <rect x="115" y="300" width="210" height="145" rx="24" fill="#ECFEFF" stroke="#A5F3FC" stroke-width="2"/>
+  <text x="143" y="345" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">Review</text>
+  <text x="143" y="388" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Raw movie</text><text x="143" y="422" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">text</text>
+  
+  <path d="M340 372 L445 372" stroke="#06B6D4" stroke-width="5" stroke-linecap="round"/>
+  <path d="M427 359 L445 372 L427 385" fill="none" stroke="#06B6D4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <rect x="460" y="300" width="210" height="145" rx="24" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+  <text x="488" y="345" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">Clean</text>
+  <text x="488" y="388" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Lowercase</text><text x="488" y="422" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">punctuation</text>
+  
+  <path d="M685 372 L790 372" stroke="#06B6D4" stroke-width="5" stroke-linecap="round"/>
+  <path d="M772 359 L790 372 L772 385" fill="none" stroke="#06B6D4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <rect x="805" y="300" width="210" height="145" rx="24" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+  <text x="833" y="345" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">Tokens</text>
+  <text x="833" y="388" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Word</text><text x="833" y="422" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">features</text>
+  
+  <path d="M1030 372 L1135 372" stroke="#06B6D4" stroke-width="5" stroke-linecap="round"/>
+  <path d="M1117 359 L1135 372 L1117 385" fill="none" stroke="#06B6D4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <rect x="1150" y="300" width="145" height="145" rx="24" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+  <text x="1178" y="345" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">Model</text>
+  <text x="1178" y="388" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Naive</text><text x="1178" y="422" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Bayes</text>
+  
+  <rect x="270" y="545" width="860" height="125" rx="24" fill="#F8FAFC" stroke="#D7E1EA" stroke-width="2"/>
+  <text x="298" y="590" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">Prediction</text>
+  <text x="298" y="633" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Positive / Negative review classification with Laplace smoothing and log probabilities.</text>
+  <rect x="98" y="778" width="220" height="28" rx="14" fill="#06B6D4" opacity=".16"/>
+  <text x="118" y="798" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#06B6D4">Grounded project visual</text>
+</svg>

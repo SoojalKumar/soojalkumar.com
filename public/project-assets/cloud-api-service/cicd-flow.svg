@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-label="Cloud API CI/CD Flow">
+  <rect width="1400" height="900" fill="#F8FAFC"/>
+  <rect x="70" y="70" width="1260" height="760" rx="34" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="3"/>
+  <rect x="70" y="70" width="1260" height="86" rx="34" fill="#0B1120"/>
+  <circle cx="118" cy="113" r="12" fill="#F87171"/><circle cx="154" cy="113" r="12" fill="#FBBF24"/><circle cx="190" cy="113" r="12" fill="#34D399"/>
+  <text x="700" y="124" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800" fill="#FFFFFF">Cloud API CI/CD Flow</text>
+  
+  
+  <rect x="120" y="300" width="220" height="140" rx="24" fill="#ECFEFF" stroke="#A5F3FC" stroke-width="2"/>
+  <text x="148" y="345" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">React UI</text>
+  <text x="148" y="388" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Task dashboard</text>
+  
+  <path d="M356 370 L462 370" stroke="#06B6D4" stroke-width="5" stroke-linecap="round"/>
+  <path d="M444 357 L462 370 L444 383" fill="none" stroke="#06B6D4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <rect x="476" y="300" width="220" height="140" rx="24" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+  <text x="504" y="345" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">FastAPI</text>
+  <text x="504" y="388" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Routes</text><text x="504" y="422" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Services</text>
+  
+  <path d="M712 370 L818 370" stroke="#06B6D4" stroke-width="5" stroke-linecap="round"/>
+  <path d="M800 357 L818 370 L800 383" fill="none" stroke="#06B6D4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <rect x="832" y="300" width="220" height="140" rx="24" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+  <text x="860" y="345" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">SQLite</text>
+  <text x="860" y="388" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Persistence</text>
+  
+  <path d="M1068 370 L1174 370" stroke="#06B6D4" stroke-width="5" stroke-linecap="round"/>
+  <path d="M1156 357 L1174 370 L1156 383" fill="none" stroke="#06B6D4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <rect x="1188" y="300" width="120" height="140" rx="24" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+  <text x="1216" y="345" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">Docker</text>
+  <text x="1216" y="388" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Image</text>
+  
+  <rect x="390" y="545" width="620" height="130" rx="24" fill="#F8FAFC" stroke="#D7E1EA" stroke-width="2"/>
+  <text x="418" y="590" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">GitHub Actions</text>
+  <text x="418" y="633" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Install -&gt; Test -&gt; Build -&gt; Deploy readiness</text>
+  <rect x="98" y="778" width="220" height="28" rx="14" fill="#06B6D4" opacity=".16"/>
+  <text x="118" y="798" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#06B6D4">Grounded project visual</text>
+</svg>

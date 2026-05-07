@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-label="EchoWear Voice Interaction Flow">
+  <rect width="1400" height="900" fill="#F8FAFC"/>
+  <rect x="70" y="70" width="1260" height="760" rx="34" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="3"/>
+  <rect x="70" y="70" width="1260" height="86" rx="34" fill="#0B1120"/>
+  <circle cx="118" cy="113" r="12" fill="#F87171"/><circle cx="154" cy="113" r="12" fill="#FBBF24"/><circle cx="190" cy="113" r="12" fill="#34D399"/>
+  <text x="700" y="124" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800" fill="#FFFFFF">EchoWear Voice Interaction Flow</text>
+  
+  
+  <rect x="125" y="295" width="230" height="150" rx="24" fill="#ECFEFF" stroke="#A5F3FC" stroke-width="2"/>
+  <text x="153" y="340" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">User Voice</text>
+  <text x="153" y="383" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Wake phrase</text><text x="153" y="417" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Command</text>
+  
+  <path d="M370 370 L475 370" stroke="#06B6D4" stroke-width="5" stroke-linecap="round"/>
+  <path d="M457 357 L475 370 L457 383" fill="none" stroke="#06B6D4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <rect x="490" y="295" width="230" height="150" rx="24" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+  <text x="518" y="340" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">AVFoundation</text>
+  <text x="518" y="383" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Microphone</text><text x="518" y="417" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Audio stream</text>
+  
+  <path d="M735 370 L840 370" stroke="#06B6D4" stroke-width="5" stroke-linecap="round"/>
+  <path d="M822 357 L840 370 L822 383" fill="none" stroke="#06B6D4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <rect x="855" y="295" width="230" height="150" rx="24" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+  <text x="883" y="340" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">Speech</text>
+  <text x="883" y="383" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Recognition</text><text x="883" y="417" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Text output</text>
+  
+  <path d="M1100 370 L1205 370" stroke="#06B6D4" stroke-width="5" stroke-linecap="round"/>
+  <path d="M1187 357 L1205 370 L1187 383" fill="none" stroke="#06B6D4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <rect x="1218" y="295" width="110" height="150" rx="24" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+  <text x="1246" y="340" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">UI</text>
+  <text x="1246" y="383" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Feedback</text>
+  
+  <rect x="310" y="555" width="780" height="130" rx="24" fill="#F8FAFC" stroke="#D7E1EA" stroke-width="2"/>
+  <text x="338" y="600" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800" fill="#111827">Accessibility Layer</text>
+  <text x="338" y="643" font-family="Inter, Arial, sans-serif" font-size="21" fill="#475569">Immediate visual confirmation and wearable-focused interaction patterns</text>
+  <rect x="98" y="778" width="220" height="28" rx="14" fill="#06B6D4" opacity=".16"/>
+  <text x="118" y="798" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#06B6D4">Grounded project visual</text>
+</svg>

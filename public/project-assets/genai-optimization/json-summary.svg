@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-label="GenAI Experiment Summary">
+  <rect width="1400" height="900" fill="#F8FAFC"/>
+  <rect x="70" y="70" width="1260" height="760" rx="34" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="3"/>
+  <rect x="70" y="70" width="1260" height="86" rx="34" fill="#0B1120"/>
+  <circle cx="118" cy="113" r="12" fill="#F87171"/><circle cx="154" cy="113" r="12" fill="#FBBF24"/><circle cx="190" cy="113" r="12" fill="#34D399"/>
+  <text x="700" y="124" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800" fill="#FFFFFF">GenAI Experiment Summary</text>
+  
+  <rect x="130" y="230" width="1140" height="500" rx="24" fill="#0B1120"/>
+  <text x="170" y="290" font-family="SFMono-Regular, Menlo, monospace" font-size="26" fill="#67E8F9">outputs/run_summary.json</text>
+  <text x="170" y="360" font-family="SFMono-Regular, Menlo, monospace" font-size="24" fill="#A7F3D0">{</text>
+  <text x="210" y="405" font-family="SFMono-Regular, Menlo, monospace" font-size="24" fill="#E0F2FE">"population_size": 100,</text>
+  <text x="210" y="450" font-family="SFMono-Regular, Menlo, monospace" font-size="24" fill="#E0F2FE">"mutation_rate": 0.05,</text>
+  <text x="210" y="495" font-family="SFMono-Regular, Menlo, monospace" font-size="24" fill="#E0F2FE">"generations": 50,</text>
+  <text x="210" y="540" font-family="SFMono-Regular, Menlo, monospace" font-size="24" fill="#E0F2FE">"best_fitness": "experiment output"</text>
+  <text x="170" y="585" font-family="SFMono-Regular, Menlo, monospace" font-size="24" fill="#A7F3D0">}</text>
+  <rect x="98" y="778" width="220" height="28" rx="14" fill="#06B6D4" opacity=".16"/>
+  <text x="118" y="798" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#06B6D4">Grounded project visual</text>
+</svg>

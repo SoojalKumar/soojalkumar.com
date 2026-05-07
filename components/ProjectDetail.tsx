@@ -25,6 +25,8 @@ const visualIcons = {
   diagram: Boxes,
 };
 
+type ProjectVisual = Project["visuals"][number];
+
 const ProjectDetail = ({ slug }: ProjectDetailProps) => {
   const project = projects.find((item) => item.slug === slug);
 
@@ -157,38 +159,63 @@ const SectionHeading = ({ title, description }: { title: string; description?: s
   </div>
 );
 
-const HeroVisual = ({ project }: { project: Project }) => (
-  <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-xl">
-    <div className="rounded-xl bg-slate-950 p-5 text-white">
-      <div className="flex items-center justify-between border-b border-white/10 pb-4">
-        <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-cyan-300">Conceptual Visual</p>
-          <h2 className="mt-1 text-xl font-bold">{project.heroVisual.title}</h2>
-        </div>
-        <div className="flex gap-1.5">
-          <span className="h-3 w-3 rounded-full bg-red-400" />
-          <span className="h-3 w-3 rounded-full bg-amber-300" />
-          <span className="h-3 w-3 rounded-full bg-emerald-400" />
-        </div>
-      </div>
-      <div className="mt-5 grid gap-3 sm:grid-cols-2">
-        {project.heroVisual.items.map((item, index) => (
-          <div
-            key={item}
-            className={`rounded-xl border border-white/10 bg-white/[0.06] p-4 ${
-              index === 0 ? "sm:col-span-2" : ""
-            }`}
-          >
-            <p className="text-sm font-semibold text-cyan-200">{item}</p>
-            <div className="mt-3 h-2 rounded-full bg-slate-800">
-              <div className="h-2 rounded-full bg-cyan-400" style={{ width: `${68 - index * 7}%` }} />
-            </div>
+const HeroVisual = ({ project }: { project: Project }) => {
+  const primaryVisual = project.visuals.find((visual) => visual.image);
+
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-xl">
+      <div className="overflow-hidden rounded-xl bg-slate-950 text-white">
+        <div className="flex items-center justify-between border-b border-white/10 p-5">
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-cyan-300">
+              {primaryVisual?.source ?? "Project Visual"}
+            </p>
+            <h2 className="mt-1 text-xl font-bold">{project.heroVisual.title}</h2>
           </div>
-        ))}
+          <div className="flex gap-1.5">
+            <span className="h-3 w-3 rounded-full bg-red-400" />
+            <span className="h-3 w-3 rounded-full bg-amber-300" />
+            <span className="h-3 w-3 rounded-full bg-emerald-400" />
+          </div>
+        </div>
+        <div className="p-5">
+          {primaryVisual?.image ? (
+            <div className="overflow-hidden rounded-xl border border-white/10 bg-white">
+              <img
+                src={primaryVisual.image}
+                alt={primaryVisual.alt ?? project.heroVisual.title}
+                className="h-80 w-full bg-white object-contain"
+              />
+            </div>
+          ) : (
+            <div className="grid gap-3 sm:grid-cols-2">
+              {project.heroVisual.items.map((item, index) => (
+                <div
+                  key={item}
+                  className={`rounded-xl border border-white/10 bg-white/[0.06] p-4 ${
+                    index === 0 ? "sm:col-span-2" : ""
+                  }`}
+                >
+                  <p className="text-sm font-semibold text-cyan-200">{item}</p>
+                  <div className="mt-3 h-2 rounded-full bg-slate-800">
+                    <div className="h-2 rounded-full bg-cyan-400" style={{ width: `${68 - index * 7}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {project.heroVisual.items.slice(0, 4).map((item) => (
+              <div key={item} className="rounded-xl border border-white/10 bg-white/[0.06] p-3">
+                <p className="text-sm font-semibold text-cyan-200">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const MetricGrid = ({ metrics }: { metrics: string[] }) => (
   <section className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -285,32 +312,59 @@ const TechnicalImplementation = ({ project }: { project: Project }) => (
 const VisualShowcase = ({ project }: { project: Project }) => (
   <section className="mt-12">
     <SectionHeading
-      title="Visual Showcase"
-      description="Conceptual preview panels for the project experience. These are intentional placeholders, not fake screenshots."
+      title="Screenshots & Visuals"
+      description="Real project screenshots and outputs appear first. Where a project has no existing screenshots, the visuals are grounded diagrams or output previews based on the actual project structure."
     />
     <div className="mt-5 grid gap-5 md:grid-cols-2">
-      {project.visuals.map((visual) => {
-        const Icon = visualIcons[visual.variant];
-        return (
-          <div key={visual.title} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <div className="flex min-h-40 items-center justify-center bg-slate-950 p-5 text-center text-white">
-              <div>
-                <Icon className="mx-auto text-cyan-300" size={30} />
-                <p className="mt-3 text-lg font-bold">{visual.title}</p>
-                <div className="mx-auto mt-4 h-2 w-40 rounded-full bg-slate-800">
-                  <div className="h-2 w-2/3 rounded-full bg-cyan-400" />
-                </div>
-              </div>
-            </div>
-            <div className="p-5">
-              <p className="leading-7 text-slate-600">{visual.description}</p>
-            </div>
-          </div>
-        );
-      })}
+      {project.visuals.map((visual) => (
+        <VisualCard key={visual.title} visual={visual} />
+      ))}
     </div>
   </section>
 );
+
+const VisualCard = ({ visual }: { visual: ProjectVisual }) => {
+  const Icon = visualIcons[visual.variant];
+
+  return (
+    <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
+      <div className="relative bg-slate-950">
+        {visual.image ? (
+          <img
+            src={visual.image}
+            alt={visual.alt ?? visual.title}
+            className="h-72 w-full bg-white object-contain"
+            loading="lazy"
+          />
+        ) : (
+          <div className="flex min-h-72 items-center justify-center p-5 text-center text-white">
+            <div>
+              <Icon className="mx-auto text-cyan-300" size={30} />
+              <p className="mt-3 text-lg font-bold">{visual.title}</p>
+              <div className="mx-auto mt-4 h-2 w-40 rounded-full bg-slate-800">
+                <div className="h-2 w-2/3 rounded-full bg-cyan-400" />
+              </div>
+            </div>
+          </div>
+        )}
+        <div className="absolute left-4 top-4 flex flex-wrap gap-2">
+          <span className="rounded-full bg-slate-950/85 px-3 py-1 text-xs font-bold uppercase tracking-wide text-cyan-200 ring-1 ring-white/10">
+            {visual.label ?? "Visual"}
+          </span>
+          {visual.source && (
+            <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-slate-700">
+              {visual.source}
+            </span>
+          )}
+        </div>
+      </div>
+      <figcaption className="p-5">
+        <h3 className="font-bold text-ink">{visual.title}</h3>
+        <p className="mt-2 leading-7 text-slate-600">{visual.description}</p>
+      </figcaption>
+    </figure>
+  );
+};
 
 const PreviewBlock = ({ project }: { project: Project }) => {
   if (!project.preview) return null;

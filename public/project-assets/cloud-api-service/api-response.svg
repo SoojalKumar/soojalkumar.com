@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-label="Cloud API Request / Response">
+  <rect width="1400" height="900" fill="#F8FAFC"/>
+  <rect x="70" y="70" width="1260" height="760" rx="34" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="3"/>
+  <rect x="70" y="70" width="1260" height="86" rx="34" fill="#0B1120"/>
+  <circle cx="118" cy="113" r="12" fill="#F87171"/><circle cx="154" cy="113" r="12" fill="#FBBF24"/><circle cx="190" cy="113" r="12" fill="#34D399"/>
+  <text x="700" y="124" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800" fill="#FFFFFF">Cloud API Request / Response</text>
+  
+  <rect x="120" y="230" width="1160" height="470" rx="24" fill="#0B1120"/>
+  <text x="165" y="285" font-family="SFMono-Regular, Menlo, monospace" font-size="28" font-weight="800" fill="#67E8F9">GET /api/v1/tasks?status=open&amp;page=1</text>
+  <text x="165" y="345" font-family="SFMono-Regular, Menlo, monospace" font-size="24" fill="#CBD5E1">x-api-key: development-api-key</text>
+  <text x="165" y="430" font-family="SFMono-Regular, Menlo, monospace" font-size="24" fill="#A7F3D0">{</text>
+  <text x="205" y="475" font-family="SFMono-Regular, Menlo, monospace" font-size="24" fill="#E0F2FE">"items": ["task objects"],</text>
+  <text x="205" y="520" font-family="SFMono-Regular, Menlo, monospace" font-size="24" fill="#E0F2FE">"page": 1,</text>
+  <text x="205" y="565" font-family="SFMono-Regular, Menlo, monospace" font-size="24" fill="#E0F2FE">"total": 24</text>
+  <text x="165" y="610" font-family="SFMono-Regular, Menlo, monospace" font-size="24" fill="#A7F3D0">}</text>
+  <rect x="98" y="778" width="220" height="28" rx="14" fill="#06B6D4" opacity=".16"/>
+  <text x="118" y="798" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#06B6D4">Grounded project visual</text>
+</svg>
