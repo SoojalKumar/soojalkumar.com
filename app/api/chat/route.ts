@@ -3,7 +3,7 @@ import { awards, certifications, experience, organizations, profile, projects, s
 
 export const runtime = "nodejs";
 
-const MODEL = "gemini-1.5-flash";
+const MODEL = "gemini-2.0-flash";
 const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
 const portfolioContext = [
