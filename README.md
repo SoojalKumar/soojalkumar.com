@@ -34,6 +34,12 @@ bun run build
 
 The project exports a static site to `out/` for GitHub Pages.
 
+## Portfolio Assistant
+
+The floating chatbot is currently a static, client-side portfolio assistant. It answers from local portfolio data and works on GitHub Pages without an API key or backend.
+
+For a future Gemini-powered version, deploy the site to server-capable hosting such as Vercel or Netlify, add `GEMINI_API_KEY` as an environment variable, and create a server-side API route such as `app/api/chat/route.ts`. Do not expose the Gemini key in frontend code.
+
 ## Deployment
 
 GitHub Actions deploys the static site to GitHub Pages on every push to `main`.
@@ -41,5 +47,5 @@ GitHub Actions deploys the static site to GitHub Pages on every push to `main`.
 Custom domain:
 
 ```text
-soojalkumar.com
+www.skvidhani.com
 ```
