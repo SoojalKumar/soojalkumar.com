@@ -3,8 +3,9 @@ import { awards, certifications, experience, organizations, profile, projects, s
 
 export const runtime = "nodejs";
 
-const MODEL = "gemini-2.0-flash";
-const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
+const PROVIDER = "groq";
+const MODEL = "llama-3.1-8b-instant";
+const ENDPOINT = "https://api.groq.com/openai/v1/chat/completions";
 
 const portfolioContext = [
   `Name: ${profile.name}`,
@@ -41,12 +42,10 @@ Keep answers concise, professional, and helpful. If relevant, suggest the user v
 Portfolio context:
 ${portfolioContext}`;
 
-type GeminiResponse = {
-  candidates?: {
-    content?: {
-      parts?: {
-        text?: string;
-      }[];
+type GroqResponse = {
+  choices?: {
+    message?: {
+      content?: string;
     };
   }[];
   error?: {
@@ -55,11 +54,12 @@ type GeminiResponse = {
 };
 
 export async function GET() {
-  const key = process.env.GEMINI_API_KEY;
+  const key = process.env.GROQ_API_KEY;
 
   return NextResponse.json({
     ok: true,
-    hasGeminiKey: Boolean(key),
+    provider: PROVIDER,
+    hasGroqKey: Boolean(key),
     keyLength: key?.length ?? 0,
     model: MODEL,
     runtime,
@@ -89,12 +89,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ reply: "Please keep your question shorter so I can answer it clearly." }, { status: 400 });
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
-  console.log("Gemini key exists:", Boolean(apiKey));
-  console.log("Gemini model:", MODEL);
+  const apiKey = process.env.GROQ_API_KEY;
+  console.log("Groq key exists:", Boolean(apiKey));
+  console.log("Groq model:", MODEL);
 
   if (!apiKey) {
-    return NextResponse.json({ error: "Gemini API key is not configured on the server." }, { status: 503 });
+    return NextResponse.json({ error: "Groq API key is not configured on the server." }, { status: 503 });
   }
 
   try {
@@ -102,41 +102,41 @@ export async function POST(request: Request) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-goog-api-key": apiKey,
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        systemInstruction: {
-          parts: [{ text: systemPrompt }],
-        },
-        contents: [
+        model: MODEL,
+        messages: [
+          {
+            role: "system",
+            content: systemPrompt,
+          },
           {
             role: "user",
-            parts: [{ text: message }],
+            content: message,
           },
         ],
+        temperature: 0.3,
+        max_tokens: 600,
       }),
     });
-    console.log("Gemini response status:", response.status);
+    console.log("Groq response status:", response.status);
 
     if (!response.ok) {
       const errorBody = await response.text();
-      console.error("Gemini error response body:", errorBody);
-      return NextResponse.json({ error: "Gemini request failed." }, { status: 502 });
+      console.error("Groq error response body:", errorBody);
+      return NextResponse.json({ error: "Groq request failed." }, { status: 502 });
     }
 
-    const data = (await response.json()) as GeminiResponse;
-    const reply = data?.candidates?.[0]?.content?.parts
-      ?.map((part) => part.text)
-      ?.filter(Boolean)
-      ?.join("\n")
-      ?.trim();
+    const data = (await response.json()) as GroqResponse;
+    const reply = data?.choices?.[0]?.message?.content?.trim();
 
     if (!reply) {
-      return NextResponse.json({ error: "Gemini response could not be parsed." }, { status: 502 });
+      return NextResponse.json({ error: "Groq response could not be parsed." }, { status: 502 });
     }
 
     return NextResponse.json({ reply });
   } catch {
-    return NextResponse.json({ error: "Gemini request failed." }, { status: 502 });
+    return NextResponse.json({ error: "Groq request failed." }, { status: 502 });
   }
 }

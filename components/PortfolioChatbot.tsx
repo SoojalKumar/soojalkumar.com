@@ -137,7 +137,7 @@ const PortfolioChatbot = () => {
     if (open) scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, open]);
 
-  const askGemini = async (question: string) => {
+  const askAssistant = async (question: string) => {
     const response = await fetch("/api/chat", {
       method: "POST",
       headers: {
@@ -176,12 +176,12 @@ const PortfolioChatbot = () => {
     setLoading(true);
 
     try {
-      const reply = await askGemini(trimmed);
+      const reply = await askAssistant(trimmed);
       setMessages((current) =>
         current.map((message) => (message.id === assistantMessageId ? { ...message, content: reply } : message))
       );
     } catch {
-      const fallbackReply = `${getAssistantAnswer(trimmed)}\n\n(Note: Gemini is unavailable right now, so I answered from the local portfolio knowledge base.)`;
+      const fallbackReply = `${getAssistantAnswer(trimmed)}\n\nAnswered from Soojal's verified portfolio knowledge base.`;
       setMessages((current) =>
         current.map((message) => (message.id === assistantMessageId ? { ...message, content: fallbackReply } : message))
       );
