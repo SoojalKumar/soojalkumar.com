@@ -2,25 +2,70 @@ import AwardCard from "@/components/AwardCard";
 import CertificationCard from "@/components/CertificationCard";
 import MotionSection from "@/components/MotionSection";
 import SectionTitle from "@/components/SectionTitle";
-import { awards, certifications, organizations } from "@/lib/data";
+import Tag from "@/components/Tag";
+import { awards, certifications, organizations, researchPublications } from "@/lib/data";
+import { ArrowRight, ExternalLink } from "lucide-react";
+import Link from "next/link";
 
 export default function ResearchPage() {
+  const publication = researchPublications[0];
+
   return (
     <main className="mx-auto max-w-6xl px-5 py-28">
       <SectionTitle title="Research / Awards" description="Research, honors, certifications, and student organization leadership." />
-      <MotionSection className="rounded-xl border-l-4 border-accent bg-sky-50 p-8 shadow-sm">
-        <p className="text-sm font-semibold uppercase tracking-wider text-accent">Best Paper Award</p>
-        <h2 className="mt-2 text-2xl font-bold text-ink">
-          Explainable AI for Intrusion Detection Systems: Enhancing Trust, Transparency, and Real-Time Threat Response
-        </h2>
-        <p className="mt-2 font-semibold text-slate-600">
-          International Journal of AI, Big Data, Computational and Management Studies · Issued Apr 2026
-        </p>
-        <p className="mt-4 leading-8 text-slate-700">
-          Recognized for research quality and technical contribution in AI-driven cybersecurity. The work focuses on
-          integrating explainability techniques such as SHAP and LIME with machine learning models to improve
-          transparency, trust, and real-time intrusion detection.
-        </p>
+
+      <MotionSection className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-accent">Best Paper Award</p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink">{publication.title}</h2>
+            <p className="mt-3 font-semibold text-slate-600">
+              {publication.journal} · Published {publication.publishedLabel}
+            </p>
+            <p className="mt-5 leading-8 text-slate-700">{publication.abstractPreview}</p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {publication.tags.map((tag) => (
+                <Tag key={tag}>{tag}</Tag>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border-l-4 border-accent bg-sky-50 p-6 shadow-sm ring-1 ring-sky-100">
+            <p className="text-sm font-semibold uppercase tracking-wider text-accent">Publication</p>
+            <dl className="mt-4 space-y-3 text-sm">
+              <div>
+                <dt className="font-semibold text-ink">Author</dt>
+                <dd className="text-slate-600">{publication.author}</dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-ink">Volume / Issue / Pages</dt>
+                <dd className="text-slate-600">
+                  Vol. {publication.volume}, Issue {publication.issue}, pp. {publication.pages}
+                </dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-ink">DOI</dt>
+                <dd className="break-words text-slate-600">{publication.doiLabel}</dd>
+              </div>
+            </dl>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href={publication.doi}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-ink transition hover:border-accent"
+              >
+                DOI <ExternalLink size={16} />
+              </a>
+              <Link
+                href={publication.route}
+                className="inline-flex items-center gap-2 rounded-lg bg-navy px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+              >
+                Read Details <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+        </div>
       </MotionSection>
 
       <MotionSection className="mt-12">

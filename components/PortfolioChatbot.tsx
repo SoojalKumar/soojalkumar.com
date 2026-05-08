@@ -2,7 +2,7 @@
 
 import { FormEvent, KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
 import { MessageCircle, Send, Sparkles, Trash2, X } from "lucide-react";
-import { awards, certifications, experience, profile, projects } from "@/lib/data";
+import { awards, certifications, experience, profile, projects, researchPublications } from "@/lib/data";
 
 type ChatMessage = {
   id: number;
@@ -43,6 +43,8 @@ const projectLinkBySlug: Record<string, string> = {
 
 const technicalSkills =
   "Soojal's technical skills include Python, TypeScript, JavaScript, React, Next.js, FastAPI, REST APIs, SQLite, Docker, Git, GitHub Actions, Linux, Unix, machine learning, NLP, genetic algorithms, NumPy, Matplotlib, computer architecture, CLI tools, and systems programming.";
+
+const researchPaper = researchPublications[0];
 
 const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9+#.\s-]/g, " ");
 
@@ -114,8 +116,8 @@ const getAssistantAnswer = (rawQuestion: string) => {
     return `Soojal's experience includes operations, student leadership, teaching support, and campus service roles:\n\n${roles}\n\nHis work experience shows leadership, communication, operations management, analytical observation, and problem-solving.`;
   }
 
-  if (includesAny(question, ["research", "award", "paper", "publication", "intrusion", "cybersecurity", "best paper"])) {
-    return `Soojal received a Best Paper Award for research titled "Explainable AI for Intrusion Detection Systems: Enhancing Trust, Transparency, and Real-Time Threat Response." The work focuses on AI-driven cybersecurity, explainability, SHAP/LIME-style transparency, trust, and real-time threat response.\n\nHonors include: ${awards.join("; ")}.`;
+  if (includesAny(question, ["research", "award", "paper", "publication", "intrusion", "cybersecurity", "best paper", "doi", "xai", "shap", "lime"])) {
+    return `Soojal received a Best Paper Award for "${researchPaper.title}."\n\nJournal: ${researchPaper.journal}\nYear: ${researchPaper.year}\nDOI: ${researchPaper.doi}\n\nSummary: ${researchPaper.abstractPreview}\n\nRead the detail page: ${researchPaper.route}\n\nHonors include: ${awards.join("; ")}.`;
   }
 
   if (includesAny(question, ["certification", "certificate", "license", "docker", "linux", "unix"])) {

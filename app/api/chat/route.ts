@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { awards, certifications, experience, organizations, profile, projects, socialLinks } from "@/lib/data";
+import { awards, certifications, experience, organizations, profile, projects, researchPublications, socialLinks } from "@/lib/data";
 
 export const runtime = "nodejs";
 
@@ -21,6 +21,7 @@ const allowedLinks = [
   "Resume: /resume",
   "Contact: /contact",
   "Research: /research",
+  "Explainable AI Intrusion Detection Paper: /research/explainable-ai-intrusion-detection",
   "Experience: /experience",
 ];
 
@@ -63,6 +64,12 @@ const portfolioContext = [
   `Experience:\n${experience
     .map((item) => `- ${item.role}, ${item.organization}, ${item.date}${item.location ? `, ${item.location}` : ""}. ${item.bullets.join(" ")}`)
     .join("\n")}`,
+  `Research publications:\n${researchPublications
+    .map(
+      (paper) =>
+        `- ${paper.title}. Author: ${paper.author}. Journal: ${paper.journal}. Publisher/group: ${paper.publisher}. Year: ${paper.year}. DOI: ${paper.doi}. Published: ${paper.published}. Route: ${paper.route}. Summary: ${paper.abstractPreview}. Tags: ${paper.tags.join(", ")}. Keywords: ${paper.keywords.join(", ")}.`
+    )
+    .join("\n")}`,
   `Awards: ${awards.join("; ")}`,
   `Certifications: ${certifications.join("; ")}`,
   `Organizations: ${organizations.map((item) => `${item.title}, ${item.role}, ${item.date}: ${item.description}`).join("; ")}`,
@@ -74,9 +81,11 @@ Answer only about Soojal Kumar's portfolio information: education, skills, proje
 
 Use only the provided portfolio context. Do not invent facts, metrics, URLs, awards, job titles, private information, salary, visa status, phone number, GPA, confidential details, or features not listed in the context. Do not mention a phone number.
 
-Never use placeholder links such as your-portfolio.com. When including a link, use only these relative internal links from the allowed internal links list: /projects, /projects/campusstudy-ai, /projects/cloud-api-service, /projects/echowear, /projects/genai-optimization, /projects/orbit-simulator, /projects/sentiment-analysis, /projects/cache-simulator, /projects/banking-system, /projects/zerog-survival, /resume, /contact, /research, /experience. If a project does not have an allowed detail link, point to /projects.
+Never use placeholder links such as your-portfolio.com. When including a link, use only these relative internal links from the allowed internal links list: /projects, /projects/campusstudy-ai, /projects/cloud-api-service, /projects/echowear, /projects/genai-optimization, /projects/orbit-simulator, /projects/sentiment-analysis, /projects/cache-simulator, /projects/banking-system, /projects/zerog-survival, /resume, /contact, /research, /research/explainable-ai-intrusion-detection, /experience. If a project does not have an allowed detail link, point to /projects.
 
 If asked about a specific project, answer with: what it is, what Soojal built, technologies used, what it demonstrates, and the correct internal link if available. For MIPS CPU Simulator, say branch handling only; do not say branch prediction.
+
+If asked about research, the Best Paper Award, the XAI intrusion detection paper, or the DOI, include only the listed publication title, journal, year, DOI, short summary, and detail route: /research/explainable-ai-intrusion-detection. Do not say there are multiple publications unless they are listed in the portfolio context.
 
 If you are unsure or the detail is not in the portfolio context, say: "I don't have that detail in the portfolio data, but you can check the Projects page for more."
 

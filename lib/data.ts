@@ -942,6 +942,47 @@ export const experience = [
 
 export const awards = ["Best Paper Award - IJAIBDCMS, Apr 2026", "Resident Assistant Grant - Jun 2024", "UOP International Academic Excellence Scholarship - Jan 2021"];
 
+export const researchPublications = [
+  {
+    slug: "explainable-ai-intrusion-detection",
+    route: "/research/explainable-ai-intrusion-detection",
+    title: "Explainable AI for Intrusion Detection Systems: Enhancing Trust, Transparency, and Real-Time Threat Response",
+    author: "Soojal Kumar",
+    journal: "International Journal of AI, Big Data, Computational and Management Studies",
+    publisher: "Noble Scholar Research Group",
+    volume: "7",
+    issue: "2",
+    pages: "115-123",
+    year: "2026",
+    issn: "3050-9416",
+    doi: "https://doi.org/10.63282/3050-9416.IJAIBDCMS-V7I2P119",
+    doiLabel: "10.63282/3050-9416.IJAIBDCMS-V7I2P119",
+    received: "02/03/2026",
+    revised: "06/04/2026",
+    accepted: "14/04/2026",
+    published: "21/04/2026",
+    publishedLabel: "Apr 21, 2026",
+    tags: ["XAI", "Intrusion Detection", "Cybersecurity", "Machine Learning", "SHAP", "LIME"],
+    keywords: [
+      "Explainable Artificial Intelligence",
+      "Intrusion Detection Systems",
+      "Cybersecurity",
+      "Machine Learning",
+      "Transparency",
+      "Trust",
+      "Real-Time Threat Detection",
+    ],
+    abstractPreview:
+      "A real-time explainable intrusion detection framework combining Random Forest and Deep Neural Network models with SHAP and LIME explanations to improve transparency, trust, and analyst usability.",
+    abstract: [
+      "The growing sophistication of cyber threats has exposed the limitations of conventional intrusion detection systems that depend on static signatures and rule-based detection. Although machine learning has improved the ability to identify malicious traffic patterns, many high-performing models remain difficult to interpret, reducing trust and limiting operational adoption. This study develops and evaluates a real-time explainable intrusion detection framework that combines predictive accuracy with transparent decision support.",
+      "Using the NSL-KDD and CICIDS2017 benchmark datasets, the study implemented Random Forest and Deep Neural Network models under a stratified training, validation, and testing protocol with repeated experimental runs. Data preprocessing included normalization, feature engineering, imbalance correction, and hyperparameter optimization. Explainability was integrated through SHAP and LIME to generate both global and case-specific interpretations of model predictions.",
+      "The results show that both models achieved strong classification performance, while the Deep Neural Network produced higher recall and ROC-AUC under more complex traffic conditions. Random Forest delivered lower inference latency and competitive precision. The inclusion of explainability introduced only modest processing overhead while significantly improving interpretability, alert transparency, and analyst usability.",
+      "The study contributes a unified evaluation of predictive performance, explanation quality, and real-time response efficiency, supported by a deployment-oriented framework for practical security environments. The findings indicate that effective intrusion detection systems should be judged not only by accuracy, but also by how clearly and rapidly they support human decision-making.",
+    ],
+  },
+];
+
 export const certifications = [
   "Foundations of Algorithmic Thinking with Python - LinkedIn, May 2026",
   "Getting Started as a Full-Stack Web Developer - LinkedIn, May 2026",
