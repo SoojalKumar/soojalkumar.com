@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import { MessageCircle, Send, Sparkles, Trash2, X } from "lucide-react";
 import { awards, certifications, experience, profile, projects, researchPublications } from "@/lib/data";
 
@@ -14,19 +15,19 @@ const welcomeMessage =
   "Hi, I'm Soojal's portfolio assistant. Ask me about his projects, skills, experience, resume, or contact information.";
 
 const fallbackAnswer =
-  "I can help with Soojal's projects, skills, experience, resume, research, and contact information. Try asking: 'What projects has Soojal built?' or visit /projects.";
+  "I can help with Soojal's projects, skills, experience, resume, research, and contact information. Try asking: 'What projects has Soojal built?' or visit [Projects](/projects).";
 
 const projectAliases: Record<string, string[]> = {
-  "campusstudy-ai": ["campusstudy", "campus study", "rag", "study platform"],
-  "cloud-api-service": ["cloud", "api", "task", "fastapi", "docker"],
-  echowear: ["echowear", "echo wear", "speech", "wake", "wearable", "haptic"],
+  "campusstudy-ai": ["campusstudy", "campus study", "campis study", "campus ai", "study ai", "university study app", "ai study app", "rag", "study platform"],
+  "cloud-api-service": ["cloud api", "cloud based api", "api service", "task api", "fastapi project", "cloud", "fastapi", "docker"],
+  echowear: ["echowear", "echo wear", "voice app", "wearable app", "speech recognition", "speech", "wake", "haptic"],
   "mips-cpu-simulator": ["mips", "cpu", "instruction", "architecture", "branch"],
-  "genai-optimization": ["genai", "genetic", "optimization", "fitness", "trading"],
-  "orbit-simulator": ["orbit", "kepler", "planet", "simulation"],
-  "sentiment-analysis": ["sentiment", "naive bayes", "nlp", "movie review"],
-  "cache-simulator": ["cache", "lru", "memory", "hit", "miss"],
-  "banking-system": ["bank", "banking", "oop", "c++"],
-  "zerog-survival": ["zero-g", "zerog", "survival", "game", "oxygen", "asteroid"],
+  "genai-optimization": ["gen ai", "genai", "genetic algorithm", "optimization engine", "genetic", "optimization", "fitness", "trading"],
+  "orbit-simulator": ["orbit", "orbit simulator", "planet simulator", "kepler", "planet", "simulation"],
+  "sentiment-analysis": ["sentiment", "naive bayes", "movie review classifier", "nlp", "movie review"],
+  "cache-simulator": ["cache", "cache simulator", "lru", "memory", "hit", "miss"],
+  "banking-system": ["banking", "bank project", "bank", "oop", "c++"],
+  "zerog-survival": ["zero g", "zero-g", "zerog", "space game", "survival", "game", "oxygen", "asteroid"],
 };
 
 const projectLinkBySlug: Record<string, string> = {
@@ -46,9 +47,49 @@ const technicalSkills =
 
 const researchPaper = researchPublications[0];
 
-const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9+#.\s-]/g, " ");
+const allowedInternalLinks = new Set([
+  "/",
+  "/about",
+  "/projects",
+  "/projects/campusstudy-ai",
+  "/projects/cloud-api-service",
+  "/projects/echowear",
+  "/projects/genai-optimization",
+  "/projects/orbit-simulator",
+  "/projects/sentiment-analysis",
+  "/projects/cache-simulator",
+  "/projects/banking-system",
+  "/projects/zerog-survival",
+  "/experience",
+  "/research",
+  "/research/explainable-ai-intrusion-detection",
+  "/resume",
+  "/contact",
+]);
+
+const allowedExternalLinks = new Set(["https://doi.org/10.63282/3050-9416.IJAIBDCMS-V7I2P119"]);
+
+const normalize = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/\bwaht\b/g, "what")
+    .replace(/\bcampis\b/g, "campus")
+    .replace(/\bprojcts\b/g, "projects")
+    .replace(/\bskils\b/g, "skills")
+    .replace(/\bcontect\b/g, "contact")
+    .replace(/[^a-z0-9+#.\s-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 
 const includesAny = (text: string, terms: string[]) => terms.some((term) => text.includes(term));
+
+const intentAliases = {
+  skills: ["skills", "technical skills", "tech stack", "kya skills", "skills kya", "kis cheez mein skilled", "programming languages"],
+  contact: ["contact", "email", "connect", "rabta", "contact kaise", "how can i contact", "contact kaise karun"],
+  resume: ["resume", "cv", "download resume", "resume kaha hai", "cv kaha hai"],
+  projects: ["projects", "project", "kaam", "kya banaya", "what has he built", "portfolio projects", "soojal ke projects", "projects kya"],
+  research: ["research", "paper", "best paper", "xai", "intrusion detection", "ids", "cybersecurity paper", "research paper batao"],
+};
 
 const projectListAnswer = () => {
   const highlighted = projects
@@ -65,10 +106,10 @@ const projectListAnswer = () => {
         "zerog-survival",
       ].includes(project.slug)
     )
-    .map((project) => `- ${project.title}: ${project.description} (${projectLinkBySlug[project.slug] ?? "/projects"})`)
+    .map((project) => `- [${project.title}](${projectLinkBySlug[project.slug] ?? "/projects"}): ${project.description}`)
     .join("\n");
 
-  return `Soojal has built projects across AI, backend APIs, mobile/wearable interaction, optimization, simulation, NLP, and systems programming.\n\n${highlighted}\n\nYou can explore them in detail on the Projects page: /projects`;
+  return `Soojal has built projects across AI, backend APIs, mobile/wearable interaction, optimization, simulation, NLP, and systems programming.\n\n${highlighted}\n\nYou can explore them here: [Projects](/projects).`;
 };
 
 const getProjectAnswer = (question: string) => {
@@ -81,7 +122,7 @@ const getProjectAnswer = (question: string) => {
       : match.description;
   const link = projectLinkBySlug[match.slug] ?? "/projects";
 
-  return `What it is: ${description}\n\nWhat Soojal built: ${match.features.slice(0, 5).join(", ")}.\n\nTechnologies used: ${match.tags.join(", ")}.\n\nWhat it demonstrates: ${match.impact.join(" ")}\n\nView it here: ${link}`;
+  return `What it is: ${description}\n\nWhat Soojal built: ${match.features.slice(0, 5).join(", ")}.\n\nTechnologies used: ${match.tags.join(", ")}.\n\nWhat it demonstrates: ${match.impact.join(" ")}\n\nRead more: [${match.title}](${link}).`;
 };
 
 const getAssistantAnswer = (rawQuestion: string) => {
@@ -92,7 +133,7 @@ const getAssistantAnswer = (rawQuestion: string) => {
     return "Soojal Kumar is a Computer Science graduate from the University of the Pacific with experience in software engineering, AI, optimization, simulation, backend development, cloud APIs, cybersecurity-aware applications, and systems programming.";
   }
 
-  if (includesAny(question, ["skill", "tech stack", "technology", "programming", "language", "framework"])) {
+  if (includesAny(question, [...intentAliases.skills, "technology", "programming", "language", "framework"])) {
     return technicalSkills;
   }
 
@@ -100,7 +141,7 @@ const getAssistantAnswer = (rawQuestion: string) => {
     return `${profile.education}. Expected / issued: ${profile.graduation}. Relevant strengths include AI, data structures, computer systems, networks, application development, and systems-oriented software engineering.`;
   }
 
-  if (includesAny(question, ["project", "portfolio", "built", "github"])) {
+  if (includesAny(question, [...intentAliases.projects, "portfolio", "built", "github"])) {
     return projectAnswer ?? projectListAnswer();
   }
 
@@ -116,20 +157,20 @@ const getAssistantAnswer = (rawQuestion: string) => {
     return `Soojal's experience includes operations, student leadership, teaching support, and campus service roles:\n\n${roles}\n\nHis work experience shows leadership, communication, operations management, analytical observation, and problem-solving.`;
   }
 
-  if (includesAny(question, ["research", "award", "paper", "publication", "intrusion", "cybersecurity", "best paper", "doi", "xai", "shap", "lime"])) {
-    return `Soojal received a Best Paper Award for "${researchPaper.title}."\n\nJournal: ${researchPaper.journal}\nYear: ${researchPaper.year}\nDOI: ${researchPaper.doi}\n\nSummary: ${researchPaper.abstractPreview}\n\nRead the detail page: ${researchPaper.route}\n\nHonors include: ${awards.join("; ")}.`;
+  if (includesAny(question, [...intentAliases.research, "award", "publication", "intrusion", "cybersecurity", "doi", "shap", "lime"])) {
+    return `Soojal received a Best Paper Award for "${researchPaper.title}."\n\nJournal: ${researchPaper.journal}\nYear: ${researchPaper.year}\nDOI: ${researchPaper.doi}\n\nSummary: ${researchPaper.abstractPreview}\n\nRead more: [Research paper](${researchPaper.route}).\n\nHonors include: ${awards.join("; ")}.`;
   }
 
   if (includesAny(question, ["certification", "certificate", "license", "docker", "linux", "unix"])) {
     return `Selected certifications include ${certifications.slice(0, 6).join("; ")}. You can see the full list here: /research`;
   }
 
-  if (includesAny(question, ["resume", "cv", "download"])) {
-    return "Soojal's resume is available on the Resume page and can be downloaded there. View it here: /resume";
+  if (includesAny(question, intentAliases.resume)) {
+    return "Soojal's resume is available on the Resume page and can be downloaded there. View it here: [Resume](/resume).";
   }
 
-  if (includesAny(question, ["contact", "email", "linkedin", "connect", "hire", "reach"])) {
-    return `You can contact Soojal at ${profile.email}. The Contact page also includes a message form and links to his public profiles.\n\nView it here: /contact\n\nNo phone number is listed on the public portfolio.`;
+  if (includesAny(question, [...intentAliases.contact, "linkedin", "hire", "reach"])) {
+    return `You can contact Soojal at ${profile.email}. The Contact page also includes a message form and links to his public profiles.\n\nView it here: [Contact](/contact).\n\nNo phone number is listed on the public portfolio.`;
   }
 
   if (includesAny(question, ["location", "based", "where"])) {
@@ -138,6 +179,83 @@ const getAssistantAnswer = (rawQuestion: string) => {
 
   return fallbackAnswer;
 };
+
+const createSafeLink = (href: string, label: string, key: string) => {
+  const isInternal = allowedInternalLinks.has(href);
+  const isAllowedExternal = allowedExternalLinks.has(href);
+
+  if (!isInternal && !isAllowedExternal) {
+    return label;
+  }
+
+  return (
+    <a
+      key={key}
+      href={href}
+      target={isAllowedExternal ? "_blank" : undefined}
+      rel={isAllowedExternal ? "noreferrer" : undefined}
+      className="font-semibold text-accent underline decoration-cyan-300 underline-offset-4 transition hover:text-sky-500 focus:outline-none focus:ring-2 focus:ring-cyan-200"
+    >
+      {label}
+    </a>
+  );
+};
+
+const renderPlainRoutes = (text: string, keyPrefix: string): ReactNode[] => {
+  const nodes: ReactNode[] = [];
+  const routePattern = /(^|[\s(])(\/|(?:\/[a-z0-9_-]+)+\/?)(?=[\s).,!?:;]|$)/gi;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = routePattern.exec(text))) {
+    const leading = match[1] ?? "";
+    const route = match[2];
+    const routeStart = match.index + leading.length;
+
+    if (routeStart > lastIndex) {
+      nodes.push(text.slice(lastIndex, routeStart));
+    }
+
+    nodes.push(createSafeLink(route, route, `${keyPrefix}-route-${routeStart}`));
+    lastIndex = routeStart + route.length;
+  }
+
+  if (lastIndex < text.length) {
+    nodes.push(text.slice(lastIndex));
+  }
+
+  return nodes;
+};
+
+const renderInlineLinks = (text: string, keyPrefix: string): ReactNode[] => {
+  const nodes: ReactNode[] = [];
+  const markdownPattern = /\[([^\]]+)\]\((\/|\/[a-z0-9_/-]+|https:\/\/doi\.org\/10\.63282\/3050-9416\.IJAIBDCMS-V7I2P119)\)/gi;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = markdownPattern.exec(text))) {
+    if (match.index > lastIndex) {
+      nodes.push(...renderPlainRoutes(text.slice(lastIndex, match.index), `${keyPrefix}-plain-${lastIndex}`));
+    }
+
+    nodes.push(createSafeLink(match[2], match[1], `${keyPrefix}-md-${match.index}`));
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    nodes.push(...renderPlainRoutes(text.slice(lastIndex), `${keyPrefix}-plain-${lastIndex}`));
+  }
+
+  return nodes;
+};
+
+const renderMessageContent = (content: string) =>
+  content.split("\n").map((line, index, lines) => (
+    <span key={`line-${index}`}>
+      {renderInlineLinks(line, `line-${index}`)}
+      {index < lines.length - 1 && <br />}
+    </span>
+  ));
 
 const PortfolioChatbot = () => {
   const [open, setOpen] = useState(false);
@@ -148,7 +266,14 @@ const PortfolioChatbot = () => {
   const nextId = useRef(2);
 
   const quickPrompts = useMemo(
-    () => ["What projects has Soojal built?", "What are Soojal's technical skills?", "How can I contact Soojal?"],
+    () => [
+      "What projects has Soojal built?",
+      "Tell me about EchoWear",
+      "What is CampusStudy AI?",
+      "What are Soojal's technical skills?",
+      "Tell me about Soojal's research paper",
+      "How can I contact Soojal?",
+    ],
     []
   );
 
@@ -263,7 +388,7 @@ const PortfolioChatbot = () => {
                         : "rounded-bl-md border border-slate-200 bg-white text-slate-700"
                     }`}
                   >
-                    {message.content}
+                    {renderMessageContent(message.content)}
                   </div>
                 </div>
               ))}
