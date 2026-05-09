@@ -32,7 +32,7 @@ const ProjectDetail = ({ slug }: ProjectDetailProps) => {
 
   if (!project) {
     return (
-      <main className="mx-auto max-w-5xl px-5 py-28">
+      <main className="mx-auto max-w-5xl px-4 pb-36 pt-28 sm:px-5">
         <h1 className="text-3xl font-bold text-ink">Project not found</h1>
         <Link href="/projects" className="mt-6 inline-flex text-accent">
           Back to Projects
@@ -42,16 +42,16 @@ const ProjectDetail = ({ slug }: ProjectDetailProps) => {
   }
 
   return (
-    <main className="bg-slate-50">
-      <div className="mx-auto max-w-6xl px-5 py-28">
+    <main className="w-full overflow-x-hidden bg-slate-50">
+      <div className="mx-auto w-full max-w-6xl overflow-x-hidden px-4 pb-36 pt-28 sm:px-5">
         <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-semibold text-accent">
           <ArrowLeft size={16} /> Back to Projects
         </Link>
 
-        <section className="mt-8 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-          <div>
+        <section className="mt-8 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
+          <div className="min-w-0">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-accent">{project.date}</p>
-            <h1 className="mt-4 text-4xl font-bold tracking-tight text-ink md:text-5xl">{project.title}</h1>
+            <h1 className="mt-4 break-words text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl">{project.title}</h1>
             <p className="mt-4 text-xl leading-8 text-slate-600">{project.subtitle}</p>
             <p className="mt-5 max-w-3xl leading-7 text-slate-600">{project.summary}</p>
 
@@ -61,20 +61,20 @@ const ProjectDetail = ({ slug }: ProjectDetailProps) => {
               ))}
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               {project.github && (
                 <a
                   href={project.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg bg-navy px-5 py-3 font-semibold text-white transition hover:bg-slate-800"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-5 py-3 font-semibold text-white transition hover:bg-slate-800"
                 >
                   GitHub <ExternalLink size={18} />
                 </a>
               )}
               <Link
                 href="/projects"
-                className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold text-ink transition hover:border-accent"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold text-ink transition hover:border-accent"
               >
                 All Projects <ArrowRight size={18} />
               </Link>
@@ -132,18 +132,18 @@ const ProjectDetail = ({ slug }: ProjectDetailProps) => {
           </div>
         </section>
 
-        <div className="mt-12 flex flex-wrap justify-center gap-3">
+        <div className="mt-12 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
           {project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-3 font-semibold text-white transition hover:bg-sky-500"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 font-semibold text-white transition hover:bg-sky-500"
             >
               GitHub Link <ExternalLink size={18} />
             </a>
           )}
-          <Link href="/projects" className="rounded-lg bg-navy px-5 py-3 font-semibold text-white transition hover:bg-slate-800">
+          <Link href="/projects" className="rounded-lg bg-navy px-5 py-3 text-center font-semibold text-white transition hover:bg-slate-800">
             Back to All Projects
           </Link>
         </div>
@@ -163,28 +163,28 @@ const HeroVisual = ({ project }: { project: Project }) => {
   const primaryVisual = project.visuals.find((visual) => visual.image);
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-xl">
+    <div className="min-w-0 rounded-2xl border border-slate-200 bg-white p-3 shadow-xl sm:p-4">
       <div className="overflow-hidden rounded-xl bg-slate-950 text-white">
-        <div className="flex items-center justify-between border-b border-white/10 p-5">
-          <div>
+        <div className="flex items-center justify-between gap-4 border-b border-white/10 p-4 sm:p-5">
+          <div className="min-w-0">
             <p className="text-xs uppercase tracking-[0.2em] text-cyan-300">
               {primaryVisual?.source ?? "Project Visual"}
             </p>
-            <h2 className="mt-1 text-xl font-bold">{project.heroVisual.title}</h2>
+            <h2 className="mt-1 break-words text-lg font-bold sm:text-xl">{project.heroVisual.title}</h2>
           </div>
-          <div className="flex gap-1.5">
+          <div className="flex shrink-0 gap-1.5">
             <span className="h-3 w-3 rounded-full bg-red-400" />
             <span className="h-3 w-3 rounded-full bg-amber-300" />
             <span className="h-3 w-3 rounded-full bg-emerald-400" />
           </div>
         </div>
-        <div className="p-5">
+        <div className="p-4 sm:p-5">
           {primaryVisual?.image ? (
             <div className="overflow-hidden rounded-xl border border-white/10 bg-white">
               <img
                 src={primaryVisual.image}
                 alt={primaryVisual.alt ?? project.heroVisual.title}
-                className="h-80 w-full bg-white object-contain"
+                className="h-56 w-full bg-white object-contain sm:h-80"
               />
             </div>
           ) : (
@@ -204,10 +204,10 @@ const HeroVisual = ({ project }: { project: Project }) => {
               ))}
             </div>
           )}
-          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          <div className="mt-5 grid min-w-0 gap-3 sm:grid-cols-2">
             {project.heroVisual.items.slice(0, 4).map((item) => (
-              <div key={item} className="rounded-xl border border-white/10 bg-white/[0.06] p-3">
-                <p className="text-sm font-semibold text-cyan-200">{item}</p>
+              <div key={item} className="min-w-0 rounded-xl border border-white/10 bg-white/[0.06] p-3">
+                <p className="break-words text-sm font-semibold text-cyan-200">{item}</p>
               </div>
             ))}
           </div>
@@ -218,11 +218,11 @@ const HeroVisual = ({ project }: { project: Project }) => {
 };
 
 const MetricGrid = ({ metrics }: { metrics: string[] }) => (
-  <section className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+  <section className="mt-12 grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
     {metrics.map((metric) => (
-      <div key={metric} className="rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm">
+      <div key={metric} className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm">
         <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">Highlight</p>
-        <p className="mt-2 text-lg font-bold text-accent">{metric}</p>
+        <p className="mt-2 break-words text-lg font-bold text-accent">{metric}</p>
       </div>
     ))}
   </section>
@@ -231,13 +231,13 @@ const MetricGrid = ({ metrics }: { metrics: string[] }) => (
 const FeatureGrid = ({ title, items }: { title: string; items: string[] }) => (
   <section className="mt-12">
     <SectionHeading title={title} />
-    <div className="mt-5 grid gap-4 md:grid-cols-3">
+    <div className="mt-5 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-3">
       {items.map((item) => (
-        <div key={item} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
+        <div key={item} className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 text-accent">
             <Layers3 size={20} />
           </div>
-          <h3 className="mt-4 font-bold text-ink">{item}</h3>
+          <h3 className="mt-4 break-words font-bold text-ink">{item}</h3>
         </div>
       ))}
     </div>
@@ -258,18 +258,18 @@ const DiagramSection = ({
   <section className="mt-12">
     <SectionHeading title={title} description={description} />
     <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="grid gap-3 md:grid-cols-3 lg:grid-cols-5">
+      <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-3 lg:grid-cols-5">
         {items.map((item, index) => (
           <div key={item} className="relative">
             <div
-              className={`min-h-28 rounded-2xl border p-4 ${
+              className={`min-h-28 min-w-0 rounded-2xl border p-4 ${
                 variant === "architecture"
                   ? "border-sky-200 bg-sky-50"
                   : "border-slate-200 bg-slate-50"
               }`}
             >
               <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">Step {index + 1}</p>
-              <p className="mt-2 font-bold leading-6 text-ink">{item}</p>
+              <p className="mt-2 break-words font-bold leading-6 text-ink">{item}</p>
             </div>
             {index < items.length - 1 && (
               <div className="hidden lg:absolute lg:-right-4 lg:top-1/2 lg:block lg:-translate-y-1/2">
@@ -286,9 +286,9 @@ const DiagramSection = ({
 const TechnicalImplementation = ({ project }: { project: Project }) => (
   <section className="mt-12">
     <SectionHeading title="Technical Implementation" />
-    <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <div className="mt-5 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       {project.technicalGroups.map((group) => (
-        <div key={group.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div key={group.title} className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-slate-900 text-cyan-300">
               <Code2 size={18} />
@@ -297,9 +297,9 @@ const TechnicalImplementation = ({ project }: { project: Project }) => (
           </div>
           <ul className="mt-4 space-y-2">
             {group.items.map((item) => (
-              <li key={item} className="flex gap-2 text-sm leading-6 text-slate-600">
-                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-accent" />
-                <span>{item}</span>
+              <li key={item} className="flex min-w-0 gap-2 text-sm leading-6 text-slate-600">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                <span className="min-w-0 break-words">{item}</span>
               </li>
             ))}
           </ul>
@@ -315,7 +315,7 @@ const VisualShowcase = ({ project }: { project: Project }) => (
       title="Screenshots & Visuals"
       description="Real project screenshots and outputs appear first. Where a project has no existing screenshots, the visuals are grounded diagrams or output previews based on the actual project structure."
     />
-    <div className="mt-5 grid gap-5 md:grid-cols-2">
+    <div className="mt-5 grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2">
       {project.visuals.map((visual) => (
         <VisualCard key={visual.title} visual={visual} />
       ))}
@@ -327,17 +327,17 @@ const VisualCard = ({ visual }: { visual: ProjectVisual }) => {
   const Icon = visualIcons[visual.variant];
 
   return (
-    <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
+    <figure className="min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
       <div className="relative bg-slate-950">
         {visual.image ? (
           <img
             src={visual.image}
             alt={visual.alt ?? visual.title}
-            className="h-72 w-full bg-white object-contain"
+            className="h-56 w-full bg-white object-contain sm:h-72"
             loading="lazy"
           />
         ) : (
-          <div className="flex min-h-72 items-center justify-center p-5 text-center text-white">
+          <div className="flex min-h-56 items-center justify-center p-5 text-center text-white sm:min-h-72">
             <div>
               <Icon className="mx-auto text-cyan-300" size={30} />
               <p className="mt-3 text-lg font-bold">{visual.title}</p>
@@ -347,7 +347,7 @@ const VisualCard = ({ visual }: { visual: ProjectVisual }) => {
             </div>
           </div>
         )}
-        <div className="absolute left-4 top-4 flex flex-wrap gap-2">
+        <div className="absolute left-3 right-3 top-3 flex flex-wrap gap-2 sm:left-4 sm:right-auto sm:top-4">
           <span className="rounded-full bg-slate-950/85 px-3 py-1 text-xs font-bold uppercase tracking-wide text-cyan-200 ring-1 ring-white/10">
             {visual.label ?? "Visual"}
           </span>
@@ -359,8 +359,8 @@ const VisualCard = ({ visual }: { visual: ProjectVisual }) => {
         </div>
       </div>
       <figcaption className="p-5">
-        <h3 className="font-bold text-ink">{visual.title}</h3>
-        <p className="mt-2 leading-7 text-slate-600">{visual.description}</p>
+        <h3 className="break-words font-bold text-ink">{visual.title}</h3>
+        <p className="mt-2 break-words leading-7 text-slate-600">{visual.description}</p>
       </figcaption>
     </figure>
   );
@@ -372,7 +372,7 @@ const PreviewBlock = ({ project }: { project: Project }) => {
   return (
     <section className="mt-12">
       <SectionHeading title={project.preview.title} />
-      <pre className="mt-5 overflow-x-auto rounded-2xl border border-slate-800 bg-slate-950 p-6 text-sm leading-7 text-cyan-100 shadow-lg">
+      <pre className="mt-5 max-w-full overflow-x-auto rounded-2xl border border-slate-800 bg-slate-950 p-4 text-sm leading-7 text-cyan-100 shadow-lg sm:p-6">
         <code>{project.preview.content}</code>
       </pre>
     </section>
@@ -382,16 +382,16 @@ const PreviewBlock = ({ project }: { project: Project }) => {
 const Challenges = ({ project }: { project: Project }) => (
   <section className="mt-12">
     <SectionHeading title="Challenges & Solutions" />
-    <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+    <div className="mt-5 min-w-0 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
       {project.challenges.map((item, index) => (
-        <div key={item.challenge} className={`grid gap-0 md:grid-cols-2 ${index > 0 ? "border-t border-slate-200" : ""}`}>
+        <div key={item.challenge} className={`grid min-w-0 grid-cols-1 gap-0 md:grid-cols-2 ${index > 0 ? "border-t border-slate-200" : ""}`}>
           <div className="bg-slate-50 p-5">
             <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">Challenge</p>
-            <p className="mt-2 leading-7 text-slate-700">{item.challenge}</p>
+            <p className="mt-2 break-words leading-7 text-slate-700">{item.challenge}</p>
           </div>
           <div className="p-5">
             <p className="text-sm font-semibold uppercase tracking-wide text-accent">Solution</p>
-            <p className="mt-2 leading-7 text-slate-700">{item.solution}</p>
+            <p className="mt-2 break-words leading-7 text-slate-700">{item.solution}</p>
           </div>
         </div>
       ))}
