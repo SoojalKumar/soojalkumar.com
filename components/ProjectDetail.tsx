@@ -52,6 +52,7 @@ const ProjectDetail = ({ slug }: ProjectDetailProps) => {
           <div className="min-w-0">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-accent">{project.date}</p>
             <h1 className="mt-4 break-words text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl">{project.title}</h1>
+            {project.context && <p className="mt-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent">{project.context}</p>}
             <p className="mt-4 text-xl leading-8 text-slate-600">{project.subtitle}</p>
             <p className="mt-5 max-w-3xl leading-7 text-slate-600">{project.summary}</p>
 
@@ -62,6 +63,16 @@ const ProjectDetail = ({ slug }: ProjectDetailProps) => {
             </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              {project.liveDemo && (
+                <a
+                  href={project.liveDemo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 font-semibold text-white transition hover:bg-sky-500"
+                >
+                  Live Demo <ExternalLink size={18} />
+                </a>
+              )}
               {project.github && (
                 <a
                   href={project.github}
@@ -70,6 +81,16 @@ const ProjectDetail = ({ slug }: ProjectDetailProps) => {
                   className="inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-5 py-3 font-semibold text-white transition hover:bg-slate-800"
                 >
                   GitHub <ExternalLink size={18} />
+                </a>
+              )}
+              {project.apiDocs && (
+                <a
+                  href={project.apiDocs}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold text-ink transition hover:border-accent"
+                >
+                  API Docs <ExternalLink size={18} />
                 </a>
               )}
               <Link
@@ -114,6 +135,8 @@ const ProjectDetail = ({ slug }: ProjectDetailProps) => {
 
         <TechnicalImplementation project={project} />
 
+        {project.slug === "hydra-h2o" && <EndpointSection />}
+
         <VisualShowcase project={project} />
 
         {project.preview && <PreviewBlock project={project} />}
@@ -133,6 +156,16 @@ const ProjectDetail = ({ slug }: ProjectDetailProps) => {
         </section>
 
         <div className="mt-12 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
+          {project.liveDemo && (
+            <a
+              href={project.liveDemo}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 font-semibold text-white transition hover:bg-sky-500"
+            >
+              View Live Demo <ExternalLink size={18} />
+            </a>
+          )}
           {project.github && (
             <a
               href={project.github}
@@ -141,6 +174,16 @@ const ProjectDetail = ({ slug }: ProjectDetailProps) => {
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 font-semibold text-white transition hover:bg-sky-500"
             >
               GitHub Link <ExternalLink size={18} />
+            </a>
+          )}
+          {project.apiDocs && (
+            <a
+              href={project.apiDocs}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold text-ink transition hover:border-accent"
+            >
+              View API Docs <ExternalLink size={18} />
             </a>
           )}
           <Link href="/projects" className="rounded-lg bg-navy px-5 py-3 text-center font-semibold text-white transition hover:bg-slate-800">
@@ -318,6 +361,39 @@ const VisualShowcase = ({ project }: { project: Project }) => (
     <div className="mt-5 grid min-w-0 grid-cols-1 gap-5 md:grid-cols-2">
       {project.visuals.map((visual) => (
         <VisualCard key={visual.title} visual={visual} />
+      ))}
+    </div>
+  </section>
+);
+
+const hydraEndpoints = [
+  { method: "GET", path: "/api/health", description: "Checks API status and reports LLM enablement." },
+  { method: "GET", path: "/api/docs", description: "Swagger documentation for the deployed FastAPI backend." },
+  { method: "GET", path: "/api/supply/dashboard", description: "Returns the combined water outlook, signal cards, alerts, and AI summary." },
+  { method: "POST", path: "/api/supply/chat", description: "Powers Ask Hydra through the backend chat endpoint." },
+];
+
+const EndpointSection = () => (
+  <section className="mt-12">
+    <SectionHeading
+      title="API Endpoints"
+      description="Key deployed routes from the FastAPI backend mounted under /api on Vercel."
+    />
+    <div className="mt-5 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2">
+      {hydraEndpoints.map((endpoint) => (
+        <div key={endpoint.path} className="min-w-0 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="flex flex-wrap items-center gap-3">
+            <span
+              className={`rounded-full px-3 py-1 text-xs font-bold tracking-wide ${
+                endpoint.method === "POST" ? "bg-cyan-100 text-cyan-800" : "bg-slate-900 text-cyan-200"
+              }`}
+            >
+              {endpoint.method}
+            </span>
+            <code className="break-all rounded-lg bg-slate-100 px-3 py-1 text-sm font-semibold text-ink">{endpoint.path}</code>
+          </div>
+          <p className="mt-4 leading-7 text-slate-600">{endpoint.description}</p>
+        </div>
       ))}
     </div>
   </section>

@@ -18,6 +18,7 @@ const fallbackAnswer =
   "I can help with Soojal's projects, skills, experience, resume, research, and contact information. Try asking: 'What projects has Soojal built?' or visit [Projects](/projects).";
 
 const projectAliases: Record<string, string[]> = {
+  "hydra-h2o": ["hydra", "h2o", "projecth2o", "project h2o", "water intelligence", "water platform", "water hackathon", "h2o hackathon"],
   "campusstudy-ai": ["campusstudy", "campus study", "campis study", "campus ai", "study ai", "university study app", "ai study app", "rag", "study platform"],
   "cloud-api-service": ["cloud api", "cloud based api", "api service", "task api", "fastapi project", "cloud", "fastapi", "docker"],
   echowear: ["echowear", "echo wear", "voice app", "wearable app", "speech recognition", "speech", "wake", "haptic"],
@@ -31,6 +32,7 @@ const projectAliases: Record<string, string[]> = {
 };
 
 const projectLinkBySlug: Record<string, string> = {
+  "hydra-h2o": "/projects/hydra-h2o",
   "campusstudy-ai": "/projects/campusstudy-ai",
   "cloud-api-service": "/projects/cloud-api-service",
   echowear: "/projects/echowear",
@@ -51,6 +53,7 @@ const allowedInternalLinks = new Set([
   "/",
   "/about",
   "/projects",
+  "/projects/hydra-h2o",
   "/projects/campusstudy-ai",
   "/projects/cloud-api-service",
   "/projects/echowear",
@@ -67,7 +70,13 @@ const allowedInternalLinks = new Set([
   "/contact",
 ]);
 
-const allowedExternalLinks = new Set(["https://doi.org/10.63282/3050-9416.IJAIBDCMS-V7I2P119"]);
+const allowedExternalLinks = new Set([
+  "https://doi.org/10.63282/3050-9416.IJAIBDCMS-V7I2P119",
+  "https://project-h2-o.vercel.app/",
+  "https://project-h2-o.vercel.app",
+  "https://github.com/SoojalKumar/projectH2O",
+  "https://project-h2-o.vercel.app/api/docs",
+]);
 
 const normalize = (value: string) =>
   value
@@ -96,6 +105,7 @@ const projectListAnswer = () => {
     .filter((project) =>
       [
         "campusstudy-ai",
+        "hydra-h2o",
         "cloud-api-service",
         "echowear",
         "genai-optimization",
@@ -122,7 +132,12 @@ const getProjectAnswer = (question: string) => {
       : match.description;
   const link = projectLinkBySlug[match.slug] ?? "/projects";
 
-  return `What it is: ${description}\n\nWhat Soojal built: ${match.features.slice(0, 5).join(", ")}.\n\nTechnologies used: ${match.tags.join(", ")}.\n\nWhat it demonstrates: ${match.impact.join(" ")}\n\nRead more: [${match.title}](${link}).`;
+  const hydraLinks =
+    match.slug === "hydra-h2o"
+      ? "\n\nLinks: [Hydra project page](/projects/hydra-h2o), [Live demo](https://project-h2-o.vercel.app/), [GitHub](https://github.com/SoojalKumar/projectH2O), [API docs](https://project-h2-o.vercel.app/api/docs)."
+      : `\n\nRead more: [${match.title}](${link}).`;
+
+  return `What it is: ${description}\n\nWhat Soojal built: ${match.features.slice(0, 5).join(", ")}.\n\nTechnologies used: ${match.tags.join(", ")}.\n\nWhat it demonstrates: ${match.impact.join(" ")}${hydraLinks}`;
 };
 
 const getAssistantAnswer = (rawQuestion: string) => {
@@ -229,7 +244,7 @@ const renderPlainRoutes = (text: string, keyPrefix: string): ReactNode[] => {
 
 const renderInlineLinks = (text: string, keyPrefix: string): ReactNode[] => {
   const nodes: ReactNode[] = [];
-  const markdownPattern = /\[([^\]]+)\]\((\/|\/[a-z0-9_/-]+|https:\/\/doi\.org\/10\.63282\/3050-9416\.IJAIBDCMS-V7I2P119)\)/gi;
+  const markdownPattern = /\[([^\]]+)\]\((\/|\/[a-z0-9_/-]+|https?:\/\/[^)\s]+)\)/gi;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
 

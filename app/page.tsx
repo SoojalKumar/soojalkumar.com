@@ -54,8 +54,8 @@ export default function HomePage() {
       </MotionSection>
 
       <MotionSection className="mx-auto max-w-6xl px-5 pb-20">
-        <SectionTitle title="Featured Projects" description="A focused snapshot of my AI, cloud API, and systems work." />
-        <div className="grid gap-6 md:grid-cols-3">
+        <SectionTitle title="Featured Projects" description="A focused snapshot of my hackathon, AI, cloud API, and systems work." />
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {featured.map((project) => (
             <ProjectCard project={project} key={project.slug} />
           ))}

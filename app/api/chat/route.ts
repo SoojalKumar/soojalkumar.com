@@ -11,6 +11,7 @@ const allowedLinks = [
   "Home: /",
   "About: /about",
   "Projects page: /projects",
+  "Hydra H2O: /projects/hydra-h2o",
   "EchoWear: /projects/echowear",
   "Cloud-Based API Service: /projects/cloud-api-service",
   "CampusStudy AI: /projects/campusstudy-ai",
@@ -25,9 +26,13 @@ const allowedLinks = [
   "Research: /research",
   "Explainable AI Intrusion Detection Paper: /research/explainable-ai-intrusion-detection",
   "Experience: /experience",
+  "Hydra Live Demo: https://project-h2-o.vercel.app/",
+  "Hydra GitHub: https://github.com/SoojalKumar/projectH2O",
+  "Hydra API Docs: https://project-h2-o.vercel.app/api/docs",
 ];
 
 const projectLinkBySlug: Record<string, string> = {
+  "hydra-h2o": "/projects/hydra-h2o",
   "campusstudy-ai": "/projects/campusstudy-ai",
   "cloud-api-service": "/projects/cloud-api-service",
   echowear: "/projects/echowear",
@@ -59,7 +64,15 @@ const portfolioContext = [
             : project.description;
         const projectLink = projectLinkBySlug[project.slug] ?? "/projects";
 
-        return `- ${project.title} (${project.date}): ${projectDescription} Tech: ${project.tags.join(", ")}. Summary: ${project.summary} Internal link: ${projectLink}`;
+        const externalLinks = [
+          project.liveDemo ? `Live demo: ${project.liveDemo}` : "",
+          project.github ? `GitHub: ${project.github}` : "",
+          project.apiDocs ? `API docs: ${project.apiDocs}` : "",
+        ]
+          .filter(Boolean)
+          .join(" ");
+
+        return `- ${project.title} (${project.date}${project.context ? `, ${project.context}` : ""}): ${projectDescription} Tech: ${project.tags.join(", ")}. Summary: ${project.summary} Internal link: ${projectLink}. ${externalLinks}`;
       }
     )
     .join("\n")}`,
@@ -87,6 +100,7 @@ Use only the provided portfolio context. Do not invent facts, metrics, URLs, awa
 
 Project and research aliases to understand:
 - "campus study", "campusstudy", "campis study", "campus ai", "study ai" = CampusStudy AI
+- "hydra", "h2o", "projecth2o", "project h2o", "water intelligence", "water platform", "water hackathon", "h2o hackathon" = Hydra - H2O Hackathon Water Intelligence Platform
 - "cloud api", "api service", "cloud based api" = Cloud-Based API Service
 - "echo wear", "echowear", "voice app", "wearable app" = EchoWear
 - "gen ai", "genai", "genetic algorithm", "optimization engine" = GenAI Optimization
@@ -97,7 +111,7 @@ Project and research aliases to understand:
 - "zero g", "zero-g", "space game" = Zero-G Survival
 - "research", "paper", "best paper", "xai", "intrusion detection", "ids" = research paper
 
-Never use placeholder links such as your-portfolio.com. When including a link, use only these relative internal links from the allowed internal links list: /, /about, /projects, /projects/campusstudy-ai, /projects/cloud-api-service, /projects/echowear, /projects/genai-optimization, /projects/orbit-simulator, /projects/sentiment-analysis, /projects/cache-simulator, /projects/banking-system, /projects/zerog-survival, /experience, /research, /research/explainable-ai-intrusion-detection, /resume, /contact. If a project does not have an allowed detail link, point to /projects. You may include the approved DOI link: https://doi.org/10.63282/3050-9416.IJAIBDCMS-V7I2P119.
+Never use placeholder portfolio domains or invented URLs. When including a link, use only these relative internal links from the allowed internal links list: /, /about, /projects, /projects/hydra-h2o, /projects/campusstudy-ai, /projects/cloud-api-service, /projects/echowear, /projects/genai-optimization, /projects/orbit-simulator, /projects/sentiment-analysis, /projects/cache-simulator, /projects/banking-system, /projects/zerog-survival, /experience, /research, /research/explainable-ai-intrusion-detection, /resume, /contact. If a project does not have an allowed detail link, point to /projects. You may include these approved external links: https://project-h2-o.vercel.app/, https://github.com/SoojalKumar/projectH2O, https://project-h2-o.vercel.app/api/docs, https://doi.org/10.63282/3050-9416.IJAIBDCMS-V7I2P119.
 
 If asked about a specific project, answer with: what it is, what Soojal built, technologies used, what it demonstrates, and the correct internal link using markdown, for example [EchoWear](/projects/echowear). For MIPS CPU Simulator, say branch handling only; do not say branch prediction.
 

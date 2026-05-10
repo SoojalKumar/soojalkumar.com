@@ -27,7 +27,10 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           </a>
         )}
       </div>
-      <p className="mt-4 min-w-0 flex-1 whitespace-normal break-words leading-7 text-slate-600">{project.description}</p>
+      {project.context && <p className="mt-4 text-sm font-semibold text-accent">{project.context}</p>}
+      <p className={`${project.context ? "mt-2" : "mt-4"} min-w-0 flex-1 whitespace-normal break-words leading-7 text-slate-600`}>
+        {project.description}
+      </p>
       <div className="mt-5 flex flex-wrap gap-2">
         {project.tags.slice(0, 6).map((tag) => (
           <Tag key={tag}>{tag}</Tag>
@@ -40,6 +43,16 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         >
           View Details
         </Link>
+        {project.liveDemo && (
+          <a
+            href={project.liveDemo}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-ink transition hover:border-accent sm:w-auto sm:py-2"
+          >
+            Live Demo
+          </a>
+        )}
       </div>
     </article>
   );
