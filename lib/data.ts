@@ -98,31 +98,33 @@ const baseProjects: ProjectBase[] = [
   {
     slug: "hydra-h2o",
     title: "Hydra - H2O Hackathon Water Intelligence Platform",
-    date: "2026",
-    subtitle: "Flutter + FastAPI water intelligence platform built for the H2O Hackathon in Stockton.",
+    date: "May 2026",
+    subtitle: "Flutter + FastAPI water intelligence platform built for the H2O Hackathon Hacking the Supply challenge.",
     description:
-      "Hydra is a Flutter + FastAPI water intelligence platform built for the H2O Hackathon. It turns snowpack, precipitation, reservoir, forecast, and alert data into a simple dashboard with AI-powered water outlook explanations.",
+      "Hydra is a Flutter + FastAPI water intelligence platform built for the H2O Hackathon Hacking the Supply challenge. It turns snowpack, precipitation, reservoir, forecast, and alert data into a simple dashboard with AI-powered water outlook explanations.",
     tags: ["Hackathon", "AI", "FastAPI", "Flutter", "Dart", "Python", "Water Intelligence", "Vercel", "REST API"],
     github: "https://github.com/SoojalKumar/projectH2O",
     liveDemo: "https://project-h2-o.vercel.app/",
     apiDocs: "https://project-h2-o.vercel.app/api/docs",
     apiHealth: "https://project-h2-o.vercel.app/api/health",
-    context: "H2O Hackathon, Stockton",
+    context: "H2O Hackathon - Hacking the Supply, May 2026",
     summary:
-      "Hydra is a hackathon-built water intelligence platform that combines a Flutter web interface with a FastAPI backend to explain California water supply conditions in simple, decision-ready language. The app surfaces snowpack, precipitation, reservoir levels, alerts, forecast data, report summaries, and an AI assistant that helps growers and local communities understand water risk.",
-    metrics: ["H2O Hackathon", "Flutter Web", "FastAPI Backend", "AI Water Outlook"],
+      "Hydra is a hackathon-built water intelligence platform that combines a Flutter web interface with a FastAPI backend to explain California water supply conditions in simple, decision-ready language. Built for the H2O Hackathon Hacking the Supply coding challenge, the app uses the challenge's synthetic-but-realistic snowpack, precipitation, and reservoir data to help water managers, farmers, and concerned citizens understand water risk.",
+    metrics: ["Hacking the Supply", "Three Water Signals", "Flutter Web", "FastAPI Backend"],
     problem:
-      "Water supply information can be fragmented, technical, and difficult for growers or local communities to interpret quickly. Hydra aims to simplify snowpack, precipitation, reservoir, alert, and forecast signals into a clearer water outlook.",
+      "For decades, California water planning relied heavily on Sierra Nevada snowpack as a natural reservoir and annual supply signal. Warmer storms, earlier snowmelt, atmospheric rivers, and drought-to-flood volatility now make a single-signal approach less reliable. Hydra responds to the hackathon challenge by combining snowpack, precipitation, and reservoir storage into a clearer water outlook.",
     objectives: [
-      "Build a hackathon-ready water intelligence platform.",
-      "Explain California water supply conditions through snowpack, precipitation, and reservoir signals.",
-      "Surface multi-signal alerts, trends, report summaries, and planning guidance.",
+      "Build a hackathon-ready awareness and warning app for California water supply conditions.",
+      "Explain why snowpack alone is no longer enough for modern water forecasting.",
+      "Combine snowpack, precipitation, and reservoir storage into one readable outlook.",
+      "Surface multi-signal alerts, trends, report summaries, and planning guidance for water managers, farmers, and citizens.",
       "Provide an AI assistant through the backend while keeping classification and alert logic deterministic.",
       "Deploy a Flutter web frontend and FastAPI backend together on Vercel.",
     ],
     methodology: [
-      "Used a bundled California supply dataset covering 2016-2025 monthly readings.",
-      "Classified snowpack, precipitation, and reservoir signals with deterministic backend services.",
+      "Used the H2O Hackathon challenge dataset, a synthetic-but-realistic dataset modeled after standard California water references.",
+      "Classified snowpack as future water, precipitation as current conditions, and reservoir storage as the current supply buffer.",
+      "Applied challenge thresholds for snowpack, precipitation, and reservoir conditions to generate plain-language risk states.",
       "Served dashboard, forecast, report, alert, and chat data through FastAPI routes mounted under /api on Vercel.",
       "Used Groq-powered explanations as an optional AI layer with offline fallback behavior.",
     ],
@@ -131,6 +133,7 @@ const baseProjects: ProjectBase[] = [
       "FastAPI backend under /api",
       "Water supply dashboard endpoint",
       "AI assistant/chat endpoint",
+      "Hacking the Supply challenge data interpretation",
       "Alert and outlook system",
       "Swagger API documentation",
       "Safety guard for AI summaries",
@@ -139,7 +142,8 @@ const baseProjects: ProjectBase[] = [
       "Frontend: Flutter, Dart, Riverpod, dio, fl_chart, Material UI",
       "Backend: Python, FastAPI, Pydantic, deterministic service modules",
       "AI: optional Groq API explanations with offline fallback",
-      "Data: bundled California supply dataset from 2016-2025",
+      "Data: H2O Hackathon synthetic-but-realistic snowpack, precipitation, and reservoir dataset",
+      "Water metrics: snowpack percent of April 1 average, precipitation percent of average, reservoir percent capacity",
       "Testing: pytest backend suite and GitHub Actions backend tests",
       "Deployment: Vercel Flutter web app with FastAPI serverless API under /api",
     ],
@@ -392,20 +396,21 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
   "hydra-h2o": {
     heroVisual: {
       title: "Hydra Water Outlook Platform",
-      items: ["Flutter Dashboard", "FastAPI /api Backend", "Supply Dashboard", "AI Assistant", "Swagger Docs"],
+      items: ["Hacking the Supply", "Flutter Dashboard", "FastAPI /api Backend", "Three Water Signals", "AI Assistant"],
     },
-    workflow: ["Water Supply Dataset", "Deterministic Signal Classification", "Dashboard + Alerts", "Optional AI Explanation", "User-Facing Water Outlook"],
-    architecture: ["Flutter Web Frontend", "FastAPI Backend", "Supply Dashboard API", "Alerts / Forecast / Reports", "AI Assistant", "User-facing Water Outlook"],
+    workflow: ["Challenge JSON/CSV Data", "Snowpack + Precipitation + Reservoir Signals", "Deterministic Risk Classification", "Dashboard + Alerts", "Optional AI Explanation", "User-Facing Water Outlook"],
+    architecture: ["Flutter Web Frontend", "FastAPI Backend", "Supply Dashboard API", "Challenge Data Services", "Alerts / Forecast / Reports", "AI Assistant", "User-facing Water Outlook"],
     technicalGroups: [
       { title: "Frontend", items: ["Flutter", "Dart", "Riverpod state management", "Responsive dashboard UI", "Web deployment on Vercel"] },
       { title: "Backend", items: ["FastAPI", "Python", "Pydantic schemas", "REST API endpoints", "Dashboard and chat routes"] },
-      { title: "AI / Data", items: ["Bundled California supply dataset, 2016-2025", "Groq API optional LLM integration", "AI-generated water outlook summaries", "Safety guard for source-number consistency"] },
+      { title: "Challenge Data", items: ["Synthetic-but-realistic H2O Hackathon dataset", "Snowpack percent of April 1 average", "Precipitation percent of average", "Reservoir percent capacity", "Multi-signal water outlook logic"] },
+      { title: "AI Layer", items: ["Groq API optional LLM integration", "AI-generated water outlook summaries", "Offline deterministic fallback", "Safety guard for source-number consistency"] },
       { title: "Testing / Deployment", items: ["pytest backend suite", "34 passing backend tests documented in README", "GitHub Actions backend tests", "Vercel Flutter web + FastAPI deployment"] },
     ],
     visuals: [
       {
         title: "Hydra Home / Onboarding",
-        description: "Real screenshot from the running Flutter web app introducing the core idea: snowpack alone is no longer enough.",
+        description: "Real screenshot from the running Flutter web app introducing the hackathon challenge idea: snowpack alone is no longer enough.",
         label: "Screenshot",
         image: "/project-assets/hydra-h2o/home.png",
         alt: "Hydra onboarding screen",
@@ -414,7 +419,7 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
       },
       {
         title: "Water Supply Dashboard",
-        description: "Real dashboard screenshot showing Hydra's Watch outlook and combined snowpack, precipitation, and reservoir signals.",
+        description: "Real dashboard screenshot showing Hydra's Watch outlook and the three challenge signals: snowpack, precipitation, and reservoir storage.",
         label: "Screenshot",
         image: "/project-assets/hydra-h2o/dashboard.png",
         alt: "Hydra water supply dashboard screenshot",
@@ -423,7 +428,7 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
       },
       {
         title: "Multi-Signal Alerts",
-        description: "Real alerts screen showing allocation uncertainty, low snowpack, reservoir drawdown, and weak future signal patterns.",
+        description: "Real alerts screen showing how the app turns volatile water signals into warning-style guidance.",
         label: "Screenshot",
         image: "/project-assets/hydra-h2o/alerts.png",
         alt: "Hydra alerts screenshot",
@@ -432,7 +437,7 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
       },
       {
         title: "Trends Visualization",
-        description: "Real trends screen comparing snowpack, precipitation, and reservoir conditions across the bundled California supply data.",
+        description: "Real trends screen comparing snowpack, precipitation, and reservoir conditions from the challenge data.",
         label: "Screenshot",
         image: "/project-assets/hydra-h2o/trends.png",
         alt: "Hydra trends visualization screenshot",
@@ -451,8 +456,12 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
     ],
     challenges: [
       {
-        challenge: "Water data is complex and hard for non-technical users to interpret.",
-        solution: "Hydra converts water supply signals into dashboard cards, alerts, trends, reports, and plain-language summaries.",
+        challenge: "The challenge data combines different water signals with different meanings and thresholds.",
+        solution: "Hydra separates snowpack as future water, precipitation as current conditions, and reservoirs as the supply buffer, then combines them into one water outlook.",
+      },
+      {
+        challenge: "Water supply is volatile, and snowpack alone is no longer a reliable planning signal.",
+        solution: "Hydra uses the Hacking the Supply framing to compare snowpack, precipitation, and reservoir storage together for a more complete picture.",
       },
       {
         challenge: "AI summaries can drift from source numbers.",
