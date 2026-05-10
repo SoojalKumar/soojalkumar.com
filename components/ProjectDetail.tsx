@@ -12,6 +12,7 @@ import {
   TerminalSquare,
 } from "lucide-react";
 import { Project, projects } from "@/lib/data";
+import ProjectInteractiveDemo from "./ProjectInteractiveDemo";
 import Tag from "./Tag";
 
 type ProjectDetailProps = {
@@ -26,6 +27,8 @@ const visualIcons = {
 };
 
 type ProjectVisual = Project["visuals"][number];
+
+const isExternalHref = (href: string) => href.startsWith("http");
 
 const ProjectDetail = ({ slug }: ProjectDetailProps) => {
   const project = projects.find((item) => item.slug === slug);
@@ -64,14 +67,23 @@ const ProjectDetail = ({ slug }: ProjectDetailProps) => {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               {project.liveDemo && (
-                <a
-                  href={project.liveDemo}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 font-semibold text-white transition hover:bg-sky-500"
-                >
-                  Live Demo <ExternalLink size={18} />
-                </a>
+                isExternalHref(project.liveDemo) ? (
+                  <a
+                    href={project.liveDemo}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 font-semibold text-white transition hover:bg-sky-500"
+                  >
+                    {project.demoLabel ?? "Live Demo"} <ExternalLink size={18} />
+                  </a>
+                ) : (
+                  <Link
+                    href={project.liveDemo}
+                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 font-semibold text-white transition hover:bg-sky-500"
+                  >
+                    {project.demoLabel ?? "Demo"} <ArrowRight size={18} />
+                  </Link>
+                )
               )}
               {project.github && (
                 <a
@@ -137,6 +149,8 @@ const ProjectDetail = ({ slug }: ProjectDetailProps) => {
 
         {project.slug === "hydra-h2o" && <EndpointSection />}
 
+        {project.demoStatus && !project.liveDemo?.startsWith("http") && <ProjectInteractiveDemo slug={project.slug} />}
+
         <VisualShowcase project={project} />
 
         {project.preview && <PreviewBlock project={project} />}
@@ -157,14 +171,23 @@ const ProjectDetail = ({ slug }: ProjectDetailProps) => {
 
         <div className="mt-12 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
           {project.liveDemo && (
-            <a
-              href={project.liveDemo}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 font-semibold text-white transition hover:bg-sky-500"
-            >
-              View Live Demo <ExternalLink size={18} />
-            </a>
+            isExternalHref(project.liveDemo) ? (
+              <a
+                href={project.liveDemo}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 font-semibold text-white transition hover:bg-sky-500"
+              >
+                View {project.demoLabel ?? "Live Demo"} <ExternalLink size={18} />
+              </a>
+            ) : (
+              <Link
+                href={project.liveDemo}
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 font-semibold text-white transition hover:bg-sky-500"
+              >
+                View {project.demoLabel ?? "Demo"} <ArrowRight size={18} />
+              </Link>
+            )
           )}
           {project.github && (
             <a

@@ -36,6 +36,7 @@ const projectLinkBySlug: Record<string, string> = {
   "campusstudy-ai": "/projects/campusstudy-ai",
   "cloud-api-service": "/projects/cloud-api-service",
   echowear: "/projects/echowear",
+  "mips-cpu-simulator": "/projects/mips-cpu-simulator",
   "genai-optimization": "/projects/genai-optimization",
   "orbit-simulator": "/projects/orbit-simulator",
   "sentiment-analysis": "/projects/sentiment-analysis",
@@ -55,14 +56,24 @@ const allowedInternalLinks = new Set([
   "/projects",
   "/projects/hydra-h2o",
   "/projects/campusstudy-ai",
+  "/projects/campusstudy-ai#interactive-demo",
   "/projects/cloud-api-service",
   "/projects/echowear",
+  "/projects/echowear#interactive-demo",
+  "/projects/mips-cpu-simulator",
   "/projects/genai-optimization",
+  "/projects/genai-optimization#interactive-demo",
   "/projects/orbit-simulator",
+  "/projects/orbit-simulator#interactive-demo",
   "/projects/sentiment-analysis",
+  "/projects/sentiment-analysis#interactive-demo",
   "/projects/cache-simulator",
+  "/projects/cache-simulator#interactive-demo",
   "/projects/banking-system",
+  "/projects/banking-system#interactive-demo",
   "/projects/zerog-survival",
+  "/projects/zerog-survival#interactive-demo",
+  "/projects/mips-cpu-simulator#interactive-demo",
   "/experience",
   "/research",
   "/research/explainable-ai-intrusion-detection",
@@ -76,6 +87,9 @@ const allowedExternalLinks = new Set([
   "https://project-h2-o.vercel.app",
   "https://github.com/SoojalKumar/projectH2O",
   "https://project-h2-o.vercel.app/api/docs",
+  "https://skvidhani-cloud-api-service.hf.space/",
+  "https://skvidhani-cloud-api-service.hf.space",
+  "https://skvidhani-cloud-api-service.hf.space/docs",
 ]);
 
 const normalize = (value: string) =>
@@ -98,6 +112,7 @@ const intentAliases = {
   resume: ["resume", "cv", "download resume", "resume kaha hai", "cv kaha hai"],
   projects: ["projects", "project", "kaam", "kya banaya", "what has he built", "portfolio projects", "soojal ke projects", "projects kya"],
   research: ["research", "paper", "best paper", "xai", "intrusion detection", "ids", "cybersecurity paper", "research paper batao"],
+  demos: ["demo", "demos", "live demo", "live demos", "show demo", "open demo", "which projects have live demos", "kaunse demo", "demo links"],
 };
 
 const projectListAnswer = () => {
@@ -135,9 +150,20 @@ const getProjectAnswer = (question: string) => {
   const hydraLinks =
     match.slug === "hydra-h2o"
       ? "\n\nLinks: [Hydra project page](/projects/hydra-h2o), [Live demo](https://project-h2-o.vercel.app/), [GitHub](https://github.com/SoojalKumar/projectH2O), [API docs](https://project-h2-o.vercel.app/api/docs)."
-      : `\n\nRead more: [${match.title}](${link}).`;
+      : `\n\nRead more: [${match.title}](${link}).${match.liveDemo ? `\n\nDemo status: ${match.demoStatus ?? "Demo available"}. Open: [${match.demoLabel ?? "Demo"}](${match.liveDemo}).` : ""}`;
 
   return `What it is: ${description}\n\nWhat Soojal built: ${match.features.slice(0, 5).join(", ")}.\n\nTechnologies used: ${match.tags.join(", ")}.\n\nWhat it demonstrates: ${match.impact.join(" ")}${hydraLinks}`;
+};
+
+const getDemoAnswer = () => {
+  const live = projects.filter((project) => project.demoStatus === "Live deployed app");
+  const portfolio = projects.filter((project) => project.demoStatus && project.demoStatus !== "Live deployed app");
+  const liveText = live.map((project) => `- ${project.title}: [${project.demoLabel ?? "Live Demo"}](${project.liveDemo})`).join("\n");
+  const portfolioText = portfolio
+    .map((project) => `- ${project.title}: ${project.demoStatus} - [${project.demoLabel ?? "Demo"}](${project.liveDemo})`)
+    .join("\n");
+
+  return `Live deployed apps:\n${liveText}\n\nPortfolio-hosted demos and showcases:\n${portfolioText}\n\nI label sample traces and showcases honestly, so they are not presented as production deployments.`;
 };
 
 const getAssistantAnswer = (rawQuestion: string) => {
@@ -154,6 +180,10 @@ const getAssistantAnswer = (rawQuestion: string) => {
 
   if (includesAny(question, ["education", "university", "degree", "school", "college", "pacific"])) {
     return `${profile.education}. Expected / issued: ${profile.graduation}. Relevant strengths include AI, data structures, computer systems, networks, application development, and systems-oriented software engineering.`;
+  }
+
+  if (includesAny(question, intentAliases.demos)) {
+    return projectAnswer ?? getDemoAnswer();
   }
 
   if (includesAny(question, [...intentAliases.projects, "portfolio", "built", "github"])) {
@@ -218,7 +248,7 @@ const createSafeLink = (href: string, label: string, key: string) => {
 
 const renderPlainRoutes = (text: string, keyPrefix: string): ReactNode[] => {
   const nodes: ReactNode[] = [];
-  const routePattern = /(^|[\s(])(\/|(?:\/[a-z0-9_-]+)+\/?)(?=[\s).,!?:;]|$)/gi;
+  const routePattern = /(^|[\s(])(\/|(?:\/[a-z0-9_-]+)+(?:#[a-z0-9_-]+)?\/?)(?=[\s).,!?:;]|$)/gi;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
 
@@ -244,7 +274,7 @@ const renderPlainRoutes = (text: string, keyPrefix: string): ReactNode[] => {
 
 const renderInlineLinks = (text: string, keyPrefix: string): ReactNode[] => {
   const nodes: ReactNode[] = [];
-  const markdownPattern = /\[([^\]]+)\]\((\/|\/[a-z0-9_/-]+|https?:\/\/[^)\s]+)\)/gi;
+  const markdownPattern = /\[([^\]]+)\]\((\/|\/[a-z0-9_/-]+(?:#[a-z0-9_-]+)?|https?:\/\/[^)\s]+)\)/gi;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
 

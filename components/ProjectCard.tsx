@@ -7,6 +7,8 @@ type ProjectCardProps = {
   project: Project;
 };
 
+const isExternalHref = (href: string) => href.startsWith("http");
+
 const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
     <article className="flex h-full w-full min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-soft sm:p-6">
@@ -44,14 +46,23 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           View Details
         </Link>
         {project.liveDemo && (
-          <a
-            href={project.liveDemo}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-ink transition hover:border-accent sm:w-auto sm:py-2"
-          >
-            Live Demo
-          </a>
+          isExternalHref(project.liveDemo) ? (
+            <a
+              href={project.liveDemo}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-ink transition hover:border-accent sm:w-auto sm:py-2"
+            >
+              {project.demoLabel ?? "Live Demo"}
+            </a>
+          ) : (
+            <Link
+              href={project.liveDemo}
+              className="inline-flex w-full items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-ink transition hover:border-accent sm:w-auto sm:py-2"
+            >
+              {project.demoLabel ?? "Demo"}
+            </Link>
+          )
         )}
       </div>
     </article>

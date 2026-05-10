@@ -38,6 +38,8 @@ export type Project = {
   tags: string[];
   github?: string;
   liveDemo?: string;
+  demoLabel?: string;
+  demoStatus?: "Live deployed app" | "Interactive portfolio demo" | "Sample output demo" | "Project showcase" | "Demo mode planned";
   apiDocs?: string;
   apiHealth?: string;
   context?: string;
@@ -105,6 +107,8 @@ const baseProjects: ProjectBase[] = [
     tags: ["Hackathon", "AI", "FastAPI", "Flutter", "Dart", "Python", "Water Intelligence", "Vercel", "REST API"],
     github: "https://github.com/SoojalKumar/projectH2O",
     liveDemo: "https://project-h2-o.vercel.app/",
+    demoLabel: "Live Demo",
+    demoStatus: "Live deployed app",
     apiDocs: "https://project-h2-o.vercel.app/api/docs",
     apiHealth: "https://project-h2-o.vercel.app/api/health",
     context: "H2O Hackathon - Hacking the Supply, May 2026",
@@ -162,6 +166,9 @@ const baseProjects: ProjectBase[] = [
       "University-focused AI study platform with web, mobile, FastAPI backend, workers, RAG, and study workflows.",
     tags: ["TypeScript", "FastAPI", "RAG", "AI", "Web", "Mobile", "Workers"],
     github: "https://github.com/SoojalKumar/campusstudy-ai",
+    liveDemo: "/projects/campusstudy-ai#interactive-demo",
+    demoLabel: "Demo Mode",
+    demoStatus: "Interactive portfolio demo",
     summary:
       "CampusStudy AI is a university-focused AI study platform designed to help students organize learning, generate study support, and interact with AI-powered academic workflows. The project combines a modern frontend, FastAPI backend, worker-based processing, and retrieval-augmented generation concepts to support scalable study experiences.",
     metrics: ["AI Study Workflows", "RAG Architecture", "Web + Mobile Platform", "FastAPI Backend"],
@@ -192,6 +199,11 @@ const baseProjects: ProjectBase[] = [
       "Built and deployed a full-stack cloud-based task management API service using FastAPI, React, TypeScript, SQLite, Docker, and GitHub Actions. Includes CRUD APIs, API-key authentication, validation, pagination, filtering, health checks, structured errors, database persistence, CI/CD, and a React dashboard.",
     tags: ["FastAPI", "Python", "React", "TypeScript", "SQLite", "Docker", "GitHub Actions", "REST APIs"],
     github: "https://github.com/SoojalKumar/cloud-api-service",
+    liveDemo: "https://skvidhani-cloud-api-service.hf.space/",
+    demoLabel: "Live Demo",
+    demoStatus: "Live deployed app",
+    apiDocs: "https://skvidhani-cloud-api-service.hf.space/docs",
+    apiHealth: "https://skvidhani-cloud-api-service.hf.space/api/v1/health",
     summary:
       "Cloud-Based API Service is a production-style full-stack application built around a task management API. It includes a FastAPI backend, React + TypeScript dashboard, SQLite persistence, API-key authentication, Docker containerization, GitHub Actions CI/CD, and public deployment.",
     metrics: ["RESTful CRUD APIs", "Dockerized App", "CI/CD Pipeline", "Public Deployment"],
@@ -212,6 +224,9 @@ const baseProjects: ProjectBase[] = [
       "SwiftUI iOS/watchOS prototype combining speech recognition, microphone-driven listening, authentication, and a clean wearable-focused interface for experimenting with voice-driven interactions.",
     tags: ["Swift", "SwiftUI", "iOS", "watchOS", "Speech Recognition", "AVFoundation", "Keychain"],
     github: "https://github.com/SoojalKumar/EchoWear",
+    liveDemo: "/projects/echowear#interactive-demo",
+    demoLabel: "Web Showcase",
+    demoStatus: "Project showcase",
     summary:
       "EchoWear is a Swift-based iOS/watchOS prototype that explores wearable-first voice monitoring experiences. The project includes a modern SwiftUI sign-in flow, a voice monitor surface, configurable speech recognition behavior, microphone-driven listening through AVFoundation, and supporting structure for Apple Watch-related work.",
     metrics: ["SwiftUI App", "Speech Recognition", "Wearable-Focused UI", "iOS Simulator Ready"],
@@ -259,6 +274,9 @@ const baseProjects: ProjectBase[] = [
       "Python-based MIPS instruction set simulator modeling fetch, decode, execute, register updates, memory access, and branch handling with cycle-by-cycle traces.",
     tags: ["Python", "Computer Architecture", "CLI", "Systems Programming", "Simulation"],
     github: "https://github.com/SoojalKumar/mips-cpu-simulator",
+    liveDemo: "/projects/mips-cpu-simulator#interactive-demo",
+    demoLabel: "Sample Trace Demo",
+    demoStatus: "Sample output demo",
     summary:
       "MIPS CPU Simulator is a modular Python system that models instruction-level execution for MIPS-like programs. It implements fetch, decode, execute, register updates, memory access, branch handling, and cycle-by-cycle execution tracing.",
     metrics: ["Fetch-Decode-Execute", "Modular CPU Engine", "Register + Memory System", "Cycle-by-Cycle Trace"],
@@ -279,6 +297,9 @@ const baseProjects: ProjectBase[] = [
       "Genetic algorithm optimization system that evolves trading strategies from historical financial data using selection, crossover, mutation, elitism, and experiment tracking.",
     tags: ["Python", "Genetic Algorithms", "Optimization", "Machine Learning", "NumPy", "Matplotlib"],
     github: "https://github.com/SoojalKumar/genai-project",
+    liveDemo: "/projects/genai-optimization#interactive-demo",
+    demoLabel: "Sample Experiment Demo",
+    demoStatus: "Sample output demo",
     summary:
       "This project implements a genetic algorithm framework that evolves candidate strategies using selection, crossover, mutation, and elitism. It supports training/testing workflows, configurable experiments, JSON summaries, and fitness progression plots.",
     metrics: ["Genetic Algorithm", "Strategy Optimization", "CLI Configuration", "Fitness Visualizations"],
@@ -298,6 +319,9 @@ const baseProjects: ProjectBase[] = [
       "Planetary orbit simulation system using Kepler's laws, numerical computation, JSON configuration, static visualizations, and animated GIF outputs.",
     tags: ["Python", "Scientific Computing", "Simulation", "NumPy", "Matplotlib", "Visualization"],
     github: "https://github.com/SoojalKumar/orbit-simulator-project",
+    liveDemo: "/projects/orbit-simulator#interactive-demo",
+    demoLabel: "Visual Demo",
+    demoStatus: "Interactive portfolio demo",
     summary:
       "Orbit Simulator models elliptical planetary motion around a central star using numerical methods and Kepler's laws. It supports demo mode, interactive input, JSON configuration, static snapshots, and animated GIF generation.",
     metrics: ["Kepler-Based Motion", "JSON Configuration", "Static + GIF Output", "Scientific Visualization"],
@@ -317,6 +341,9 @@ const baseProjects: ProjectBase[] = [
       "NLP pipeline that classifies movie reviews using preprocessing, tokenization, Laplace smoothing, and Naive Bayes probabilistic modeling.",
     tags: ["Python", "NLP", "Machine Learning", "Text Processing", "Naive Bayes"],
     github: "https://github.com/SoojalKumar/sentiment-analysis-naive-bayes",
+    liveDemo: "/projects/sentiment-analysis#interactive-demo",
+    demoLabel: "Interactive Demo",
+    demoStatus: "Interactive portfolio demo",
     summary:
       "This project builds a text classification pipeline that predicts review sentiment using preprocessing, tokenization, word frequency distributions, Laplace smoothing, and log-probability scoring.",
     metrics: ["NLP Pipeline", "Naive Bayes Model", "Laplace Smoothing", "CLI Workflow"],
@@ -336,6 +363,9 @@ const baseProjects: ProjectBase[] = [
       "Python cache simulator supporting direct-mapped and set-associative caches with tag matching, LRU replacement, memory address parsing, and command-line configuration.",
     tags: ["Python", "Cache Memory", "Ubuntu", "CLI", "Systems Programming"],
     github: "https://github.com/SoojalKumar/cache-simulator",
+    liveDemo: "/projects/cache-simulator#interactive-demo",
+    demoLabel: "Cache Trace Demo",
+    demoStatus: "Sample output demo",
     summary:
       "Cache Simulator models cache memory behavior using configurable command-line inputs, direct-mapped and set-associative designs, tag matching, LRU replacement, and memory address parsing.",
     metrics: ["Direct-Mapped Cache", "Set-Associative Cache", "LRU Replacement", "CLI Configuration"],
@@ -355,6 +385,9 @@ const baseProjects: ProjectBase[] = [
       "Object-oriented C++ banking system with Bank, BankAccount, CheckingAccount, and SavingsAccount classes supporting account creation and transactions.",
     tags: ["C++", "OOP", "Banking Simulation", "Console App"],
     github: "https://github.com/SoojalKumar/banking-system-simulation",
+    liveDemo: "/projects/banking-system#interactive-demo",
+    demoLabel: "OOP Demo",
+    demoStatus: "Interactive portfolio demo",
     summary: "Banking System Simulation is a C++ console application that models bank accounts, transactions, and account-type behavior using object-oriented programming.",
     metrics: ["C++", "OOP Design", "Transactions", "Console UI"],
     problem: "A banking workflow provides a practical way to model inheritance, polymorphism, encapsulation, and user interaction in C++.",
@@ -373,6 +406,9 @@ const baseProjects: ProjectBase[] = [
       "Java survival game where players manage oxygen and navigate asteroid hazards while trying to reach a space station.",
     tags: ["Java", "Eclipse", "Game Development", "Resource Management"],
     github: "https://github.com/SoojalKumar/final-project-misfits-public",
+    liveDemo: "/projects/zerog-survival#interactive-demo",
+    demoLabel: "Game Showcase",
+    demoStatus: "Project showcase",
     summary: "Zero-G Survival is a Java game project where players manage oxygen, navigate hazards, and try to survive long enough to reach a space station.",
     metrics: ["Java", "Game Loop", "Oxygen Management", "Asteroid Hazards"],
     problem: "The game turns resource scarcity and movement hazards into a simple interactive survival challenge.",

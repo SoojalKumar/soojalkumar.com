@@ -15,12 +15,22 @@ const allowedLinks = [
   "EchoWear: /projects/echowear",
   "Cloud-Based API Service: /projects/cloud-api-service",
   "CampusStudy AI: /projects/campusstudy-ai",
+  "CampusStudy AI Demo Mode: /projects/campusstudy-ai#interactive-demo",
+  "MIPS CPU Simulator: /projects/mips-cpu-simulator",
   "GenAI Optimization: /projects/genai-optimization",
+  "GenAI Sample Experiment Demo: /projects/genai-optimization#interactive-demo",
   "Orbit Simulator: /projects/orbit-simulator",
+  "Orbit Visual Demo: /projects/orbit-simulator#interactive-demo",
   "Sentiment Analysis: /projects/sentiment-analysis",
+  "Sentiment Interactive Demo: /projects/sentiment-analysis#interactive-demo",
   "Cache Simulator: /projects/cache-simulator",
+  "Cache Trace Demo: /projects/cache-simulator#interactive-demo",
   "Banking System: /projects/banking-system",
+  "Banking OOP Demo: /projects/banking-system#interactive-demo",
   "Zero-G Survival: /projects/zerog-survival",
+  "Zero-G Game Showcase: /projects/zerog-survival#interactive-demo",
+  "EchoWear Web Showcase: /projects/echowear#interactive-demo",
+  "MIPS Sample Trace Demo: /projects/mips-cpu-simulator#interactive-demo",
   "Resume: /resume",
   "Contact: /contact",
   "Research: /research",
@@ -29,6 +39,8 @@ const allowedLinks = [
   "Hydra Live Demo: https://project-h2-o.vercel.app/",
   "Hydra GitHub: https://github.com/SoojalKumar/projectH2O",
   "Hydra API Docs: https://project-h2-o.vercel.app/api/docs",
+  "Cloud API Live Demo: https://skvidhani-cloud-api-service.hf.space/",
+  "Cloud API Docs: https://skvidhani-cloud-api-service.hf.space/docs",
 ];
 
 const projectLinkBySlug: Record<string, string> = {
@@ -36,6 +48,7 @@ const projectLinkBySlug: Record<string, string> = {
   "campusstudy-ai": "/projects/campusstudy-ai",
   "cloud-api-service": "/projects/cloud-api-service",
   echowear: "/projects/echowear",
+  "mips-cpu-simulator": "/projects/mips-cpu-simulator",
   "genai-optimization": "/projects/genai-optimization",
   "orbit-simulator": "/projects/orbit-simulator",
   "sentiment-analysis": "/projects/sentiment-analysis",
@@ -66,6 +79,8 @@ const portfolioContext = [
 
         const externalLinks = [
           project.liveDemo ? `Live demo: ${project.liveDemo}` : "",
+          project.demoLabel ? `Demo label: ${project.demoLabel}` : "",
+          project.demoStatus ? `Demo status: ${project.demoStatus}` : "",
           project.github ? `GitHub: ${project.github}` : "",
           project.apiDocs ? `API docs: ${project.apiDocs}` : "",
         ]
@@ -111,7 +126,9 @@ Project and research aliases to understand:
 - "zero g", "zero-g", "space game" = Zero-G Survival
 - "research", "paper", "best paper", "xai", "intrusion detection", "ids" = research paper
 
-Never use placeholder portfolio domains or invented URLs. When including a link, use only these relative internal links from the allowed internal links list: /, /about, /projects, /projects/hydra-h2o, /projects/campusstudy-ai, /projects/cloud-api-service, /projects/echowear, /projects/genai-optimization, /projects/orbit-simulator, /projects/sentiment-analysis, /projects/cache-simulator, /projects/banking-system, /projects/zerog-survival, /experience, /research, /research/explainable-ai-intrusion-detection, /resume, /contact. If a project does not have an allowed detail link, point to /projects. You may include these approved external links: https://project-h2-o.vercel.app/, https://github.com/SoojalKumar/projectH2O, https://project-h2-o.vercel.app/api/docs, https://doi.org/10.63282/3050-9416.IJAIBDCMS-V7I2P119.
+Never use placeholder portfolio domains or invented URLs. When including a link, use only the relative internal links and demo anchors listed in the allowed internal links context, such as /projects, /projects/hydra-h2o, /projects/sentiment-analysis#interactive-demo, /resume, and /contact. If a project does not have an allowed detail link, point to /projects. You may include these approved external links: https://project-h2-o.vercel.app/, https://github.com/SoojalKumar/projectH2O, https://project-h2-o.vercel.app/api/docs, https://skvidhani-cloud-api-service.hf.space/, https://skvidhani-cloud-api-service.hf.space/docs, https://doi.org/10.63282/3050-9416.IJAIBDCMS-V7I2P119.
+
+If asked which projects have demos, distinguish real live deployed apps from portfolio-hosted interactive demos, sample output demos, and project showcases. Do not call a sample trace or showcase a production live app.
 
 If asked about a specific project, answer with: what it is, what Soojal built, technologies used, what it demonstrates, and the correct internal link using markdown, for example [EchoWear](/projects/echowear). For MIPS CPU Simulator, say branch handling only; do not say branch prediction.
 
