@@ -105,6 +105,16 @@ const ProjectDetail = ({ slug }: ProjectDetailProps) => {
                   API Docs <ExternalLink size={18} />
                 </a>
               )}
+              {project.apiHealth && (
+                <a
+                  href={project.apiHealth}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold text-ink transition hover:border-accent"
+                >
+                  API Health <ExternalLink size={18} />
+                </a>
+              )}
               <Link
                 href="/projects"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold text-ink transition hover:border-accent"
@@ -146,6 +156,8 @@ const ProjectDetail = ({ slug }: ProjectDetailProps) => {
         />
 
         <TechnicalImplementation project={project} />
+
+        {project.deployment && <DeploymentSection project={project} />}
 
         {project.slug === "hydra-h2o" && <EndpointSection />}
 
@@ -207,6 +219,16 @@ const ProjectDetail = ({ slug }: ProjectDetailProps) => {
               className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold text-ink transition hover:border-accent"
             >
               View API Docs <ExternalLink size={18} />
+            </a>
+          )}
+          {project.apiHealth && (
+            <a
+              href={project.apiHealth}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 font-semibold text-ink transition hover:border-accent"
+            >
+              View API Health <ExternalLink size={18} />
             </a>
           )}
           <Link href="/projects" className="rounded-lg bg-navy px-5 py-3 text-center font-semibold text-white transition hover:bg-slate-800">
@@ -369,6 +391,31 @@ const TechnicalImplementation = ({ project }: { project: Project }) => (
               </li>
             ))}
           </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+);
+
+const DeploymentSection = ({ project }: { project: Project }) => (
+  <section className="mt-12 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <SectionHeading title="Live Deployment" description="Confirmed deployment links and environment notes from the project repository." />
+    <div className="mt-5 grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2">
+      {project.deployment?.map((item) => (
+        <div key={`${item.label}-${item.value}`} className="min-w-0 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+          <p className="text-sm font-semibold uppercase tracking-wide text-accent">{item.label}</p>
+          {item.href ? (
+            <a
+              href={item.href}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 inline-flex max-w-full break-words text-base font-bold leading-7 text-ink underline decoration-cyan-300 underline-offset-4 transition hover:text-accent"
+            >
+              {item.value}
+            </a>
+          ) : (
+            <p className="mt-2 break-words text-base font-bold leading-7 text-ink">{item.value}</p>
+          )}
         </div>
       ))}
     </div>

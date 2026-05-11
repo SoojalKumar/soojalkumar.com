@@ -42,6 +42,11 @@ export type Project = {
   demoStatus?: "Live deployed app" | "Interactive portfolio demo" | "Sample output demo" | "Project showcase" | "Demo mode planned";
   apiDocs?: string;
   apiHealth?: string;
+  deployment?: {
+    label: string;
+    value: string;
+    href?: string;
+  }[];
   context?: string;
   summary: string;
   metrics: string[];
@@ -161,17 +166,27 @@ const baseProjects: ProjectBase[] = [
     title: "CampusStudy AI",
     date: "2026",
     subtitle:
-      "University-focused AI study platform for uploads, RAG-grounded chat, notes, flashcards, quizzes, and study guides.",
+      "Live university-focused AI study platform with a Vercel frontend, Render FastAPI backend, RAG-grounded chat, notes, flashcards, quizzes, and study guides.",
     description:
-      "CampusStudy AI is a full-stack university study platform where students upload lectures, PDFs, slides, notes, docs, audio, and video, then generate notes, flashcards, quizzes, study guides, summaries, and citation-grounded chat answers.",
+      "CampusStudy AI is a live university-focused AI study platform with a Vercel-hosted frontend and Render-hosted FastAPI backend. It supports document processing, RAG-grounded assistance, notes, flashcards, quizzes, summaries, and study guides.",
     tags: ["AI", "RAG", "FastAPI", "Next.js", "TypeScript", "Expo", "Workers", "Document Processing", "Flashcards", "Quizzes"],
     github: "https://github.com/SoojalKumar/campusstudy-ai",
-    liveDemo: "/projects/campusstudy-ai#interactive-demo",
-    demoLabel: "Demo Mode",
-    demoStatus: "Interactive portfolio demo",
+    liveDemo: "https://campusstudy-ai-web.vercel.app",
+    demoLabel: "Live Demo",
+    demoStatus: "Live deployed app",
+    apiDocs: "https://campusstudy-ai.onrender.com/docs",
+    apiHealth: "https://campusstudy-ai.onrender.com/api/v1/health",
+    deployment: [
+      { label: "Frontend", value: "Vercel - campusstudy-ai-web.vercel.app", href: "https://campusstudy-ai-web.vercel.app" },
+      { label: "Backend", value: "Render - campusstudy-ai.onrender.com", href: "https://campusstudy-ai.onrender.com/api/v1/health" },
+      { label: "API Base", value: "https://campusstudy-ai.onrender.com/api/v1", href: "https://campusstudy-ai.onrender.com/api/v1/health" },
+      { label: "API Docs", value: "FastAPI Swagger docs", href: "https://campusstudy-ai.onrender.com/docs" },
+      { label: "Render Startup", value: "Docker startup runs migrations, seeds demo data, then starts Uvicorn" },
+      { label: "Documented Backend Env", value: "DATABASE_URL, SECRET_KEY, LLM_PROVIDER, GROQ_API_KEY, GROQ_MODEL, CORS origins" },
+    ],
     summary:
-      "CampusStudy AI is a university-focused AI study platform that helps students turn course materials into structured study support. The monorepo combines a Next.js web app, Expo mobile companion, FastAPI backend, Celery worker pipeline, PostgreSQL with pgvector, Redis, object storage, and provider abstractions for LLMs, embeddings, speech-to-text, and storage.",
-    metrics: ["Document Upload Pipeline", "RAG-Grounded Chat", "Notes + Flashcards + Quizzes", "Web + Mobile + Workers"],
+      "CampusStudy AI is a live university-focused AI study platform that helps students turn course materials into structured study support. The deployed system uses a Vercel-hosted Next.js frontend and a Render-hosted FastAPI backend, with repo support for an Expo mobile companion, Celery worker pipeline, PostgreSQL with pgvector, Redis, object storage, and provider abstractions for LLMs, embeddings, speech-to-text, and storage.",
+    metrics: ["Live Vercel Frontend", "Render FastAPI Backend", "RAG-Grounded Chat", "Notes + Flashcards + Quizzes"],
     problem:
       "Students often use disconnected tools for notes, slides, lecture recordings, quizzes, flashcards, study planning, and AI help. CampusStudy AI brings these workflows into one academic platform where uploaded course material can become searchable, structured, and reusable study outputs.",
     objectives: [
@@ -206,6 +221,7 @@ const baseProjects: ProjectBase[] = [
       "Workers: Celery with Redis for asynchronous extraction, chunking, embeddings, and study asset generation",
       "Data and storage: PostgreSQL with pgvector plus MinIO/S3-compatible object storage",
       "AI providers: mock local mode, Groq, Meta Llama-compatible generation, embeddings, and speech-to-text abstractions",
+      "Deployment: Vercel frontend connected to a Render-hosted FastAPI API base at https://campusstudy-ai.onrender.com/api/v1",
       "Testing and CI: pytest, ruff, web lint/test/build, mobile typecheck, and GitHub Actions workflow coverage",
     ],
     impact: [
@@ -540,17 +556,18 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
   },
   "campusstudy-ai": {
     heroVisual: {
-      title: "Full-Stack AI Study Platform",
-      items: ["Next.js Web App", "Expo Mobile App", "FastAPI Backend", "Celery Pipeline", "RAG Chat + Citations"],
+      title: "Live Full-Stack AI Study Platform",
+      items: ["Vercel Web Frontend", "Render FastAPI Backend", "API Docs + Health", "Celery Pipeline", "RAG Chat + Citations"],
     },
     workflow: ["Student Uploads Material", "Extract / Transcribe", "Chunk + Embed", "Generate Study Assets", "Ask with Citations", "Review Notes / Flashcards / Quizzes"],
-    architecture: ["Next.js Web / Expo Mobile", "FastAPI API", "SQLAlchemy Services", "Celery Workers", "PostgreSQL + pgvector", "MinIO / S3 Storage", "LLM / Embedding / Speech Providers"],
+    architecture: ["Next.js Web Frontend on Vercel", "FastAPI Backend on Render", "SQLAlchemy Services", "Celery Workers", "PostgreSQL + pgvector / documented Render DATABASE_URL", "Redis + MinIO/S3 storage support", "LLM / Embedding / Speech Providers"],
     technicalGroups: [
-      { title: "Frontend", items: ["Next.js App Router", "React 19", "Tailwind CSS", "React Query", "Recharts dashboard surfaces"] },
+      { title: "Frontend", items: ["Next.js App Router", "React 19", "Tailwind CSS", "React Query", "Recharts dashboard surfaces", "Vercel deployment"] },
       { title: "Mobile", items: ["Expo Router", "React Native", "Course and study companion flows", "Secure local storage"] },
-      { title: "Backend", items: ["FastAPI routers", "SQLAlchemy 2.0 models", "Alembic migrations", "Auth, courses, materials, notes, quizzes, chat, admin"] },
+      { title: "Backend", items: ["Render-hosted FastAPI API", "SQLAlchemy 2.0 models", "Alembic migrations", "Auth, courses, materials, notes, quizzes, chat, admin"] },
       { title: "AI / RAG", items: ["Chunking and embeddings", "Citation-grounded retrieval", "LLM provider abstraction", "Generated notes, flashcards, quizzes, and study guides"] },
       { title: "Workers / Infra", items: ["Celery pipeline", "Redis broker", "PostgreSQL + pgvector", "MinIO/S3-compatible storage", "Docker Compose local stack"] },
+      { title: "Deployment", items: ["Vercel frontend", "Render backend", "FastAPI docs endpoint", "Health endpoint", "CORS configured for Vercel origins"] },
       { title: "Testing / CI", items: ["pytest backend tests", "ruff checks", "web lint/test/build", "mobile typecheck", "GitHub Actions CI"] },
     ],
     visuals: [
@@ -606,9 +623,9 @@ const caseStudyDetails: Record<string, ProjectCaseStudy> = {
       },
     ],
     preview: {
-      title: "Confirmed API Surface",
+      title: "Live API + Confirmed API Surface",
       language: "text",
-      content: `POST /api/v1/materials/upload\nGET  /api/v1/materials/{id}/chunks\nGET  /api/v1/materials/{id}/status\nPOST /api/v1/notes/generate\nPOST /api/v1/flashcards/generate\nPOST /api/v1/quizzes/generate\nPOST /api/v1/chat/threads/{threadId}/messages`,
+      content: `Frontend: https://campusstudy-ai-web.vercel.app\nAPI base: https://campusstudy-ai.onrender.com/api/v1\nDocs: https://campusstudy-ai.onrender.com/docs\nHealth: GET /api/v1/health -> {"status":"ok"}\n\nPOST /api/v1/materials/upload\nGET  /api/v1/materials/{id}/chunks\nGET  /api/v1/materials/{id}/status\nPOST /api/v1/notes/generate\nPOST /api/v1/flashcards/generate\nPOST /api/v1/quizzes/generate\nPOST /api/v1/chat/threads/{threadId}/messages`,
     },
   },
   "cloud-api-service": {

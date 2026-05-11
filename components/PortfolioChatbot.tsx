@@ -73,7 +73,6 @@ const allowedInternalLinks = new Set([
   "/projects",
   "/projects/hydra-h2o",
   "/projects/campusstudy-ai",
-  "/projects/campusstudy-ai#interactive-demo",
   "/projects/cloud-api-service",
   "/projects/echowear",
   "/projects/echowear#interactive-demo",
@@ -100,6 +99,11 @@ const allowedInternalLinks = new Set([
 
 const allowedExternalLinks = new Set([
   "https://doi.org/10.63282/3050-9416.IJAIBDCMS-V7I2P119",
+  "https://campusstudy-ai-web.vercel.app",
+  "https://campusstudy-ai-web.vercel.app/",
+  "https://github.com/SoojalKumar/campusstudy-ai",
+  "https://campusstudy-ai.onrender.com/docs",
+  "https://campusstudy-ai.onrender.com/api/v1/health",
   "https://project-h2-o.vercel.app/",
   "https://project-h2-o.vercel.app",
   "https://github.com/SoojalKumar/projectH2O",
@@ -167,7 +171,7 @@ const getProjectAnswer = (question: string) => {
   const hydraLinks =
     match.slug === "hydra-h2o"
       ? "\n\nLinks: [Hydra project page](/projects/hydra-h2o), [Live demo](https://project-h2-o.vercel.app/), [GitHub](https://github.com/SoojalKumar/projectH2O), [API docs](https://project-h2-o.vercel.app/api/docs)."
-      : `\n\nRead more: [${match.title}](${link}).${match.liveDemo ? `\n\nDemo status: ${match.demoStatus ?? "Demo available"}. Open: [${match.demoLabel ?? "Demo"}](${match.liveDemo}).` : ""}`;
+      : `\n\nRead more: [${match.title}](${link}).${match.liveDemo ? `\n\nDemo status: ${match.demoStatus ?? "Demo available"}. Open: [${match.demoLabel ?? "Demo"}](${match.liveDemo}).` : ""}${match.apiDocs ? `\n\nAPI docs: [Docs](${match.apiDocs}).` : ""}${match.apiHealth ? `\n\nBackend health: [Health](${match.apiHealth}).` : ""}`;
 
   return `What it is: ${description}\n\nWhat Soojal built: ${match.features.slice(0, 5).join(", ")}.\n\nTechnologies used: ${match.tags.join(", ")}.\n\nWhat it demonstrates: ${match.impact.join(" ")}${hydraLinks}`;
 };

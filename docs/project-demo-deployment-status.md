@@ -8,7 +8,7 @@ This audit was created from local clones of the public GitHub repositories. The 
 | --- | --- | --- | --- | --- | --- |
 | Hydra / projectH2O | Flutter web, FastAPI, Python, Vercel, Groq optional | Live Vercel app at `https://project-h2-o.vercel.app/` | Keep as real live demo; link API docs and health route | Easy | Verify links after major changes; keep Vercel env optional for Groq |
 | Cloud-Based API Service | FastAPI, SQLite, React, Vite, Docker, Hugging Face Space | Live app at `https://skvidhani-cloud-api-service.hf.space/` | Use existing live demo; do not duplicate on Vercel unless needed | Easy | Keep Hugging Face sync healthy; optionally add Vercel later with persistent storage decision |
-| CampusStudy AI | Next.js, Expo, FastAPI, PostgreSQL, Redis, MinIO, Celery, pnpm/turbo | No production demo confirmed | Use portfolio demo mode first; full deployment needs managed DB, Redis, object storage, worker, and env review | Hard | Create a seeded Vercel demo only after backend infra is provisioned |
+| CampusStudy AI | Next.js, Expo, FastAPI, PostgreSQL/pgvector support, Redis, MinIO/S3 storage support, Celery, pnpm/turbo | Live Vercel frontend and Render backend | Use the real live deployment; keep API docs and health linked from the portfolio | Medium | Verify Vercel frontend, Render health, and API docs after major backend changes |
 | EchoWear | Swift, SwiftUI, iOS/watchOS, AVFoundation, Speech framework | No web runtime; screenshots exist | Web showcase inside portfolio; do not call it a live iOS app | Medium | Add App Store/TestFlight demo only if an Apple distribution path is prepared |
 | MIPS CPU Simulator | Python CLI, standard library | No web app | Portfolio sample execution trace | Medium | Optional: build a browser emulator later using a safe subset of instructions |
 | GenAI Optimization | Python CLI, NumPy, Matplotlib | Real output artifacts exist | Portfolio sample experiment demo using generated plot/config | Medium | Optional: deploy a small static dashboard with precomputed outputs |
@@ -32,10 +32,13 @@ The portfolio now distinguishes demo types:
 - Hydra live demo: `https://project-h2-o.vercel.app/`
 - Hydra API docs: `https://project-h2-o.vercel.app/api/docs`
 - Hydra API health: `https://project-h2-o.vercel.app/api/health`
+- CampusStudy AI live demo: `https://campusstudy-ai-web.vercel.app`
+- CampusStudy AI API docs: `https://campusstudy-ai.onrender.com/docs`
+- CampusStudy AI API health: `https://campusstudy-ai.onrender.com/api/v1/health`
 - Cloud API live demo: `https://skvidhani-cloud-api-service.hf.space/`
 - Cloud API docs: `https://skvidhani-cloud-api-service.hf.space/docs`
 - Cloud API health: `https://skvidhani-cloud-api-service.hf.space/api/v1/health`
 
 ## Notes
 
-CampusStudy AI is the strongest candidate for a future full Vercel demo, but it should not be treated as a quick static deployment. The repo includes a Next.js web app, FastAPI backend, Celery worker, PostgreSQL/pgvector, Redis, and MinIO storage, so a trustworthy public demo needs infrastructure and seed-data planning.
+CampusStudy AI is now represented as a live full-stack project. The repo deployment notes document a Vercel frontend using `NEXT_PUBLIC_API_BASE_URL=https://campusstudy-ai.onrender.com/api/v1`, a Render backend startup path that runs migrations and seeds demo data before Uvicorn, and CORS origins for the Vercel frontend.

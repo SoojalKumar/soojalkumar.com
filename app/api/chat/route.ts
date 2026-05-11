@@ -15,7 +15,6 @@ const allowedLinks = [
   "EchoWear: /projects/echowear",
   "Cloud-Based API Service: /projects/cloud-api-service",
   "CampusStudy AI: /projects/campusstudy-ai",
-  "CampusStudy AI Demo Mode: /projects/campusstudy-ai#interactive-demo",
   "MIPS CPU Simulator: /projects/mips-cpu-simulator",
   "GenAI Optimization: /projects/genai-optimization",
   "GenAI Sample Experiment Demo: /projects/genai-optimization#interactive-demo",
@@ -39,6 +38,10 @@ const allowedLinks = [
   "Hydra Live Demo: https://project-h2-o.vercel.app/",
   "Hydra GitHub: https://github.com/SoojalKumar/projectH2O",
   "Hydra API Docs: https://project-h2-o.vercel.app/api/docs",
+  "CampusStudy AI Live Demo: https://campusstudy-ai-web.vercel.app",
+  "CampusStudy AI GitHub: https://github.com/SoojalKumar/campusstudy-ai",
+  "CampusStudy AI API Docs: https://campusstudy-ai.onrender.com/docs",
+  "CampusStudy AI API Health: https://campusstudy-ai.onrender.com/api/v1/health",
   "Cloud API Live Demo: https://skvidhani-cloud-api-service.hf.space/",
   "Cloud API Docs: https://skvidhani-cloud-api-service.hf.space/docs",
 ];
@@ -83,6 +86,7 @@ const portfolioContext = [
           project.demoStatus ? `Demo status: ${project.demoStatus}` : "",
           project.github ? `GitHub: ${project.github}` : "",
           project.apiDocs ? `API docs: ${project.apiDocs}` : "",
+          project.apiHealth ? `API health: ${project.apiHealth}` : "",
         ]
           .filter(Boolean)
           .join(" ");
@@ -126,7 +130,7 @@ Project and research aliases to understand:
 - "zero g", "zero-g", "space game" = Zero-G Survival
 - "research", "paper", "best paper", "xai", "intrusion detection", "ids" = research paper
 
-Never use placeholder portfolio domains or invented URLs. When including a link, use only the relative internal links and demo anchors listed in the allowed internal links context, such as /projects, /projects/hydra-h2o, /projects/sentiment-analysis#interactive-demo, /resume, and /contact. If a project does not have an allowed detail link, point to /projects. You may include these approved external links: https://project-h2-o.vercel.app/, https://github.com/SoojalKumar/projectH2O, https://project-h2-o.vercel.app/api/docs, https://skvidhani-cloud-api-service.hf.space/, https://skvidhani-cloud-api-service.hf.space/docs, https://doi.org/10.63282/3050-9416.IJAIBDCMS-V7I2P119.
+Never use placeholder portfolio domains or invented URLs. When including a link, use only the relative internal links and demo anchors listed in the allowed internal links context, such as /projects, /projects/hydra-h2o, /projects/sentiment-analysis#interactive-demo, /resume, and /contact. If a project does not have an allowed detail link, point to /projects. You may include these approved external links: https://campusstudy-ai-web.vercel.app, https://github.com/SoojalKumar/campusstudy-ai, https://campusstudy-ai.onrender.com/docs, https://campusstudy-ai.onrender.com/api/v1/health, https://project-h2-o.vercel.app/, https://github.com/SoojalKumar/projectH2O, https://project-h2-o.vercel.app/api/docs, https://skvidhani-cloud-api-service.hf.space/, https://skvidhani-cloud-api-service.hf.space/docs, https://doi.org/10.63282/3050-9416.IJAIBDCMS-V7I2P119.
 
 If asked which projects have demos, distinguish real live deployed apps from portfolio-hosted interactive demos, sample output demos, and project showcases. Do not call a sample trace or showcase a production live app.
 

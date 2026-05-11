@@ -288,9 +288,9 @@ const EchoWearDemo = () => {
 
 const CampusStudyDemo = () => (
   <DemoShell
-    label="Demo Mode"
+    label="Workflow Preview"
     title="AI Study Workflow Preview"
-    description="CampusStudy AI is an infrastructure-heavy monorepo with Next.js, Expo, FastAPI, Celery, PostgreSQL, pgvector, Redis, and object storage. This portfolio demo mode shows the confirmed study workflow without claiming a production-backed deployment."
+    description="CampusStudy AI is a live full-stack deployment with Next.js on Vercel and FastAPI on Render. This preview summarizes the confirmed study workflow from upload through cited AI study outputs."
   >
     <div className="grid gap-4 md:grid-cols-5">
       {["Upload material", "Extract or transcribe", "Chunk and embed", "Generate study assets", "Ask with citations"].map((step, index) => (
