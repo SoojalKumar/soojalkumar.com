@@ -114,7 +114,7 @@ Understand English, Hinglish, Hindi/Urdu roman text, simple Hindi/Urdu-style phr
 Use only the provided portfolio context. Do not invent facts, metrics, URLs, awards, job titles, private information, salary, visa status, phone number, GPA, confidential details, or features not listed in the context. Do not mention a phone number.
 
 Project and research aliases to understand:
-- "campus study", "campusstudy", "campis study", "campus ai", "study ai" = CampusStudy AI
+- "campus study", "campusstudy", "campis study", "campus ai", "study ai", "study app", "ai study app", "notes app", "quiz app", "flashcard app", "rag study app", "document processing" = CampusStudy AI
 - "hydra", "h2o", "projecth2o", "project h2o", "water intelligence", "water platform", "water hackathon", "h2o hackathon" = Hydra - H2O Hackathon Water Intelligence Platform
 - "cloud api", "api service", "cloud based api" = Cloud-Based API Service
 - "echo wear", "echowear", "voice app", "wearable app" = EchoWear

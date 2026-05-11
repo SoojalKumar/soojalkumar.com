@@ -290,10 +290,10 @@ const CampusStudyDemo = () => (
   <DemoShell
     label="Demo Mode"
     title="AI Study Workflow Preview"
-    description="CampusStudy AI is an infra-heavy monorepo with web, API, worker, database, Redis, and storage services. This portfolio demo mode shows the intended study workflow without claiming a production-backed deployment."
+    description="CampusStudy AI is an infrastructure-heavy monorepo with Next.js, Expo, FastAPI, Celery, PostgreSQL, pgvector, Redis, and object storage. This portfolio demo mode shows the confirmed study workflow without claiming a production-backed deployment."
   >
-    <div className="grid gap-4 md:grid-cols-4">
-      {["Upload lecture", "Extract notes", "Retrieve context", "Generate flashcards"].map((step, index) => (
+    <div className="grid gap-4 md:grid-cols-5">
+      {["Upload material", "Extract or transcribe", "Chunk and embed", "Generate study assets", "Ask with citations"].map((step, index) => (
         <div key={step} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">Step {index + 1}</p>
           <p className="mt-3 font-bold text-ink">{step}</p>

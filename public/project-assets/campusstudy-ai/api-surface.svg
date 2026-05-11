@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-label="CampusStudy AI FastAPI API surface map">
+  <rect width="1400" height="900" fill="#F8FAFC"/>
+  <rect x="70" y="70" width="1260" height="760" rx="34" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="3"/>
+  <rect x="70" y="70" width="1260" height="92" rx="34" fill="#0B1120"/>
+  <circle cx="120" cy="116" r="12" fill="#F87171"/>
+  <circle cx="156" cy="116" r="12" fill="#FBBF24"/>
+  <circle cx="192" cy="116" r="12" fill="#34D399"/>
+  <text x="700" y="127" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800" fill="#FFFFFF">CampusStudy AI API Surface</text>
+
+  <text x="118" y="232" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="900" fill="#111827">FastAPI Domain Map</text>
+  <text x="118" y="272" font-family="Inter, Arial, sans-serif" font-size="22" fill="#64748B">Routes are organized around academic identity, course materials, generated study assets, chat, processing jobs, and admin visibility.</text>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="118" y="330" width="230" height="96" rx="22" fill="#ECFEFF" stroke="#A5F3FC" stroke-width="2"/>
+    <text x="143" y="368" font-size="23" font-weight="800" fill="#111827">Auth</text>
+    <text x="143" y="401" font-size="18" fill="#475569">register / login / me</text>
+
+    <rect x="386" y="330" width="230" height="96" rx="22" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+    <text x="411" y="368" font-size="23" font-weight="800" fill="#111827">Courses</text>
+    <text x="411" y="401" font-size="18" fill="#475569">universities / topics</text>
+
+    <rect x="654" y="330" width="230" height="96" rx="22" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+    <text x="679" y="368" font-size="23" font-weight="800" fill="#111827">Materials</text>
+    <text x="679" y="401" font-size="18" fill="#475569">upload / status / chunks</text>
+
+    <rect x="922" y="330" width="230" height="96" rx="22" fill="#ECFEFF" stroke="#A5F3FC" stroke-width="2"/>
+    <text x="947" y="368" font-size="23" font-weight="800" fill="#111827">Processing</text>
+    <text x="947" y="401" font-size="18" fill="#475569">jobs / retry / pipeline</text>
+
+    <rect x="118" y="475" width="230" height="96" rx="22" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+    <text x="143" y="513" font-size="23" font-weight="800" fill="#111827">Notes</text>
+    <text x="143" y="546" font-size="18" fill="#475569">generate / by course</text>
+
+    <rect x="386" y="475" width="230" height="96" rx="22" fill="#ECFEFF" stroke="#A5F3FC" stroke-width="2"/>
+    <text x="411" y="513" font-size="23" font-weight="800" fill="#111827">Flashcards</text>
+    <text x="411" y="546" font-size="18" fill="#475569">decks / review</text>
+
+    <rect x="654" y="475" width="230" height="96" rx="22" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+    <text x="679" y="513" font-size="23" font-weight="800" fill="#111827">Quizzes</text>
+    <text x="679" y="546" font-size="18" fill="#475569">sets / attempts</text>
+
+    <rect x="922" y="475" width="230" height="96" rx="22" fill="#ECFEFF" stroke="#A5F3FC" stroke-width="2"/>
+    <text x="947" y="513" font-size="23" font-weight="800" fill="#111827">Chat</text>
+    <text x="947" y="546" font-size="18" fill="#475569">threads / messages</text>
+
+    <rect x="252" y="620" width="230" height="96" rx="22" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+    <text x="277" y="658" font-size="23" font-weight="800" fill="#111827">Transcripts</text>
+    <text x="277" y="691" font-size="18" fill="#475569">media segments</text>
+
+    <rect x="520" y="620" width="230" height="96" rx="22" fill="#ECFEFF" stroke="#A5F3FC" stroke-width="2"/>
+    <text x="545" y="658" font-size="23" font-weight="800" fill="#111827">Dashboard</text>
+    <text x="545" y="691" font-size="18" fill="#475569">overview metrics</text>
+
+    <rect x="788" y="620" width="230" height="96" rx="22" fill="#FFFFFF" stroke="#D7E1EA" stroke-width="2"/>
+    <text x="813" y="658" font-size="23" font-weight="800" fill="#111827">Admin</text>
+    <text x="813" y="691" font-size="18" fill="#475569">users / materials / jobs</text>
+  </g>
+
+  <rect x="98" y="778" width="270" height="28" rx="14" fill="#06B6D4" opacity=".16"/>
+  <text x="118" y="798" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#06B6D4">Generated from current repo API docs</text>
+</svg>
